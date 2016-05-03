@@ -21,7 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.exception.ValidationException;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.service.EntityTypeService;
 import com.lostportals.aequitas.web.domain.EntityType;
 
@@ -57,11 +57,11 @@ public class EntityTypeController_UT {
 
 	@Test
 	public void save_rethrowException() {
-		expectedException.expect(ValidationException.class);
+		expectedException.expect(UnprocessableEntityException.class);
 		String expectedMessage = "Entity not found";
 		expectedException.expectMessage(expectedMessage);
 		EntityType entityTypeToSave = new EntityType();
-		when(entityTypeService.save(entityTypeToSave)).thenThrow(new ValidationException(expectedMessage));
+		when(entityTypeService.save(entityTypeToSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
 
 		testObj.post(null, entityTypeToSave);
 	}
