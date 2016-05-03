@@ -27,7 +27,7 @@ public class EntityTypeController {
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody EntityType entityType) {
 		entityType = entityTypeService.save(entityType);
 
-		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("(.*)/?", "$1/" + entityType.getId()));
+		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("^(.*)/?$", "$1/" + entityType.getId()));
 
 		return ResponseEntity.created(newEntityUrl).build();
 	}
