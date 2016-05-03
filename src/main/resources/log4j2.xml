@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE xml>
+<Configuration>
+	<Appenders>
+		<RollingFile name="fileLogger" fileName="./logs/aequitas.web.server.log" append="true" filePattern="./logs/aequitas.web.server.log.%i" bufferedIO="false">
+			<PatternLayout>
+				<Pattern>%d{ISO8601} %-5p [%X] thread=%t class=%c - %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="50 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingFile>
+		<Console name="stdout" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{ISO8601} %-5p [%X] thread=%t class=%c - %m%n" />
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.lostportals.aequitas" additivity="false" level="info">
+			<AppenderRef ref="stdout" />
+			<AppenderRef ref="fileLogger" />
+		</Logger>
+		<Root level="warn">
+			<AppenderRef ref="stdout" />
+			<AppenderRef ref="fileLogger" />
+		</Root>
+	</Loggers>
+</Configuration>
