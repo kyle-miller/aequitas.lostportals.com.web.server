@@ -1,0 +1,23 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.lostportals.aequitas</groupId>
+  <artifactId>web-server</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <packaging>jar</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+
+  </dependencies>
+
+  <scm>
+      <url>https://github.com/kyle-miller/aequitas.lostportals.com.web.server.git</url>
+      <connection>scm:git:git://github.com/kyle-miller/aequitas.lostportals.com.web.server.git</connection>
+      <developerConnection>scm:git:git@github.com:kyle-miller/aequitas.lostportals.com.web.server.git</developerConnection>
+     <tag>1.0.0-SNAPSHOT</tag>
+  </scm>
+</project>
