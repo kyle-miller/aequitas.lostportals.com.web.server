@@ -17,18 +17,18 @@ import com.lostportals.aequitas.service.EntityTypeService;
 import com.lostportals.aequitas.web.domain.EntityType;
 
 @RestController
-@RequestMapping(value = "/api/entityTypes", produces = {"application/json"})
+@RequestMapping(value = "/api/entityTypes", produces = { "application/json" })
 public class EntityTypeController {
-	
+
 	@Autowired
 	EntityTypeService entityTypeService;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody EntityType entityType) {
 		entityType = entityTypeService.save(entityType);
-		
+
 		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("(.*)/?", "$1/" + entityType.getTypeCode()));
-		
+
 		return ResponseEntity.created(newEntityUrl).build();
 	}
 

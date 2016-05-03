@@ -6,6 +6,8 @@ import com.lostportals.aequitas.web.domain.EntityType;
 
 public interface EntityTypeService {
 	List<EntityType> getAll();
+
 	EntityType get(String id);
+
 	EntityType save(EntityType entityType);
 }
