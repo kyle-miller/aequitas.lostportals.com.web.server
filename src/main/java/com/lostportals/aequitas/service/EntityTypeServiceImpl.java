@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.h2.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -54,7 +54,7 @@ public class EntityTypeServiceImpl implements EntityTypeService {
 	public EntityType save(EntityType entityTypeToSave) {
 		DbEntityType dbEntityType = new DbEntityType(entityTypeToSave);
 
-		if (StringUtils.isNullOrEmpty(dbEntityType.getId())) {
+		if (StringUtils.isBlank(dbEntityType.getId())) {
 			dbEntityType.setId(UUID.randomUUID().toString());
 		} else {
 			DbEntityType existingDbEntityType = entityTypeDao.get(dbEntityType.getId());
