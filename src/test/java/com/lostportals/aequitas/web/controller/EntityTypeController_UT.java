@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 import com.lostportals.aequitas.exception.NotFoundException;
+import com.lostportals.aequitas.exception.ValidationException;
 import com.lostportals.aequitas.service.EntityTypeService;
 import com.lostportals.aequitas.web.domain.EntityType;
 
@@ -40,8 +41,8 @@ public class EntityTypeController_UT {
 	public void save() {
 		EntityType entityTypeToSave = new EntityType();
 		EntityType returnedEntityType = new EntityType();
-		String typeCode = "typeCode";
-		returnedEntityType.setTypeCode(typeCode);
+		String id = "id";
+		returnedEntityType.setId(id);
 		when(entityTypeService.save(entityTypeToSave)).thenReturn(returnedEntityType);
 		String postUrl = "/api/entityTypes";
 		MockHttpServletRequest mockRequest = new MockHttpServletRequest(HttpMethod.POST.toString(), postUrl);
@@ -51,7 +52,18 @@ public class EntityTypeController_UT {
 		assertNotNull(actualResponse);
 		assertEquals(actualResponse.getStatusCode(), HttpStatus.CREATED);
 		assertNotNull(actualResponse.getHeaders());
-		assertEquals(Collections.singletonList(postUrl + "/" + typeCode), actualResponse.getHeaders().get("location"));
+		assertEquals(Collections.singletonList(postUrl + "/" + id), actualResponse.getHeaders().get("location"));
+	}
+
+	@Test
+	public void save_rethrowException() {
+		expectedException.expect(ValidationException.class);
+		String expectedMessage = "Entity not found";
+		expectedException.expectMessage(expectedMessage);
+		EntityType entityTypeToSave = new EntityType();
+		when(entityTypeService.save(entityTypeToSave)).thenThrow(new ValidationException(expectedMessage));
+
+		testObj.post(null, entityTypeToSave);
 	}
 
 	@Test

@@ -6,25 +6,25 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class EntityType {
-	private String typeCode;
-	private String parentTypeCode;
+	private String id;
+	private String parentId;
 	private String name;
 	private boolean show;
 
-	public String getTypeCode() {
-		return typeCode;
+	public String getId() {
+		return id;
 	}
 
-	public void setTypeCode(String typeCode) {
-		this.typeCode = typeCode;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getParentTypeCode() {
-		return parentTypeCode;
+	public String getParentId() {
+		return parentId;
 	}
 
-	public void setParentTypeCode(String parentTypeCode) {
-		this.parentTypeCode = parentTypeCode;
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 
 	public String getName() {
