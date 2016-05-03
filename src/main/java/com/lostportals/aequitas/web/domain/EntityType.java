@@ -9,7 +9,7 @@ public class EntityType {
 	private String typeCode;
 	private String parentTypeCode;
 	private String name;
-	private boolean showByDefault;
+	private boolean show;
 
 	public String getTypeCode() {
 		return typeCode;
@@ -35,12 +35,12 @@ public class EntityType {
 		this.name = name;
 	}
 
-	public boolean isShowByDefault() {
-		return showByDefault;
+	public boolean isShow() {
+		return show;
 	}
 
-	public void setShowByDefault(boolean showByDefault) {
-		this.showByDefault = showByDefault;
+	public void setShow(boolean show) {
+		this.show = show;
 	}
 
 	public String toString() {

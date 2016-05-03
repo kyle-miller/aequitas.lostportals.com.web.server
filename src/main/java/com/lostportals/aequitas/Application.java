@@ -14,10 +14,10 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-//	@Bean
-//	public DataSource getDataSource() {
-//		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-//		builder.setType(EmbeddedDatabaseType.H2).addScript("my-schema.sql").addScript("my-test-data.sql");
-//		return builder.build();
-//	}
+	@Bean
+	public DataSource getDataSource() {
+		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+		builder.setType(EmbeddedDatabaseType.H2).addScripts("h2-schema.sql", "h2-test-data.sql");
+		return builder.build();
+	}
 }
