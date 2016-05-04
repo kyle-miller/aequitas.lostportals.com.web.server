@@ -6,7 +6,10 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -19,11 +22,18 @@ public class EntityTypeDaoImpl extends JdbcDaoSupport implements EntityTypeDao {
 		@Override
 		public DbEntityType mapRow(ResultSet rs, int rowNum) throws SQLException {
 			DbEntityType dbEntityType = new DbEntityType();
-			dbEntityType.setId(rs.getString("id"));
-			dbEntityType.setParentId(rs.getString("parentId"));
-			dbEntityType.setName(rs.getString("name"));
+			dbEntityType.setId(mapNull(rs.getString("id")));
+			dbEntityType.setParentId(mapNull(rs.getString("parentId")));
+			dbEntityType.setName(mapNull(rs.getString("name")));
 			dbEntityType.setShow(rs.getBoolean("show"));
 			return dbEntityType;
+		}
+
+		String mapNull(String str) {
+			if (StringUtils.isBlank(str) || "null".equals(str)) {
+				return null;
+			}
+			return str;
 		}
 	};
 
@@ -34,20 +44,47 @@ public class EntityTypeDaoImpl extends JdbcDaoSupport implements EntityTypeDao {
 
 	@Override
 	public List<DbEntityType> getAll() {
-		String sql = "select * from dbEntityTypes";
+		String sql = "select * from entityTypes";
 		List<DbEntityType> dbEntityTypeList = getJdbcTemplate().query(sql, rowMapper);
 		return dbEntityTypeList;
 	}
 
 	@Override
 	public DbEntityType get(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from entityTypes where id='" + id + "'";
+
+		DbEntityType dbEntityType = null;
+		try {
+			dbEntityType = getJdbcTemplate().queryForObject(sql, rowMapper);
+		} catch (EmptyResultDataAccessException e) {
+			// ignore
+		}
+
+		return dbEntityType;
 	}
 
 	@Override
-	public boolean save(DbEntityType dbEntityType) {
-		// TODO Auto-generated method stub
+	public boolean save(DbEntityType dbEntityType) throws IllegalAccessException, DataAccessException {
+		String id = dbEntityType.getId();
+		String sqlFields = dbEntityType.getSqlFields();
+		String sqlValues = dbEntityType.getSqlValues();
+		int numRowsAffected = 0;
+
+		DbEntityType existingDbEntityType = get(id);
+		if (existingDbEntityType == null) {
+			String sql = "insert into entityTypes (" + sqlFields + ") values (" + sqlValues + ")";
+			numRowsAffected = getJdbcTemplate().update(sql);
+		} else if (dbEntityType.toString().equals(existingDbEntityType.toString())) {
+			return true;
+		} else {
+			String sql = "update entityTypes (" + sqlFields + ") values (" + sqlValues + ") where id='" + id + "'";
+			numRowsAffected = getJdbcTemplate().update(sql);
+		}
+
+		if (numRowsAffected == 1) {
+			return true;
+		}
+
 		return false;
 	}
 }

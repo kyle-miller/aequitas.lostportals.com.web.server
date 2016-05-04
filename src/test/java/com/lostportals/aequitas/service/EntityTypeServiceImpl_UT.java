@@ -91,7 +91,7 @@ public class EntityTypeServiceImpl_UT {
 	}
 
 	@Test
-	public void save_new_checkDaoCall() {
+	public void save_new_checkDaoCall() throws Exception {
 		EntityType entityTypeToSave = new EntityType();
 		entityTypeToSave.setId(null);
 		entityTypeToSave.setName("name");
@@ -112,7 +112,7 @@ public class EntityTypeServiceImpl_UT {
 	}
 
 	@Test
-	public void save_new_daoFail() {
+	public void save_new_daoFail() throws Exception {
 		expectedException.expect(InternalServerException.class);
 		EntityType entityTypeToSave = new EntityType();
 		entityTypeToSave.setId(null);
@@ -126,7 +126,7 @@ public class EntityTypeServiceImpl_UT {
 	}
 
 	@Test
-	public void save_new_checkReturn() {
+	public void save_new_checkReturn() throws Exception {
 		EntityType entityTypeToSave = new EntityType();
 		entityTypeToSave.setId(null);
 		entityTypeToSave.setName("name");
@@ -146,7 +146,7 @@ public class EntityTypeServiceImpl_UT {
 	}
 
 	@Test
-	public void save_hasId_notExists() {
+	public void save_hasId_notExists() throws Exception {
 		EntityType entityTypeToSave = new EntityType();
 		entityTypeToSave.setId("id");
 		entityTypeToSave.setName("name");
@@ -168,7 +168,7 @@ public class EntityTypeServiceImpl_UT {
 	}
 
 	@Test
-	public void save_hasId_exists() {
+	public void save_hasId_exists() throws Exception {
 		EntityType entityTypeToSave = new EntityType();
 		entityTypeToSave.setId("id");
 		entityTypeToSave.setName("name");

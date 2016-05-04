@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -63,7 +64,14 @@ public class EntityTypeServiceImpl implements EntityTypeService {
 			}
 		}
 
-		boolean successful = entityTypeDao.save(dbEntityType);
+		boolean successful = false;
+
+		try {
+			successful = entityTypeDao.save(dbEntityType);
+		} catch (DataAccessException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		if (!successful) {
 			throw new InternalServerException("Unable to save entityType=" + entityTypeToSave);
