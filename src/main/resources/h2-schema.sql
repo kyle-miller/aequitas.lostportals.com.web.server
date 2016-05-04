@@ -14,8 +14,8 @@ CREATE TABLE icons (
 CREATE TABLE circles (
  id VARCHAR(36) NOT NULL PRIMARY KEY,
  entityId VARCHAR(36),
- latitude DECIMAL(3, 8) NOT NULL,
- longitude DECIMAL(3, 8) NOT NULL,
+ latitude DECIMAL(11, 8) NOT NULL,
+ longitude DECIMAL(11, 8) NOT NULL,
  radius INTEGER NOT NULL,
  outlineColor VARCHAR(25) NOT NULL,
  fillColor VARCHAR(25) NOT NULL
