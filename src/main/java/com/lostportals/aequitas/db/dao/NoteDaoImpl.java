@@ -24,7 +24,7 @@ public class NoteDaoImpl extends Dao<DbNote> implements NoteDao {
 
 	@Override
 	String getTableName() {
-		return "markers";
+		return "notes";
 	}
 
 	@Override

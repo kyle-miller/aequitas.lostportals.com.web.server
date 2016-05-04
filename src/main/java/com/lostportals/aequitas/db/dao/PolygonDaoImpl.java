@@ -24,7 +24,7 @@ public class PolygonDaoImpl extends Dao<DbPolygon> implements PolygonDao {
 
 	@Override
 	String getTableName() {
-		return "markers";
+		return "polygons";
 	}
 
 	@Override
