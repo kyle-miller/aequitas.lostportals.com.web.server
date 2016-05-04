@@ -14,18 +14,18 @@ public class DbEntityType_UT {
 
 	@Test
 	public void constructor() {
-		EntityType expectedEntityType = new EntityType();
-		expectedEntityType.setId("id");
-		expectedEntityType.setName("name");
-		expectedEntityType.setParentId("parentId");
-		expectedEntityType.setShow(true);
+		EntityType obj = new EntityType();
+		obj.setId("id");
+		obj.setName("name");
+		obj.setParentId("parentId");
+		obj.setShow(true);
 
-		DbEntityType actualDbEntityType = new DbEntityType(expectedEntityType);
+		DbEntityType actualDbObj = new DbEntityType(obj);
 
-		assertNotNull(actualDbEntityType);
-		assertEquals(expectedEntityType.getId(), actualDbEntityType.getId());
-		assertEquals(expectedEntityType.getParentId(), actualDbEntityType.getParentId());
-		assertEquals(expectedEntityType.getName(), actualDbEntityType.getName());
-		assertEquals(expectedEntityType.isShow(), actualDbEntityType.isShow());
+		assertNotNull(actualDbObj);
+		assertEquals(obj.getId(), actualDbObj.getId());
+		assertEquals(obj.getParentId(), actualDbObj.getParentId());
+		assertEquals(obj.getName(), actualDbObj.getName());
+		assertEquals(obj.isShow(), actualDbObj.isShow());
 	}
 }

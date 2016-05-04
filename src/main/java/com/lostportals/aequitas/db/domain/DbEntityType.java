@@ -1,14 +1,12 @@
 package com.lostportals.aequitas.db.domain;
 
-import java.lang.reflect.Field;
-
 import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lostportals.aequitas.web.domain.EntityType;
 
-public class DbEntityType {
+public class DbEntityType extends SqlType {
 	private String id;
 	private String parentId;
 	private String name;
@@ -63,44 +61,5 @@ public class DbEntityType {
 		} catch (JsonProcessingException e) {
 			return new ToStringCreator(this).toString();
 		}
-	}
-
-	public String getSqlFields() {
-		String sqlFields = "";
-
-		Field[] fields = getClass().getDeclaredFields();
-		for (int i = 0; i < fields.length; i++) {
-			Field field = fields[i];
-			
-			sqlFields += field.getName();
-			
-			if (i < fields.length) {
-				sqlFields += ", ";
-			}
-		}
-
-		return sqlFields;
-	}
-
-	public String getSqlValues() throws IllegalAccessException {
-		String sqlValues = "";
-		
-		Class<? extends DbEntityType> c = getClass();
-		Field[] fields = c.getDeclaredFields();
-		for (int i = 0; i < fields.length; i++) {
-			Field field = fields[i];
-			
-			if (field.getType() == String.class) {
-				sqlValues += "'" + field.get(this) + "'"; 
-			} else {
-				sqlValues += field.get(this);
-			}
-			
-			if (i < fields.length) {
-				sqlValues += ", ";
-			}
-		}
-		
-		return sqlValues;
 	}
 }

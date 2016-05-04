@@ -3,6 +3,7 @@ package com.lostportals.aequitas.db.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -42,15 +43,14 @@ public class EntityTypeDaoImpl_UT {
 	JdbcTemplate jdbcTemplate;
 
 	@Test
-	public void rowMapper() throws Exception {
+	public void rowMapper_mapRow() throws Exception {
 		RowMapper<DbEntityType> rowMapper = EntityTypeDaoImpl.rowMapper;
 		ResultSet resultSet = mock(ResultSet.class);
 		String id = "id";
 		when(resultSet.getString("id")).thenReturn(id);
 		String parentId = "parentId";
 		when(resultSet.getString("parentId")).thenReturn(parentId);
-		String name = "name";
-		when(resultSet.getString("name")).thenReturn(name);
+		when(resultSet.getString("name")).thenReturn("null"); // Covers a case found in testing with H2
 		boolean show = true;
 		when(resultSet.getBoolean("show")).thenReturn(show);
 
@@ -59,7 +59,7 @@ public class EntityTypeDaoImpl_UT {
 		assertNotNull(actualDbEntityType);
 		assertEquals(id, actualDbEntityType.getId());
 		assertEquals(parentId, actualDbEntityType.getParentId());
-		assertEquals(name, actualDbEntityType.getName());
+		assertNull(actualDbEntityType.getName());
 		assertEquals(show, actualDbEntityType.isShow());
 	}
 
@@ -95,9 +95,9 @@ public class EntityTypeDaoImpl_UT {
 		DbEntityType dbEntityType = mock(DbEntityType.class);
 		when(dbEntityType.getId()).thenReturn(id);
 		String sqlFields = "sql fields";
-		when(dbEntityType.getSqlFields()).thenReturn(sqlFields);
+		when(dbEntityType.getInsertSqlFields()).thenReturn(sqlFields);
 		String sqlValues = "sql values";
-		when(dbEntityType.getSqlValues()).thenReturn(sqlValues);
+		when(dbEntityType.getInsertSqlValues()).thenReturn(sqlValues);
 		doReturn(null).when(testObj).get(id);
 		String sqlQuery = "insert into entityTypes (" + sqlFields + ") values (" + sqlValues + ")";
 		when(jdbcTemplate.update(sqlQuery)).thenReturn(1);
@@ -114,9 +114,9 @@ public class EntityTypeDaoImpl_UT {
 		DbEntityType dbEntityType = mock(DbEntityType.class);
 		when(dbEntityType.getId()).thenReturn(id);
 		String sqlFields = "sql fields";
-		when(dbEntityType.getSqlFields()).thenReturn(sqlFields);
+		when(dbEntityType.getInsertSqlFields()).thenReturn(sqlFields);
 		String sqlValues = "sql values";
-		when(dbEntityType.getSqlValues()).thenReturn(sqlValues);
+		when(dbEntityType.getInsertSqlValues()).thenReturn(sqlValues);
 		doReturn(null).when(testObj).get(id);
 		String sqlQuery = "insert into entityTypes (" + sqlFields + ") values (" + sqlValues + ")";
 		when(jdbcTemplate.update(sqlQuery)).thenReturn(0);
@@ -133,9 +133,9 @@ public class EntityTypeDaoImpl_UT {
 		DbEntityType dbEntityType = mock(DbEntityType.class);
 		when(dbEntityType.getId()).thenReturn(id);
 		String sqlFields = "sql fields";
-		when(dbEntityType.getSqlFields()).thenReturn(sqlFields);
+		when(dbEntityType.getInsertSqlFields()).thenReturn(sqlFields);
 		String sqlValues = "sql values";
-		when(dbEntityType.getSqlValues()).thenReturn(sqlValues);
+		when(dbEntityType.getInsertSqlValues()).thenReturn(sqlValues);
 		doReturn(null).when(testObj).get(id);
 		String sqlQuery = "insert into entityTypes (" + sqlFields + ") values (" + sqlValues + ")";
 		when(jdbcTemplate.update(sqlQuery)).thenReturn(2);
@@ -154,9 +154,9 @@ public class EntityTypeDaoImpl_UT {
 		when(dbEntityType.getId()).thenReturn(id);
 		when(dbEntityType.getName()).thenReturn(name);
 		String sqlFields = "sql fields";
-		when(dbEntityType.getSqlFields()).thenReturn(sqlFields);
+		when(dbEntityType.getInsertSqlFields()).thenReturn(sqlFields);
 		String sqlValues = "sql values";
-		when(dbEntityType.getSqlValues()).thenReturn(sqlValues);
+		when(dbEntityType.getInsertSqlValues()).thenReturn(sqlValues);
 		doReturn(dbEntityType).when(testObj).get(id);
 
 		boolean actualReturnValue = testObj.save(dbEntityType);
@@ -172,15 +172,13 @@ public class EntityTypeDaoImpl_UT {
 		DbEntityType dbEntityType = mock(DbEntityType.class);
 		when(dbEntityType.getId()).thenReturn(id);
 		when(dbEntityType.getName()).thenReturn(name);
-		String sqlFields = "sql fields";
-		when(dbEntityType.getSqlFields()).thenReturn(sqlFields);
-		String sqlValues = "sql values";
-		when(dbEntityType.getSqlValues()).thenReturn(sqlValues);
+		String sqlFieldValuePairs = "sql field value pairs";
+		when(dbEntityType.getUpdateSqlSetFieldValuePairs()).thenReturn(sqlFieldValuePairs);
 		DbEntityType dbEntityTypeDiffName = new DbEntityType();
 		dbEntityType.setId(id);
 		dbEntityType.setName(name + "diff");
 		doReturn(dbEntityTypeDiffName).when(testObj).get(id);
-		String sqlQuery = "update entityTypes (" + sqlFields + ") values (" + sqlValues + ") where id='" + id + "'";
+		String sqlQuery = "update icons set " + sqlFieldValuePairs + " where id='" + id + "'";
 		when(jdbcTemplate.update(sqlQuery)).thenReturn(1);
 
 		boolean actualReturnValue = testObj.save(dbEntityType);
@@ -196,15 +194,13 @@ public class EntityTypeDaoImpl_UT {
 		DbEntityType dbEntityType = mock(DbEntityType.class);
 		when(dbEntityType.getId()).thenReturn(id);
 		when(dbEntityType.getName()).thenReturn(name);
-		String sqlFields = "sql fields";
-		when(dbEntityType.getSqlFields()).thenReturn(sqlFields);
-		String sqlValues = "sql values";
-		when(dbEntityType.getSqlValues()).thenReturn(sqlValues);
+		String sqlFieldValuePairs = "sql field value pairs";
+		when(dbEntityType.getUpdateSqlSetFieldValuePairs()).thenReturn(sqlFieldValuePairs);
 		DbEntityType dbEntityTypeDiffName = new DbEntityType();
 		dbEntityType.setId(id);
 		dbEntityType.setName(name + "diff");
 		doReturn(dbEntityTypeDiffName).when(testObj).get(id);
-		String sqlQuery = "update entityTypes (" + sqlFields + ") values (" + sqlValues + ") where id='" + id + "'";
+		String sqlQuery = "update icons set " + sqlFieldValuePairs + " where id='" + id + "'";
 		when(jdbcTemplate.update(sqlQuery)).thenReturn(0);
 
 		boolean actualReturnValue = testObj.save(dbEntityType);
@@ -220,15 +216,13 @@ public class EntityTypeDaoImpl_UT {
 		DbEntityType dbEntityType = mock(DbEntityType.class);
 		when(dbEntityType.getId()).thenReturn(id);
 		when(dbEntityType.getName()).thenReturn(name);
-		String sqlFields = "sql fields";
-		when(dbEntityType.getSqlFields()).thenReturn(sqlFields);
-		String sqlValues = "sql values";
-		when(dbEntityType.getSqlValues()).thenReturn(sqlValues);
+		String sqlFieldValuePairs = "sql field value pairs";
+		when(dbEntityType.getUpdateSqlSetFieldValuePairs()).thenReturn(sqlFieldValuePairs);
 		DbEntityType dbEntityTypeDiffName = new DbEntityType();
 		dbEntityType.setId(id);
 		dbEntityType.setName(name + "diff");
 		doReturn(dbEntityTypeDiffName).when(testObj).get(id);
-		String sqlQuery = "update entityTypes (" + sqlFields + ") values (" + sqlValues + ") where id='" + id + "'";
+		String sqlQuery = "update icons set " + sqlFieldValuePairs + " where id='" + id + "'";
 		when(jdbcTemplate.update(sqlQuery)).thenReturn(2);
 
 		boolean actualReturnValue = testObj.save(dbEntityType);

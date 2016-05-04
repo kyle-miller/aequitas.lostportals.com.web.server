@@ -4,11 +4,22 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lostportals.aequitas.web.domain.Icon;
 
-public class DbIcon {
+public class DbIcon extends SqlType {
 	private String id;
 	private String name;
 	private String url;
+
+	public DbIcon() {
+		
+	}
+
+	public DbIcon(Icon icon) {
+		this.id = icon.getId();
+		this.name = icon.getName();
+		this.url = icon.getUrl();
+	}
 
 	public String getId() {
 		return id;

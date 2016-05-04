@@ -66,18 +66,20 @@ public class EntityTypeDaoImpl extends JdbcDaoSupport implements EntityTypeDao {
 	@Override
 	public boolean save(DbEntityType dbEntityType) throws IllegalAccessException, DataAccessException {
 		String id = dbEntityType.getId();
-		String sqlFields = dbEntityType.getSqlFields();
-		String sqlValues = dbEntityType.getSqlValues();
+		
 		int numRowsAffected = 0;
 
 		DbEntityType existingDbEntityType = get(id);
 		if (existingDbEntityType == null) {
+			String sqlFields = dbEntityType.getInsertSqlFields();
+			String sqlValues = dbEntityType.getInsertSqlValues();
 			String sql = "insert into entityTypes (" + sqlFields + ") values (" + sqlValues + ")";
 			numRowsAffected = getJdbcTemplate().update(sql);
 		} else if (dbEntityType.toString().equals(existingDbEntityType.toString())) {
 			return true;
 		} else {
-			String sql = "update entityTypes (" + sqlFields + ") values (" + sqlValues + ") where id='" + id + "'";
+			String sqlFieldValuePairs = dbEntityType.getUpdateSqlSetFieldValuePairs();
+			String sql = "update entityTypes set " + sqlFieldValuePairs + " where id='" + id + "'";
 			numRowsAffected = getJdbcTemplate().update(sql);
 		}
 

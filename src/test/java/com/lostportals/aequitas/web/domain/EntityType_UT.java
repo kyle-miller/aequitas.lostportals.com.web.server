@@ -13,17 +13,17 @@ public class EntityType_UT {
 
 	@Test
 	public void constructor() {
-		DbEntityType dbEntityType = new DbEntityType();
-		dbEntityType.setId("id");
-		dbEntityType.setParentId("parentId");
-		dbEntityType.setName("name");
-		dbEntityType.setShow(true);
+		DbEntityType dbObj = new DbEntityType();
+		dbObj.setId("id");
+		dbObj.setParentId("parentId");
+		dbObj.setName("name");
+		dbObj.setShow(true);
 
-		EntityType actualEntityType = new EntityType(dbEntityType);
+		EntityType actualObj = new EntityType(dbObj);
 
-		assertEquals(dbEntityType.getId(), actualEntityType.getId());
-		assertEquals(dbEntityType.getParentId(), actualEntityType.getParentId());
-		assertEquals(dbEntityType.getName(), actualEntityType.getName());
-		assertEquals(dbEntityType.isShow(), actualEntityType.isShow());
+		assertEquals(dbObj.getId(), actualObj.getId());
+		assertEquals(dbObj.getParentId(), actualObj.getParentId());
+		assertEquals(dbObj.getName(), actualObj.getName());
+		assertEquals(dbObj.isShow(), actualObj.isShow());
 	}
 }

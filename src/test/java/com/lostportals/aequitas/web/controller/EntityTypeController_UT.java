@@ -39,15 +39,15 @@ public class EntityTypeController_UT {
 
 	@Test
 	public void save() {
-		EntityType entityTypeToSave = new EntityType();
-		EntityType returnedEntityType = new EntityType();
+		EntityType toSave = new EntityType();
+		EntityType expectedResult = new EntityType();
 		String id = "id";
-		returnedEntityType.setId(id);
-		when(entityTypeService.save(entityTypeToSave)).thenReturn(returnedEntityType);
+		expectedResult.setId(id);
+		when(entityTypeService.save(toSave)).thenReturn(expectedResult);
 		String postUrl = "/api/entityTypes";
 		MockHttpServletRequest mockRequest = new MockHttpServletRequest(HttpMethod.POST.toString(), postUrl);
 
-		ResponseEntity<Void> actualResponse = testObj.post(mockRequest, entityTypeToSave);
+		ResponseEntity<Void> actualResponse = testObj.post(mockRequest, toSave);
 
 		assertNotNull(actualResponse);
 		assertEquals(actualResponse.getStatusCode(), HttpStatus.CREATED);
@@ -58,12 +58,12 @@ public class EntityTypeController_UT {
 	@Test
 	public void save_rethrowException() {
 		expectedException.expect(UnprocessableEntityException.class);
-		String expectedMessage = "Entity not found";
+		String expectedMessage = "Error Saving";
 		expectedException.expectMessage(expectedMessage);
-		EntityType entityTypeToSave = new EntityType();
-		when(entityTypeService.save(entityTypeToSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
+		EntityType toSave = new EntityType();
+		when(entityTypeService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
 
-		testObj.post(null, entityTypeToSave);
+		testObj.post(null, toSave);
 	}
 
 	@Test
@@ -79,18 +79,18 @@ public class EntityTypeController_UT {
 	@Test
 	public void get() {
 		String id = "id";
-		EntityType expectedEntityType = new EntityType();
-		when(entityTypeService.get(id)).thenReturn(expectedEntityType);
+		EntityType expectedResult = new EntityType();
+		when(entityTypeService.get(id)).thenReturn(expectedResult);
 
 		EntityType actualEntityType = testObj.get(id);
 
-		assertEquals(expectedEntityType, actualEntityType);
+		assertEquals(expectedResult, actualEntityType);
 	}
 
 	@Test
 	public void get_rethrowException() {
 		expectedException.expect(NotFoundException.class);
-		String expectedMessage = "Entity not found";
+		String expectedMessage = "Not found";
 		expectedException.expectMessage(expectedMessage);
 		String id = "id";
 		when(entityTypeService.get(id)).thenThrow(new NotFoundException(expectedMessage));
