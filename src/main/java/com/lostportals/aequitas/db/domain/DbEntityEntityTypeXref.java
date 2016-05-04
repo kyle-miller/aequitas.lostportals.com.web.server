@@ -4,11 +4,22 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lostportals.aequitas.web.domain.EntityEntityTypeXref;
 
-public class DbEntityEntityTypeXref {
+public class DbEntityEntityTypeXref extends SqlType {
 	private String id;
 	private String entityTypeId;
 	private String entityId;
+
+	public DbEntityEntityTypeXref() {
+
+	}
+
+	public DbEntityEntityTypeXref(EntityEntityTypeXref entityEntityTypeXref) {
+		this.id = entityEntityTypeXref.getId();
+		this.entityId = entityEntityTypeXref.getEntityId();
+		this.entityTypeId = entityEntityTypeXref.getEntityTypeId();
+	}
 
 	public String getId() {
 		return id;

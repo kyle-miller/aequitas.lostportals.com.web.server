@@ -4,11 +4,22 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lostportals.aequitas.db.domain.DbPolygon;
 
 public class Polygon {
 	private String id;
 	private String entityId;
 	private String vertices;
+
+	public Polygon() {
+
+	}
+
+	public Polygon(DbPolygon dbPolygon) {
+		this.id = dbPolygon.getId();
+		this.entityId = dbPolygon.getEntityId();
+		this.vertices = dbPolygon.getVertices();
+	}
 
 	public String getId() {
 		return id;

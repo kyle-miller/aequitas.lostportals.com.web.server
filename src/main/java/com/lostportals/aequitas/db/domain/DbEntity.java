@@ -4,10 +4,20 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lostportals.aequitas.web.domain.Entity;
 
-public class DbEntity {
+public class DbEntity extends SqlType {
 	private String id;
 	private String title;
+
+	public DbEntity() {
+
+	}
+
+	public DbEntity(Entity entity) {
+		this.id = entity.getId();
+		this.title = entity.getTitle();
+	}
 
 	public String getId() {
 		return id;

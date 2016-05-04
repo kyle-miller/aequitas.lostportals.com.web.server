@@ -6,6 +6,7 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lostportals.aequitas.db.domain.DbMarker;
 
 public class Marker {
 	private String id;
@@ -13,6 +14,18 @@ public class Marker {
 	private String iconId;
 	private BigDecimal latitude;
 	private BigDecimal longitude;
+
+	public Marker() {
+
+	}
+
+	public Marker(DbMarker dbMarker) {
+		this.id = dbMarker.getId();
+		this.entityId = dbMarker.getEntityId();
+		this.iconId = dbMarker.getIconId();
+		this.latitude = dbMarker.getLatitude();
+		this.longitude = dbMarker.getLongitude();
+	}
 
 	public String getId() {
 		return id;

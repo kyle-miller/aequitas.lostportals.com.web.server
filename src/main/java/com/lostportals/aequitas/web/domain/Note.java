@@ -4,12 +4,24 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lostportals.aequitas.db.domain.DbNote;
 
 public class Note {
 	private String id;
 	private String entityId;
 	private String note;
 	private Integer position;
+
+	public Note() {
+
+	}
+
+	public Note(DbNote dbNote) {
+		this.id = dbNote.getId();
+		this.entityId = dbNote.getEntityId();
+		this.note = dbNote.getNote();
+		this.position = dbNote.getPosition();
+	}
 
 	public String getId() {
 		return id;

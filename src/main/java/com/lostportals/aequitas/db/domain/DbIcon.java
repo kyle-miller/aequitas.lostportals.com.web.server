@@ -12,7 +12,7 @@ public class DbIcon extends SqlType {
 	private String url;
 
 	public DbIcon() {
-		
+
 	}
 
 	public DbIcon(Icon icon) {

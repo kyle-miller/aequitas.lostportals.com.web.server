@@ -6,8 +6,9 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lostportals.aequitas.web.domain.Circle;
 
-public class DbCircle {
+public class DbCircle extends SqlType {
 	private String id;
 	private String entityId;
 	private BigDecimal latitude;
@@ -15,6 +16,20 @@ public class DbCircle {
 	private Integer radius;
 	private String outlineColor;
 	private String fillColor;
+
+	public DbCircle() {
+
+	}
+
+	public DbCircle(Circle circle) {
+		this.id = circle.getId();
+		this.entityId = circle.getEntityId();
+		this.latitude = circle.getLatitude();
+		this.longitude = circle.getLongitude();
+		this.radius = circle.getRadius();
+		this.outlineColor = circle.getOutlineColor();
+		this.fillColor = circle.getFillColor();
+	}
 
 	public String getId() {
 		return id;
