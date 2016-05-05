@@ -14,6 +14,7 @@ public class MapMarker {
 	private BigDecimal latitude;
 	private BigDecimal longitude;
 	private String iconId;
+	private MapIcon icon;
 
 	public MapMarker() {
 
@@ -65,6 +66,14 @@ public class MapMarker {
 
 	public void setIconId(String iconId) {
 		this.iconId = iconId;
+	}
+
+	public MapIcon getIcon() {
+		return icon;
+	}
+
+	public void setIcon(MapIcon icon) {
+		this.icon = icon;
 	}
 
 	public String toString() {

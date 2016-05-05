@@ -1,5 +1,6 @@
 package com.lostportals.aequitas.web.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.core.style.ToStringCreator;
@@ -11,7 +12,7 @@ import com.lostportals.aequitas.web.admin.domain.Entity;
 public class MapEntity {
 	private String id;
 	private String title;
-	private MapEntityType type;
+	private List<MapEntityType> types;
 	private List<MapCircle> circles;
 	private List<MapMarker> markers;
 	private List<MapPolygon> polygons;
@@ -42,12 +43,32 @@ public class MapEntity {
 		this.title = title;
 	}
 
-	public MapEntityType getType() {
-		return type;
+	public void addType(MapEntityType mapEntityType) {
+		if (types == null) {
+			types = new ArrayList<>();
+		}
+
+		if (!types.contains(mapEntityType)) {
+			types.add(mapEntityType);
+		}
 	}
 
-	public void setType(MapEntityType type) {
-		this.type = type;
+	public List<MapEntityType> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<MapEntityType> types) {
+		this.types = types;
+	}
+
+	public void addCircle(MapCircle mapCircle) {
+		if (circles == null) {
+			circles = new ArrayList<>();
+		}
+
+		if (!circles.contains(mapCircle)) {
+			circles.add(mapCircle);
+		}
 	}
 
 	public List<MapCircle> getCircles() {
@@ -58,6 +79,16 @@ public class MapEntity {
 		this.circles = circles;
 	}
 
+	public void addMarker(MapMarker mapMarker) {
+		if (markers == null) {
+			markers = new ArrayList<>();
+		}
+
+		if (!markers.contains(mapMarker)) {
+			markers.add(mapMarker);
+		}
+	}
+
 	public List<MapMarker> getMarkers() {
 		return markers;
 	}
@@ -66,12 +97,32 @@ public class MapEntity {
 		this.markers = markers;
 	}
 
+	public void addPolygon(MapPolygon mapPolygon) {
+		if (polygons == null) {
+			polygons = new ArrayList<>();
+		}
+
+		if (!polygons.contains(mapPolygon)) {
+			polygons.add(mapPolygon);
+		}
+	}
+
 	public List<MapPolygon> getPolygons() {
 		return polygons;
 	}
 
 	public void setPolygons(List<MapPolygon> polygons) {
 		this.polygons = polygons;
+	}
+
+	public void addNote(MapNote mapNote) {
+		if (notes == null) {
+			notes = new ArrayList<>();
+		}
+
+		if (!notes.contains(mapNote)) {
+			notes.add(mapNote);
+		}
 	}
 
 	public List<MapNote> getNotes() {
