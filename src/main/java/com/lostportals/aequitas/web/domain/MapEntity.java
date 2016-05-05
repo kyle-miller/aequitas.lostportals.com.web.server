@@ -12,11 +12,11 @@ import com.lostportals.aequitas.web.admin.domain.Entity;
 public class MapEntity {
 	private String id;
 	private String title;
-	private List<MapEntityType> types;
-	private List<MapCircle> circles;
-	private List<MapMarker> markers;
-	private List<MapPolygon> polygons;
-	private List<MapNote> notes;
+	private List<MapEntityType> types = new ArrayList<>();
+	private List<MapCircle> circles = new ArrayList<>();
+	private List<MapMarker> markers = new ArrayList<>();
+	private List<MapPolygon> polygons = new ArrayList<>();
+	private List<MapNote> notes = new ArrayList<>();
 
 	public MapEntity() {
 
