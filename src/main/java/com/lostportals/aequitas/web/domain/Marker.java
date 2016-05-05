@@ -11,9 +11,9 @@ import com.lostportals.aequitas.db.domain.DbMarker;
 public class Marker {
 	private String id;
 	private String entityId;
-	private String iconId;
 	private BigDecimal latitude;
 	private BigDecimal longitude;
+	private String iconId;
 
 	public Marker() {
 
@@ -43,14 +43,6 @@ public class Marker {
 		this.entityId = entityId;
 	}
 
-	public String getIconId() {
-		return iconId;
-	}
-
-	public void setIconId(String iconId) {
-		this.iconId = iconId;
-	}
-
 	public BigDecimal getLatitude() {
 		return latitude;
 	}
@@ -65,6 +57,14 @@ public class Marker {
 
 	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
+	}
+
+	public String getIconId() {
+		return iconId;
+	}
+
+	public void setIconId(String iconId) {
+		this.iconId = iconId;
 	}
 
 	public String toString() {

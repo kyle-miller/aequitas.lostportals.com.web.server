@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,6 @@ import com.lostportals.aequitas.web.domain.EntityType;
 
 @Service
 public class EntityTypeServiceImpl implements EntityTypeService {
-	static final Logger log = LogManager.getLogger();
 
 	@Autowired
 	EntityTypeDao entityTypeDao;
@@ -57,24 +54,12 @@ public class EntityTypeServiceImpl implements EntityTypeService {
 
 		if (StringUtils.isBlank(dbEntityType.getId())) {
 			dbEntityType.setId(UUID.randomUUID().toString());
-		} else {
-			DbEntityType existingDbEntityType = entityTypeDao.get(dbEntityType.getId());
-			if (existingDbEntityType != null) {
-				log.warn("EntityType already exists as dbEntityType=" + existingDbEntityType + "; overwriting with entityType=" + dbEntityType);
-			}
 		}
-
-		boolean successful = false;
 
 		try {
-			successful = entityTypeDao.save(dbEntityType);
+			entityTypeDao.save(dbEntityType);
 		} catch (DataAccessException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (!successful) {
-			throw new InternalServerException("Unable to save entityType=" + entityTypeToSave);
+			throw new InternalServerException("Unable to save entityType=" + entityTypeToSave, e);
 		}
 
 		EntityType savedEntityType = new EntityType(dbEntityType);

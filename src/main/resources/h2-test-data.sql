@@ -1,1 +1,16 @@
-INSERT INTO entityTypes VALUES ('28697fdd-5a92-4ab1-ab59-cacd173246ab', NULL, 'Trees', TRUE);
+INSERT INTO circles VALUES ('3ac9fb5f-7efa-481a-8c2f-dc0b525fd082', '9ee3f882-29c1-4c3b-9e59-5cc79dda8ff4', -45.12345678, -33.98765432, 5, '#50BB34', 'red');
+INSERT INTO entities VALUES ('9ee3f882-29c1-4c3b-9e59-5cc79dda8ff4', 'A Circle');
+INSERT INTO entities VALUES ('8f616015-fd36-4f7b-bfa4-44a255272b20', 'A Marker');
+INSERT INTO entities VALUES ('56b007a7-8b24-4141-8d80-7f8b3b269a4a', 'A Polygon');
+INSERT INTO entityEntityTypeXrefs VALUES ('7c9e13df-ca2a-49ef-a787-e6573521b9d9', '9ee3f882-29c1-4c3b-9e59-5cc79dda8ff4', '28697fdd-5a92-4ab1-ab59-cacd173246ab');
+INSERT INTO entityEntityTypeXrefs VALUES ('4f28e862-0aa0-4842-b6be-6a8ad1334c57', '8f616015-fd36-4f7b-bfa4-44a255272b20', 'af92dc64-ab4c-4639-bdfd-2dd7fe0c5475');
+INSERT INTO entityEntityTypeXrefs VALUES ('649cf5dd-c6ff-48bf-a7ed-6e454dd9ddb1', '56b007a7-8b24-4141-8d80-7f8b3b269a4a', 'fdd4ee35-2e6d-41cc-98f9-67636483c294');
+INSERT INTO entityTypes VALUES ('28697fdd-5a92-4ab1-ab59-cacd173246ab', NULL, 'Boss', TRUE);
+INSERT INTO entityTypes VALUES ('af92dc64-ab4c-4639-bdfd-2dd7fe0c5475', NULL, 'Trees', TRUE);
+INSERT INTO entityTypes VALUES ('fdd4ee35-2e6d-41cc-98f9-67636483c294', NULL, 'Horse Spawn', TRUE);
+INSERT INTO icons VALUES ('38908f09-d5be-4968-a33e-f4ef2d431a62', 'http://aequitas.lostportals.com/images/icon.png', 'Treasure');
+INSERT INTO markers VALUES ('fb6985ff-08d8-44a0-829a-11b7d64e3b7f', '8f616015-fd36-4f7b-bfa4-44a255272b20', -30.12345678, -30.98765432, '38908f09-d5be-4968-a33e-f4ef2d431a62');
+INSERT INTO notes VALUES ('90997e68-d596-4e84-82b6-fcf39fdac9c3', '9ee3f882-29c1-4c3b-9e59-5cc79dda8ff4', 'A circle note', 1);
+INSERT INTO notes VALUES ('f398e0ed-029f-433d-bd74-c19f9b2b47ae', '8f616015-fd36-4f7b-bfa4-44a255272b20', 'A marker note', 1);
+INSERT INTO notes VALUES ('9ea905d5-fee6-4f01-b6d4-0ca3eb10bbb9', '56b007a7-8b24-4141-8d80-7f8b3b269a4a', 'A polygon note', 1);
+INSERT INTO polygons VALUES ('3e13f9e6-d61a-472b-a65e-2fef0a99f771', '9ee3f882-29c1-4c3b-9e59-5cc79dda8ff4', '[[-81.50529869762794, -150.1611328125],[-82.37331716529225, -155.3466796875],[-82.48908147830929, -157.8955078125],[-81.4597372638345, -152.7099609375],[-81.49230582149612, -152.40234375]]');

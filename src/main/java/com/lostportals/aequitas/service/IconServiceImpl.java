@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,6 @@ import com.lostportals.aequitas.web.domain.Icon;
 
 @Service
 public class IconServiceImpl implements IconService {
-	static final Logger log = LogManager.getLogger();
 
 	@Autowired
 	IconDao iconDao;
@@ -57,24 +54,12 @@ public class IconServiceImpl implements IconService {
 
 		if (StringUtils.isBlank(dbIcon.getId())) {
 			dbIcon.setId(UUID.randomUUID().toString());
-		} else {
-			DbIcon existingDbIcon = iconDao.get(dbIcon.getId());
-			if (existingDbIcon != null) {
-				log.warn("Icon already exists as dbIcon=" + existingDbIcon + "; overwriting with icon=" + dbIcon);
-			}
 		}
-
-		boolean successful = false;
 
 		try {
-			successful = iconDao.save(dbIcon);
+			iconDao.save(dbIcon);
 		} catch (DataAccessException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (!successful) {
-			throw new InternalServerException("Unable to save icon=" + iconToSave);
+			throw new InternalServerException("Unable to save icon=" + iconToSave, e);
 		}
 
 		Icon savedIcon = new Icon(dbIcon);

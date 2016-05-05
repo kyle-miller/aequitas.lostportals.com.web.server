@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -46,8 +45,7 @@ public class EntityTypeServiceImpl_UT {
 
 	@Test
 	public void getAll() {
-		List<DbEntityType> daoList = Arrays.asList(createDbEntityType(), createDbEntityType(),
-				createDbEntityType());
+		List<DbEntityType> daoList = Arrays.asList(createDbEntityType(), createDbEntityType(), createDbEntityType());
 		when(entityTypeDao.getAll()).thenReturn(daoList);
 
 		List<EntityType> actualList = testObj.getAll();
@@ -63,10 +61,18 @@ public class EntityTypeServiceImpl_UT {
 		}
 	}
 
+	DbEntityType createDbEntityType() {
+		DbEntityType dbObj = new DbEntityType();
+		dbObj.setId(UUID.randomUUID().toString());
+		dbObj.setName(UUID.randomUUID().toString());
+		dbObj.setParentId(UUID.randomUUID().toString());
+		return dbObj;
+	}
+
 	@Test
 	public void get() {
 		String id = "id";
-		DbEntityType dbObj = new DbEntityType();
+		DbEntityType dbObj = createDbEntityType();
 		when(entityTypeDao.get(id)).thenReturn(dbObj);
 
 		EntityType actualObj = testObj.get(id);
@@ -92,12 +98,8 @@ public class EntityTypeServiceImpl_UT {
 
 	@Test
 	public void save_new_checkDaoCall() throws Exception {
-		EntityType toSave = new EntityType();
+		EntityType toSave = new EntityType(createDbEntityType());
 		toSave.setId(null);
-		toSave.setName("name");
-		toSave.setParentId("parentId");
-		toSave.setShow(true);
-		when(entityTypeDao.save(any(DbEntityType.class))).thenReturn(true);
 
 		testObj.save(toSave);
 
@@ -106,94 +108,46 @@ public class EntityTypeServiceImpl_UT {
 		DbEntityType capturedDbObj = dbEntityTypeCaptor.getValue();
 		assertNotNull(capturedDbObj);
 		assertNotEquals(toSave.getId(), capturedDbObj.getId());
-		assertEquals(toSave.getParentId(), capturedDbObj.getParentId());
 		assertEquals(toSave.getName(), capturedDbObj.getName());
-		assertEquals(toSave.isShow(), capturedDbObj.isShow());
+		assertEquals(toSave.getParentId(), capturedDbObj.getParentId());
 	}
 
 	@Test
 	public void save_new_daoFail() throws Exception {
 		expectedException.expect(InternalServerException.class);
-		EntityType toSave = new EntityType();
+		EntityType toSave = new EntityType(createDbEntityType());
 		toSave.setId(null);
-		toSave.setName("name");
-		toSave.setParentId("parentId");
-		toSave.setShow(true);
 		expectedException.expectMessage("Unable to save entityType=" + toSave);
-		when(entityTypeDao.save(any(DbEntityType.class))).thenReturn(false);
+		when(entityTypeDao.save(any(DbEntityType.class))).thenThrow(new IllegalAccessException("something"));
 
 		testObj.save(toSave);
 	}
 
 	@Test
 	public void save_new_checkReturn() throws Exception {
-		EntityType toSave = new EntityType();
+		EntityType toSave = new EntityType(createDbEntityType());
 		toSave.setId(null);
-		toSave.setName("name");
-		toSave.setParentId("parentId");
-		toSave.setShow(true);
-		when(entityTypeDao.save(any(DbEntityType.class))).thenReturn(true);
 
 		EntityType actualObj = testObj.save(toSave);
 
-		verify(entityTypeDao).save(any(DbEntityType.class));
-		verifyZeroInteractions(entityTypeDao);
 		assertNotNull(actualObj);
 		assertNotEquals(toSave.getId(), actualObj.getId());
-		assertEquals(toSave.getParentId(), actualObj.getParentId());
 		assertEquals(toSave.getName(), actualObj.getName());
-		assertEquals(toSave.isShow(), actualObj.isShow());
+		assertEquals(toSave.getParentId(), actualObj.getParentId());
 	}
 
 	@Test
-	public void save_hasId_notExists() throws Exception {
-		EntityType toSave = new EntityType();
-		toSave.setId("id");
-		toSave.setName("name");
-		toSave.setParentId("parentId");
-		toSave.setShow(true);
-		when(entityTypeDao.get(toSave.getId())).thenReturn(null);
-		when(entityTypeDao.save(any(DbEntityType.class))).thenReturn(true);
+	public void save_hasId_checkDaoCall() throws Exception {
+		EntityType toSave = new EntityType(createDbEntityType());
 
-		EntityType actualObj = testObj.save(toSave);
+		testObj.save(toSave);
 
-		verify(entityTypeDao).get(toSave.getId());
-		verify(entityTypeDao).save(any(DbEntityType.class));
+		verify(entityTypeDao).save(dbEntityTypeCaptor.capture());
 		verifyNoMoreInteractions(entityTypeDao);
-		assertNotNull(actualObj);
-		assertEquals(toSave.getId(), actualObj.getId());
-		assertEquals(toSave.getParentId(), actualObj.getParentId());
-		assertEquals(toSave.getName(), actualObj.getName());
-		assertEquals(toSave.isShow(), actualObj.isShow());
-	}
-
-	@Test
-	public void save_hasId_exists() throws Exception {
-		EntityType toSave = new EntityType();
-		toSave.setId("id");
-		toSave.setName("name");
-		toSave.setParentId("parentId");
-		toSave.setShow(true);
-		when(entityTypeDao.get(toSave.getId())).thenReturn(new DbEntityType(toSave));
-		when(entityTypeDao.save(any(DbEntityType.class))).thenReturn(true);
-
-		EntityType actualObj = testObj.save(toSave);
-
-		verify(entityTypeDao).get(toSave.getId());
-		verify(entityTypeDao).save(any(DbEntityType.class));
-		verifyNoMoreInteractions(entityTypeDao);
-		assertNotNull(actualObj);
-		assertEquals(toSave.getId(), actualObj.getId());
-		assertEquals(toSave.getParentId(), actualObj.getParentId());
-		assertEquals(toSave.getName(), actualObj.getName());
-		assertEquals(toSave.isShow(), actualObj.isShow());
-	}
-
-	DbEntityType createDbEntityType() {
-		DbEntityType dbObj = new DbEntityType();
-		dbObj.setId(UUID.randomUUID().toString());
-		dbObj.setName(UUID.randomUUID().toString());
-		dbObj.setParentId(UUID.randomUUID().toString());
-		return dbObj;
+		DbEntityType capturedDbObj = dbEntityTypeCaptor.getValue();
+		assertNotNull(capturedDbObj);
+		assertEquals(toSave.getId(), capturedDbObj.getId());
+		assertEquals(toSave.getName(), capturedDbObj.getName());
+		assertEquals(toSave.getParentId(), capturedDbObj.getParentId());
 	}
 }
