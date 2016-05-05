@@ -9,9 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EntityTypeDaoImpl_UT {
+public class PolygonDaoImpl_UT {
 	@InjectMocks
-	EntityTypeDaoImpl testObj;
+	PolygonDaoImpl testObj;
 
 	@Test
 	public void getRowMapper_notNull() {
@@ -20,6 +20,6 @@ public class EntityTypeDaoImpl_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("entityTypes", testObj.getTableName());
+		assertEquals("polygons", testObj.getTableName());
 	}
 }
