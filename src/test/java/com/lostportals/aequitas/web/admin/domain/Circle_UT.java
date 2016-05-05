@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.lostportals.aequitas.db.domain.DbCircle;
-import com.lostportals.aequitas.web.admin.domain.Circle;
 
 @RunWith(MockitoJUnitRunner.class)
 public class Circle_UT {

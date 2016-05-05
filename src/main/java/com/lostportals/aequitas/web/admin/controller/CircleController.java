@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.controller;
+package com.lostportals.aequitas.web.admin.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lostportals.aequitas.service.NoteService;
-import com.lostportals.aequitas.web.admin.domain.Note;
+import com.lostportals.aequitas.service.CircleService;
+import com.lostportals.aequitas.web.admin.domain.Circle;
 
 @RestController
-@RequestMapping(value = "/api/notes", produces = { "application/json" })
-public class NoteController {
+@RequestMapping(value = "/api/circles", produces = { "application/json" })
+public class CircleController {
 
 	@Autowired
-	NoteService noteService;
+	CircleService circleService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Note note) {
-		note = noteService.save(note);
+	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Circle circle) {
+		circle = circleService.save(circle);
 
-		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("^(.*)/?$", "$1/" + note.getId()));
+		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("^(.*)/?$", "$1/" + circle.getId()));
 
 		return ResponseEntity.created(newEntityUrl).build();
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Note> getAll() {
-		List<Note> noteList = noteService.getAll();
-		return noteList;
+	public List<Circle> getAll() {
+		List<Circle> circleList = circleService.getAll();
+		return circleList;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Note get(@PathVariable String id) {
-		Note note = noteService.get(id);
-		return note;
+	public Circle get(@PathVariable String id) {
+		Circle circle = circleService.get(id);
+		return circle;
 	}
 }

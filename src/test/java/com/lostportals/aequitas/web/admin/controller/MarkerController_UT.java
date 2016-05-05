@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.controller;
+package com.lostportals.aequitas.web.admin.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,29 +22,29 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
-import com.lostportals.aequitas.service.IconService;
-import com.lostportals.aequitas.web.admin.domain.Icon;
+import com.lostportals.aequitas.service.MarkerService;
+import com.lostportals.aequitas.web.admin.domain.Marker;
 
 @RunWith(MockitoJUnitRunner.class)
-public class IconController_UT {
+public class MarkerController_UT {
 
 	@InjectMocks
-	IconController testObj;
+	MarkerController testObj;
 
 	@Mock
-	IconService iconService;
+	MarkerService markerService;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void save() {
-		Icon toSave = new Icon();
-		Icon expectedResult = new Icon();
+		Marker toSave = new Marker();
+		Marker expectedResult = new Marker();
 		String id = "id";
 		expectedResult.setId(id);
-		when(iconService.save(toSave)).thenReturn(expectedResult);
-		String postUrl = "/api/icons";
+		when(markerService.save(toSave)).thenReturn(expectedResult);
+		String postUrl = "/api/markers";
 		MockHttpServletRequest mockRequest = new MockHttpServletRequest(HttpMethod.POST.toString(), postUrl);
 
 		ResponseEntity<Void> actualResponse = testObj.post(mockRequest, toSave);
@@ -60,18 +60,18 @@ public class IconController_UT {
 		expectedException.expect(UnprocessableEntityException.class);
 		String expectedMessage = "Error Saving";
 		expectedException.expectMessage(expectedMessage);
-		Icon toSave = new Icon();
-		when(iconService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
+		Marker toSave = new Marker();
+		when(markerService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
 
 		testObj.post(null, toSave);
 	}
 
 	@Test
 	public void getAll() {
-		List<Icon> expectedList = Arrays.asList(new Icon());
-		when(iconService.getAll()).thenReturn(expectedList);
+		List<Marker> expectedList = Arrays.asList(new Marker());
+		when(markerService.getAll()).thenReturn(expectedList);
 
-		List<Icon> actualList = testObj.getAll();
+		List<Marker> actualList = testObj.getAll();
 
 		assertEquals(expectedList, actualList);
 	}
@@ -79,10 +79,10 @@ public class IconController_UT {
 	@Test
 	public void get() {
 		String id = "id";
-		Icon expectedResult = new Icon();
-		when(iconService.get(id)).thenReturn(expectedResult);
+		Marker expectedResult = new Marker();
+		when(markerService.get(id)).thenReturn(expectedResult);
 
-		Icon actualEntityType = testObj.get(id);
+		Marker actualEntityType = testObj.get(id);
 
 		assertEquals(expectedResult, actualEntityType);
 	}
@@ -93,7 +93,7 @@ public class IconController_UT {
 		String expectedMessage = "Not found";
 		expectedException.expectMessage(expectedMessage);
 		String id = "id";
-		when(iconService.get(id)).thenThrow(new NotFoundException(expectedMessage));
+		when(markerService.get(id)).thenThrow(new NotFoundException(expectedMessage));
 
 		testObj.get(id);
 	}

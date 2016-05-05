@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.controller;
+package com.lostportals.aequitas.web.admin.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,29 +22,29 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
-import com.lostportals.aequitas.service.EntityEntityTypeXrefService;
-import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
+import com.lostportals.aequitas.service.PolygonService;
+import com.lostportals.aequitas.web.admin.domain.Polygon;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EntityEntityTypeXrefController_UT {
+public class PolygonController_UT {
 
 	@InjectMocks
-	EntityEntityTypeXrefController testObj;
+	PolygonController testObj;
 
 	@Mock
-	EntityEntityTypeXrefService entityEntityTypeXrefService;
+	PolygonService polygonService;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void save() {
-		EntityEntityTypeXref toSave = new EntityEntityTypeXref();
-		EntityEntityTypeXref expectedResult = new EntityEntityTypeXref();
+		Polygon toSave = new Polygon();
+		Polygon expectedResult = new Polygon();
 		String id = "id";
 		expectedResult.setId(id);
-		when(entityEntityTypeXrefService.save(toSave)).thenReturn(expectedResult);
-		String postUrl = "/api/entityEntityTypeXrefs";
+		when(polygonService.save(toSave)).thenReturn(expectedResult);
+		String postUrl = "/api/polygons";
 		MockHttpServletRequest mockRequest = new MockHttpServletRequest(HttpMethod.POST.toString(), postUrl);
 
 		ResponseEntity<Void> actualResponse = testObj.post(mockRequest, toSave);
@@ -60,18 +60,18 @@ public class EntityEntityTypeXrefController_UT {
 		expectedException.expect(UnprocessableEntityException.class);
 		String expectedMessage = "Error Saving";
 		expectedException.expectMessage(expectedMessage);
-		EntityEntityTypeXref toSave = new EntityEntityTypeXref();
-		when(entityEntityTypeXrefService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
+		Polygon toSave = new Polygon();
+		when(polygonService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
 
 		testObj.post(null, toSave);
 	}
 
 	@Test
 	public void getAll() {
-		List<EntityEntityTypeXref> expectedList = Arrays.asList(new EntityEntityTypeXref());
-		when(entityEntityTypeXrefService.getAll()).thenReturn(expectedList);
+		List<Polygon> expectedList = Arrays.asList(new Polygon());
+		when(polygonService.getAll()).thenReturn(expectedList);
 
-		List<EntityEntityTypeXref> actualList = testObj.getAll();
+		List<Polygon> actualList = testObj.getAll();
 
 		assertEquals(expectedList, actualList);
 	}
@@ -79,10 +79,10 @@ public class EntityEntityTypeXrefController_UT {
 	@Test
 	public void get() {
 		String id = "id";
-		EntityEntityTypeXref expectedResult = new EntityEntityTypeXref();
-		when(entityEntityTypeXrefService.get(id)).thenReturn(expectedResult);
+		Polygon expectedResult = new Polygon();
+		when(polygonService.get(id)).thenReturn(expectedResult);
 
-		EntityEntityTypeXref actualEntityType = testObj.get(id);
+		Polygon actualEntityType = testObj.get(id);
 
 		assertEquals(expectedResult, actualEntityType);
 	}
@@ -93,7 +93,7 @@ public class EntityEntityTypeXrefController_UT {
 		String expectedMessage = "Not found";
 		expectedException.expectMessage(expectedMessage);
 		String id = "id";
-		when(entityEntityTypeXrefService.get(id)).thenThrow(new NotFoundException(expectedMessage));
+		when(polygonService.get(id)).thenThrow(new NotFoundException(expectedMessage));
 
 		testObj.get(id);
 	}

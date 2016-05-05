@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.controller;
+package com.lostportals.aequitas.web.admin.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,29 +22,29 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
-import com.lostportals.aequitas.service.NoteService;
-import com.lostportals.aequitas.web.admin.domain.Note;
+import com.lostportals.aequitas.service.EntityService;
+import com.lostportals.aequitas.web.admin.domain.Entity;
 
 @RunWith(MockitoJUnitRunner.class)
-public class NoteController_UT {
+public class EntityController_UT {
 
 	@InjectMocks
-	NoteController testObj;
+	EntityController testObj;
 
 	@Mock
-	NoteService noteService;
+	EntityService entityService;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void save() {
-		Note toSave = new Note();
-		Note expectedResult = new Note();
+		Entity toSave = new Entity();
+		Entity expectedResult = new Entity();
 		String id = "id";
 		expectedResult.setId(id);
-		when(noteService.save(toSave)).thenReturn(expectedResult);
-		String postUrl = "/api/notes";
+		when(entityService.save(toSave)).thenReturn(expectedResult);
+		String postUrl = "/api/entitys";
 		MockHttpServletRequest mockRequest = new MockHttpServletRequest(HttpMethod.POST.toString(), postUrl);
 
 		ResponseEntity<Void> actualResponse = testObj.post(mockRequest, toSave);
@@ -60,18 +60,18 @@ public class NoteController_UT {
 		expectedException.expect(UnprocessableEntityException.class);
 		String expectedMessage = "Error Saving";
 		expectedException.expectMessage(expectedMessage);
-		Note toSave = new Note();
-		when(noteService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
+		Entity toSave = new Entity();
+		when(entityService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
 
 		testObj.post(null, toSave);
 	}
 
 	@Test
 	public void getAll() {
-		List<Note> expectedList = Arrays.asList(new Note());
-		when(noteService.getAll()).thenReturn(expectedList);
+		List<Entity> expectedList = Arrays.asList(new Entity());
+		when(entityService.getAll()).thenReturn(expectedList);
 
-		List<Note> actualList = testObj.getAll();
+		List<Entity> actualList = testObj.getAll();
 
 		assertEquals(expectedList, actualList);
 	}
@@ -79,10 +79,10 @@ public class NoteController_UT {
 	@Test
 	public void get() {
 		String id = "id";
-		Note expectedResult = new Note();
-		when(noteService.get(id)).thenReturn(expectedResult);
+		Entity expectedResult = new Entity();
+		when(entityService.get(id)).thenReturn(expectedResult);
 
-		Note actualEntityType = testObj.get(id);
+		Entity actualEntityType = testObj.get(id);
 
 		assertEquals(expectedResult, actualEntityType);
 	}
@@ -93,7 +93,7 @@ public class NoteController_UT {
 		String expectedMessage = "Not found";
 		expectedException.expectMessage(expectedMessage);
 		String id = "id";
-		when(noteService.get(id)).thenThrow(new NotFoundException(expectedMessage));
+		when(entityService.get(id)).thenThrow(new NotFoundException(expectedMessage));
 
 		testObj.get(id);
 	}

@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.controller;
+package com.lostportals.aequitas.web.admin.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,29 +22,29 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
-import com.lostportals.aequitas.service.PolygonService;
-import com.lostportals.aequitas.web.admin.domain.Polygon;
+import com.lostportals.aequitas.service.NoteService;
+import com.lostportals.aequitas.web.admin.domain.Note;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PolygonController_UT {
+public class NoteController_UT {
 
 	@InjectMocks
-	PolygonController testObj;
+	NoteController testObj;
 
 	@Mock
-	PolygonService polygonService;
+	NoteService noteService;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void save() {
-		Polygon toSave = new Polygon();
-		Polygon expectedResult = new Polygon();
+		Note toSave = new Note();
+		Note expectedResult = new Note();
 		String id = "id";
 		expectedResult.setId(id);
-		when(polygonService.save(toSave)).thenReturn(expectedResult);
-		String postUrl = "/api/polygons";
+		when(noteService.save(toSave)).thenReturn(expectedResult);
+		String postUrl = "/api/notes";
 		MockHttpServletRequest mockRequest = new MockHttpServletRequest(HttpMethod.POST.toString(), postUrl);
 
 		ResponseEntity<Void> actualResponse = testObj.post(mockRequest, toSave);
@@ -60,18 +60,18 @@ public class PolygonController_UT {
 		expectedException.expect(UnprocessableEntityException.class);
 		String expectedMessage = "Error Saving";
 		expectedException.expectMessage(expectedMessage);
-		Polygon toSave = new Polygon();
-		when(polygonService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
+		Note toSave = new Note();
+		when(noteService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
 
 		testObj.post(null, toSave);
 	}
 
 	@Test
 	public void getAll() {
-		List<Polygon> expectedList = Arrays.asList(new Polygon());
-		when(polygonService.getAll()).thenReturn(expectedList);
+		List<Note> expectedList = Arrays.asList(new Note());
+		when(noteService.getAll()).thenReturn(expectedList);
 
-		List<Polygon> actualList = testObj.getAll();
+		List<Note> actualList = testObj.getAll();
 
 		assertEquals(expectedList, actualList);
 	}
@@ -79,10 +79,10 @@ public class PolygonController_UT {
 	@Test
 	public void get() {
 		String id = "id";
-		Polygon expectedResult = new Polygon();
-		when(polygonService.get(id)).thenReturn(expectedResult);
+		Note expectedResult = new Note();
+		when(noteService.get(id)).thenReturn(expectedResult);
 
-		Polygon actualEntityType = testObj.get(id);
+		Note actualEntityType = testObj.get(id);
 
 		assertEquals(expectedResult, actualEntityType);
 	}
@@ -93,7 +93,7 @@ public class PolygonController_UT {
 		String expectedMessage = "Not found";
 		expectedException.expectMessage(expectedMessage);
 		String id = "id";
-		when(polygonService.get(id)).thenThrow(new NotFoundException(expectedMessage));
+		when(noteService.get(id)).thenThrow(new NotFoundException(expectedMessage));
 
 		testObj.get(id);
 	}

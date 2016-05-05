@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.controller;
+package com.lostportals.aequitas.web.admin.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lostportals.aequitas.service.IconService;
-import com.lostportals.aequitas.web.admin.domain.Icon;
+import com.lostportals.aequitas.service.MarkerService;
+import com.lostportals.aequitas.web.admin.domain.Marker;
 
 @RestController
-@RequestMapping(value = "/api/icons", produces = { "application/json" })
-public class IconController {
+@RequestMapping(value = "/api/markers", produces = { "application/json" })
+public class MarkerController {
 
 	@Autowired
-	IconService iconService;
+	MarkerService markerService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Icon icon) {
-		icon = iconService.save(icon);
+	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Marker marker) {
+		marker = markerService.save(marker);
 
-		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("^(.*)/?$", "$1/" + icon.getId()));
+		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("^(.*)/?$", "$1/" + marker.getId()));
 
 		return ResponseEntity.created(newEntityUrl).build();
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Icon> getAll() {
-		List<Icon> iconList = iconService.getAll();
-		return iconList;
+	public List<Marker> getAll() {
+		List<Marker> markerList = markerService.getAll();
+		return markerList;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Icon get(@PathVariable String id) {
-		Icon icon = iconService.get(id);
-		return icon;
+	public Marker get(@PathVariable String id) {
+		Marker marker = markerService.get(id);
+		return marker;
 	}
 }

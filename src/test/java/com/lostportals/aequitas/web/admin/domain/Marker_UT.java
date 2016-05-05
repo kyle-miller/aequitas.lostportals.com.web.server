@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.lostportals.aequitas.db.domain.DbMarker;
-import com.lostportals.aequitas.web.admin.domain.Marker;
 
 @RunWith(MockitoJUnitRunner.class)
 public class Marker_UT {

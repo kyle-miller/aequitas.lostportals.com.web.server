@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.controller;
+package com.lostportals.aequitas.web.admin.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,29 +22,29 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
-import com.lostportals.aequitas.service.MarkerService;
-import com.lostportals.aequitas.web.admin.domain.Marker;
+import com.lostportals.aequitas.service.EntityEntityTypeXrefService;
+import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MarkerController_UT {
+public class EntityEntityTypeXrefController_UT {
 
 	@InjectMocks
-	MarkerController testObj;
+	EntityEntityTypeXrefController testObj;
 
 	@Mock
-	MarkerService markerService;
+	EntityEntityTypeXrefService entityEntityTypeXrefService;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void save() {
-		Marker toSave = new Marker();
-		Marker expectedResult = new Marker();
+		EntityEntityTypeXref toSave = new EntityEntityTypeXref();
+		EntityEntityTypeXref expectedResult = new EntityEntityTypeXref();
 		String id = "id";
 		expectedResult.setId(id);
-		when(markerService.save(toSave)).thenReturn(expectedResult);
-		String postUrl = "/api/markers";
+		when(entityEntityTypeXrefService.save(toSave)).thenReturn(expectedResult);
+		String postUrl = "/api/entityEntityTypeXrefs";
 		MockHttpServletRequest mockRequest = new MockHttpServletRequest(HttpMethod.POST.toString(), postUrl);
 
 		ResponseEntity<Void> actualResponse = testObj.post(mockRequest, toSave);
@@ -60,18 +60,18 @@ public class MarkerController_UT {
 		expectedException.expect(UnprocessableEntityException.class);
 		String expectedMessage = "Error Saving";
 		expectedException.expectMessage(expectedMessage);
-		Marker toSave = new Marker();
-		when(markerService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
+		EntityEntityTypeXref toSave = new EntityEntityTypeXref();
+		when(entityEntityTypeXrefService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
 
 		testObj.post(null, toSave);
 	}
 
 	@Test
 	public void getAll() {
-		List<Marker> expectedList = Arrays.asList(new Marker());
-		when(markerService.getAll()).thenReturn(expectedList);
+		List<EntityEntityTypeXref> expectedList = Arrays.asList(new EntityEntityTypeXref());
+		when(entityEntityTypeXrefService.getAll()).thenReturn(expectedList);
 
-		List<Marker> actualList = testObj.getAll();
+		List<EntityEntityTypeXref> actualList = testObj.getAll();
 
 		assertEquals(expectedList, actualList);
 	}
@@ -79,10 +79,10 @@ public class MarkerController_UT {
 	@Test
 	public void get() {
 		String id = "id";
-		Marker expectedResult = new Marker();
-		when(markerService.get(id)).thenReturn(expectedResult);
+		EntityEntityTypeXref expectedResult = new EntityEntityTypeXref();
+		when(entityEntityTypeXrefService.get(id)).thenReturn(expectedResult);
 
-		Marker actualEntityType = testObj.get(id);
+		EntityEntityTypeXref actualEntityType = testObj.get(id);
 
 		assertEquals(expectedResult, actualEntityType);
 	}
@@ -93,7 +93,7 @@ public class MarkerController_UT {
 		String expectedMessage = "Not found";
 		expectedException.expectMessage(expectedMessage);
 		String id = "id";
-		when(markerService.get(id)).thenThrow(new NotFoundException(expectedMessage));
+		when(entityEntityTypeXrefService.get(id)).thenThrow(new NotFoundException(expectedMessage));
 
 		testObj.get(id);
 	}

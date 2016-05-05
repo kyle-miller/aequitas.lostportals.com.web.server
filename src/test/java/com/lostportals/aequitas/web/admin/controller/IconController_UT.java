@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.controller;
+package com.lostportals.aequitas.web.admin.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,29 +22,29 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
-import com.lostportals.aequitas.service.EntityService;
-import com.lostportals.aequitas.web.admin.domain.Entity;
+import com.lostportals.aequitas.service.IconService;
+import com.lostportals.aequitas.web.admin.domain.Icon;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EntityController_UT {
+public class IconController_UT {
 
 	@InjectMocks
-	EntityController testObj;
+	IconController testObj;
 
 	@Mock
-	EntityService entityService;
+	IconService iconService;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void save() {
-		Entity toSave = new Entity();
-		Entity expectedResult = new Entity();
+		Icon toSave = new Icon();
+		Icon expectedResult = new Icon();
 		String id = "id";
 		expectedResult.setId(id);
-		when(entityService.save(toSave)).thenReturn(expectedResult);
-		String postUrl = "/api/entitys";
+		when(iconService.save(toSave)).thenReturn(expectedResult);
+		String postUrl = "/api/icons";
 		MockHttpServletRequest mockRequest = new MockHttpServletRequest(HttpMethod.POST.toString(), postUrl);
 
 		ResponseEntity<Void> actualResponse = testObj.post(mockRequest, toSave);
@@ -60,18 +60,18 @@ public class EntityController_UT {
 		expectedException.expect(UnprocessableEntityException.class);
 		String expectedMessage = "Error Saving";
 		expectedException.expectMessage(expectedMessage);
-		Entity toSave = new Entity();
-		when(entityService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
+		Icon toSave = new Icon();
+		when(iconService.save(toSave)).thenThrow(new UnprocessableEntityException(expectedMessage));
 
 		testObj.post(null, toSave);
 	}
 
 	@Test
 	public void getAll() {
-		List<Entity> expectedList = Arrays.asList(new Entity());
-		when(entityService.getAll()).thenReturn(expectedList);
+		List<Icon> expectedList = Arrays.asList(new Icon());
+		when(iconService.getAll()).thenReturn(expectedList);
 
-		List<Entity> actualList = testObj.getAll();
+		List<Icon> actualList = testObj.getAll();
 
 		assertEquals(expectedList, actualList);
 	}
@@ -79,10 +79,10 @@ public class EntityController_UT {
 	@Test
 	public void get() {
 		String id = "id";
-		Entity expectedResult = new Entity();
-		when(entityService.get(id)).thenReturn(expectedResult);
+		Icon expectedResult = new Icon();
+		when(iconService.get(id)).thenReturn(expectedResult);
 
-		Entity actualEntityType = testObj.get(id);
+		Icon actualEntityType = testObj.get(id);
 
 		assertEquals(expectedResult, actualEntityType);
 	}
@@ -93,7 +93,7 @@ public class EntityController_UT {
 		String expectedMessage = "Not found";
 		expectedException.expectMessage(expectedMessage);
 		String id = "id";
-		when(entityService.get(id)).thenThrow(new NotFoundException(expectedMessage));
+		when(iconService.get(id)).thenThrow(new NotFoundException(expectedMessage));
 
 		testObj.get(id);
 	}
