@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lostportals.aequitas.service.CircleService;
-import com.lostportals.aequitas.web.domain.Circle;
+import com.lostportals.aequitas.service.PolygonService;
+import com.lostportals.aequitas.web.domain.Polygon;
 
 @RestController
-@RequestMapping(value = "/api/circles", produces = { "application/json" })
-public class CircleController {
+@RequestMapping(value = "/api/polygons", produces = { "application/json" })
+public class PolygonController {
 
 	@Autowired
-	CircleService circleService;
+	PolygonService polygonService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Circle circle) {
-		circle = circleService.save(circle);
+	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Polygon polygon) {
+		polygon = polygonService.save(polygon);
 
-		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("^(.*)/?$", "$1/" + circle.getId()));
+		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("^(.*)/?$", "$1/" + polygon.getId()));
 
 		return ResponseEntity.created(newEntityUrl).build();
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Circle> getAll() {
-		List<Circle> circleList = circleService.getAll();
-		return circleList;
+	public List<Polygon> getAll() {
+		List<Polygon> polygonList = polygonService.getAll();
+		return polygonList;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Circle get(@PathVariable String id) {
-		Circle circle = circleService.get(id);
-		return circle;
+	public Polygon get(@PathVariable String id) {
+		Polygon polygon = polygonService.get(id);
+		return polygon;
 	}
 }

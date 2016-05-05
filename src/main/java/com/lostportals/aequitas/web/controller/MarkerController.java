@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lostportals.aequitas.service.CircleService;
-import com.lostportals.aequitas.web.domain.Circle;
+import com.lostportals.aequitas.service.MarkerService;
+import com.lostportals.aequitas.web.domain.Marker;
 
 @RestController
-@RequestMapping(value = "/api/circles", produces = { "application/json" })
-public class CircleController {
+@RequestMapping(value = "/api/markers", produces = { "application/json" })
+public class MarkerController {
 
 	@Autowired
-	CircleService circleService;
+	MarkerService markerService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Circle circle) {
-		circle = circleService.save(circle);
+	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Marker marker) {
+		marker = markerService.save(marker);
 
-		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("^(.*)/?$", "$1/" + circle.getId()));
+		URI newEntityUrl = URI.create(request.getRequestURI().replaceFirst("^(.*)/?$", "$1/" + marker.getId()));
 
 		return ResponseEntity.created(newEntityUrl).build();
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Circle> getAll() {
-		List<Circle> circleList = circleService.getAll();
-		return circleList;
+	public List<Marker> getAll() {
+		List<Marker> markerList = markerService.getAll();
+		return markerList;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Circle get(@PathVariable String id) {
-		Circle circle = circleService.get(id);
-		return circle;
+	public Marker get(@PathVariable String id) {
+		Marker marker = markerService.get(id);
+		return marker;
 	}
 }
