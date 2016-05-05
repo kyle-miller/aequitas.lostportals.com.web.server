@@ -4,23 +4,23 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lostportals.aequitas.db.domain.DbEntityType;
+import com.lostportals.aequitas.web.db.domain.EntityType;
 
-public class EntityType {
+public class MapEntityType {
 	private String id;
 	private String parentId;
 	private String name;
 	private boolean show;
-	
-	public EntityType() {
-		
+
+	public MapEntityType() {
+
 	}
-	
-	public EntityType(DbEntityType dbEntityType) {
-		this.id = dbEntityType.getId();
-		this.parentId = dbEntityType.getParentId();
-		this.name = dbEntityType.getName();
-		this.show = dbEntityType.isShow();
+
+	public MapEntityType(EntityType entityType) {
+		this.id = entityType.getId();
+		this.parentId = entityType.getParentId();
+		this.name = entityType.getName();
+		this.show = entityType.isShow();
 	}
 
 	public String getId() {

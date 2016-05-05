@@ -2,7 +2,7 @@ package com.lostportals.aequitas.service;
 
 import java.util.List;
 
-import com.lostportals.aequitas.web.domain.Note;
+import com.lostportals.aequitas.web.db.domain.Note;
 
 public interface NoteService {
 	List<Note> getAll();

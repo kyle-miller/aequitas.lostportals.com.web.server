@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.domain;
+package com.lostportals.aequitas.web.db.domain;
 
 import static org.junit.Assert.assertEquals;
 

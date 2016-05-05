@@ -14,7 +14,7 @@ import com.lostportals.aequitas.db.dao.NoteDao;
 import com.lostportals.aequitas.db.domain.DbNote;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.domain.Note;
+import com.lostportals.aequitas.web.db.domain.Note;
 
 @Service
 public class NoteServiceImpl implements NoteService {

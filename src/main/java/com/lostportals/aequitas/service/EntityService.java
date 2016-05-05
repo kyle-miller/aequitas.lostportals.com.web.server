@@ -2,7 +2,7 @@ package com.lostportals.aequitas.service;
 
 import java.util.List;
 
-import com.lostportals.aequitas.web.domain.Entity;
+import com.lostportals.aequitas.web.db.domain.Entity;
 
 public interface EntityService {
 	List<Entity> getAll();

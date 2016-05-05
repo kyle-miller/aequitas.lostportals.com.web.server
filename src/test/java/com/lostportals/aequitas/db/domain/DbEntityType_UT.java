@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.lostportals.aequitas.web.domain.EntityType;
+import com.lostportals.aequitas.web.db.domain.EntityType;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DbEntityType_UT {

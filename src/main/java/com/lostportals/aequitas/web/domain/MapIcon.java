@@ -4,21 +4,21 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lostportals.aequitas.db.domain.DbPolygon;
+import com.lostportals.aequitas.web.db.domain.Icon;
 
-public class Polygon {
+public class MapIcon {
 	private String id;
-	private String entityId;
-	private String vertices;
+	private String name;
+	private String url;
 
-	public Polygon() {
+	public MapIcon() {
 
 	}
 
-	public Polygon(DbPolygon dbPolygon) {
-		this.id = dbPolygon.getId();
-		this.entityId = dbPolygon.getEntityId();
-		this.vertices = dbPolygon.getVertices();
+	public MapIcon(Icon icon) {
+		this.id = icon.getId();
+		this.name = icon.getName();
+		this.url = icon.getUrl();
 	}
 
 	public String getId() {
@@ -29,20 +29,20 @@ public class Polygon {
 		this.id = id;
 	}
 
-	public String getEntityId() {
-		return entityId;
+	public String getName() {
+		return name;
 	}
 
-	public void setEntityId(String entityId) {
-		this.entityId = entityId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getVertices() {
-		return vertices;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setVertices(String vertices) {
-		this.vertices = vertices;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public String toString() {

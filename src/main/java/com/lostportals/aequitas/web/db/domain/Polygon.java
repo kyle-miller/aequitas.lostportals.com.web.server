@@ -1,26 +1,24 @@
-package com.lostportals.aequitas.web.domain;
+package com.lostportals.aequitas.web.db.domain;
 
 import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lostportals.aequitas.db.domain.DbNote;
+import com.lostportals.aequitas.db.domain.DbPolygon;
 
-public class Note {
+public class Polygon {
 	private String id;
 	private String entityId;
-	private String note;
-	private Integer position;
+	private String vertices;
 
-	public Note() {
+	public Polygon() {
 
 	}
 
-	public Note(DbNote dbNote) {
-		this.id = dbNote.getId();
-		this.entityId = dbNote.getEntityId();
-		this.note = dbNote.getNote();
-		this.position = dbNote.getPosition();
+	public Polygon(DbPolygon dbPolygon) {
+		this.id = dbPolygon.getId();
+		this.entityId = dbPolygon.getEntityId();
+		this.vertices = dbPolygon.getVertices();
 	}
 
 	public String getId() {
@@ -39,20 +37,12 @@ public class Note {
 		this.entityId = entityId;
 	}
 
-	public String getNote() {
-		return note;
+	public String getVertices() {
+		return vertices;
 	}
 
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public Integer getPosition() {
-		return position;
-	}
-
-	public void setPosition(Integer position) {
-		this.position = position;
+	public void setVertices(String vertices) {
+		this.vertices = vertices;
 	}
 
 	public String toString() {

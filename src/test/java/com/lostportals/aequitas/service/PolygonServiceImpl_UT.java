@@ -26,7 +26,7 @@ import com.lostportals.aequitas.db.dao.PolygonDao;
 import com.lostportals.aequitas.db.domain.DbPolygon;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.domain.Polygon;
+import com.lostportals.aequitas.web.db.domain.Polygon;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PolygonServiceImpl_UT {

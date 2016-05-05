@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.lostportals.aequitas.web.domain.Icon;
+import com.lostportals.aequitas.web.db.domain.Icon;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DbIcon_UT {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lostportals.aequitas.service.NoteService;
-import com.lostportals.aequitas.web.domain.Note;
+import com.lostportals.aequitas.web.db.domain.Note;
 
 @RestController
 @RequestMapping(value = "/api/notes", produces = { "application/json" })

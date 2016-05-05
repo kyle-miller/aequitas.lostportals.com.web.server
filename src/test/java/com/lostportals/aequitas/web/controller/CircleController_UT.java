@@ -23,7 +23,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.service.CircleService;
-import com.lostportals.aequitas.web.domain.Circle;
+import com.lostportals.aequitas.web.db.domain.Circle;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CircleController_UT {

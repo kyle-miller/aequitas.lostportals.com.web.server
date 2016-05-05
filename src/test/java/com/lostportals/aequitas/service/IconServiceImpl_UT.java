@@ -26,7 +26,7 @@ import com.lostportals.aequitas.db.dao.IconDao;
 import com.lostportals.aequitas.db.domain.DbIcon;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.domain.Icon;
+import com.lostportals.aequitas.web.db.domain.Icon;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IconServiceImpl_UT {

@@ -23,7 +23,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.service.MarkerService;
-import com.lostportals.aequitas.web.domain.Marker;
+import com.lostportals.aequitas.web.db.domain.Marker;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MarkerController_UT {

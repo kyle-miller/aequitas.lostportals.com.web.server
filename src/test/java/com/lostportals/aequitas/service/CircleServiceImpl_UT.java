@@ -27,7 +27,7 @@ import com.lostportals.aequitas.db.dao.CircleDao;
 import com.lostportals.aequitas.db.domain.DbCircle;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.domain.Circle;
+import com.lostportals.aequitas.web.db.domain.Circle;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CircleServiceImpl_UT {

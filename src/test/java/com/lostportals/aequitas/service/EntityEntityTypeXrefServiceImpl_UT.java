@@ -26,7 +26,7 @@ import com.lostportals.aequitas.db.dao.EntityEntityTypeXrefDao;
 import com.lostportals.aequitas.db.domain.DbEntityEntityTypeXref;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.domain.EntityEntityTypeXref;
+import com.lostportals.aequitas.web.db.domain.EntityEntityTypeXref;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EntityEntityTypeXrefServiceImpl_UT {

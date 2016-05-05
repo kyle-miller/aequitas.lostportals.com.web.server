@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.domain;
+package com.lostportals.aequitas.web.db.domain;
 
 import java.math.BigDecimal;
 
@@ -6,25 +6,29 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lostportals.aequitas.db.domain.DbMarker;
+import com.lostportals.aequitas.db.domain.DbCircle;
 
-public class Marker {
+public class Circle {
 	private String id;
 	private String entityId;
 	private BigDecimal latitude;
 	private BigDecimal longitude;
-	private String iconId;
+	private Integer radius;
+	private String outlineColor;
+	private String fillColor;
 
-	public Marker() {
+	public Circle() {
 
 	}
 
-	public Marker(DbMarker dbMarker) {
-		this.id = dbMarker.getId();
-		this.entityId = dbMarker.getEntityId();
-		this.iconId = dbMarker.getIconId();
-		this.latitude = dbMarker.getLatitude();
-		this.longitude = dbMarker.getLongitude();
+	public Circle(DbCircle dbCircle) {
+		this.id = dbCircle.getId();
+		this.entityId = dbCircle.getEntityId();
+		this.latitude = dbCircle.getLatitude();
+		this.longitude = dbCircle.getLongitude();
+		this.radius = dbCircle.getRadius();
+		this.outlineColor = dbCircle.getOutlineColor();
+		this.fillColor = dbCircle.getFillColor();
 	}
 
 	public String getId() {
@@ -59,12 +63,28 @@ public class Marker {
 		this.longitude = longitude;
 	}
 
-	public String getIconId() {
-		return iconId;
+	public Integer getRadius() {
+		return radius;
 	}
 
-	public void setIconId(String iconId) {
-		this.iconId = iconId;
+	public void setRadius(Integer radius) {
+		this.radius = radius;
+	}
+
+	public String getOutlineColor() {
+		return outlineColor;
+	}
+
+	public void setOutlineColor(String outlineColor) {
+		this.outlineColor = outlineColor;
+	}
+
+	public String getFillColor() {
+		return fillColor;
+	}
+
+	public void setFillColor(String fillColor) {
+		this.fillColor = fillColor;
 	}
 
 	public String toString() {
