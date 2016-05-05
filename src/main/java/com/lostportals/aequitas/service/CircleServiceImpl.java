@@ -14,7 +14,7 @@ import com.lostportals.aequitas.db.dao.CircleDao;
 import com.lostportals.aequitas.db.domain.DbCircle;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.db.domain.Circle;
+import com.lostportals.aequitas.web.admin.domain.Circle;
 
 @Service
 public class CircleServiceImpl implements CircleService {

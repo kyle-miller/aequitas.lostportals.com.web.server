@@ -6,7 +6,7 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lostportals.aequitas.web.db.domain.Marker;
+import com.lostportals.aequitas.web.admin.domain.Marker;
 
 public class MapMarker {
 	private String id;

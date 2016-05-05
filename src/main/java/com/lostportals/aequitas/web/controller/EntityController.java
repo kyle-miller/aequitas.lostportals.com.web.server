@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lostportals.aequitas.service.EntityService;
-import com.lostportals.aequitas.web.db.domain.Entity;
+import com.lostportals.aequitas.web.admin.domain.Entity;
 
 @RestController
 @RequestMapping(value = "/api/entities", produces = { "application/json" })

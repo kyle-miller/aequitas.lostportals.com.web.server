@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.db.domain;
+package com.lostportals.aequitas.web.domain;
 
 import static java.math.RoundingMode.DOWN;
 import static org.junit.Assert.assertEquals;
@@ -13,7 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.lostportals.aequitas.web.admin.domain.Circle;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DbCircle_UT {
+public class MapCircle_UT {
 
 	@Test
 	public void constructor() {
@@ -26,15 +26,15 @@ public class DbCircle_UT {
 		obj.setOutlineColor("outlineColor");
 		obj.setRadius(Double.valueOf(Math.random() * 100000).intValue());
 
-		DbCircle actualDbObj = new DbCircle(obj);
+		MapCircle actualMapObj = new MapCircle(obj);
 
-		assertNotNull(actualDbObj);
-		assertEquals(obj.getId(), actualDbObj.getId());
-		assertEquals(obj.getEntityId(), actualDbObj.getEntityId());
-		assertEquals(obj.getFillColor(), actualDbObj.getFillColor());
-		assertEquals(obj.getLatitude(), actualDbObj.getLatitude());
-		assertEquals(obj.getLongitude(), actualDbObj.getLongitude());
-		assertEquals(obj.getOutlineColor(), actualDbObj.getOutlineColor());
-		assertEquals(obj.getRadius(), actualDbObj.getRadius());
+		assertNotNull(actualMapObj);
+		assertEquals(obj.getId(), actualMapObj.getId());
+		assertEquals(obj.getEntityId(), actualMapObj.getEntityId());
+		assertEquals(obj.getFillColor(), actualMapObj.getFillColor());
+		assertEquals(obj.getLatitude(), actualMapObj.getLatitude());
+		assertEquals(obj.getLongitude(), actualMapObj.getLongitude());
+		assertEquals(obj.getOutlineColor(), actualMapObj.getOutlineColor());
+		assertEquals(obj.getRadius(), actualMapObj.getRadius());
 	}
 }

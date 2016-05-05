@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.db.domain;
+package com.lostportals.aequitas.web.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,7 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.lostportals.aequitas.web.admin.domain.Polygon;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DbPolygon_UT {
+public class MapPolygon_UT {
 
 	@Test
 	public void constructor() {
@@ -19,11 +19,11 @@ public class DbPolygon_UT {
 		obj.setEntityId("entityId");
 		obj.setVertices("vertices");
 
-		DbPolygon actualDbObj = new DbPolygon(obj);
+		MapPolygon actualMapObj = new MapPolygon(obj);
 
-		assertNotNull(actualDbObj);
-		assertEquals(obj.getId(), actualDbObj.getId());
-		assertEquals(obj.getEntityId(), actualDbObj.getEntityId());
-		assertEquals(obj.getVertices(), actualDbObj.getVertices());
+		assertNotNull(actualMapObj);
+		assertEquals(obj.getId(), actualMapObj.getId());
+		assertEquals(obj.getEntityId(), actualMapObj.getEntityId());
+		assertEquals(obj.getVertices(), actualMapObj.getVertices());
 	}
 }

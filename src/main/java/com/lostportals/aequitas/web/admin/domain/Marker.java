@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.web.db.domain;
+package com.lostportals.aequitas.web.admin.domain;
 
 import java.math.BigDecimal;
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lostportals.aequitas.service.PolygonService;
-import com.lostportals.aequitas.web.db.domain.Polygon;
+import com.lostportals.aequitas.web.admin.domain.Polygon;
 
 @RestController
 @RequestMapping(value = "/api/polygons", produces = { "application/json" })

@@ -23,7 +23,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.service.NoteService;
-import com.lostportals.aequitas.web.db.domain.Note;
+import com.lostportals.aequitas.web.admin.domain.Note;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NoteController_UT {

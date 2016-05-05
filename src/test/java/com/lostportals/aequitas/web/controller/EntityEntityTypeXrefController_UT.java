@@ -23,7 +23,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.service.EntityEntityTypeXrefService;
-import com.lostportals.aequitas.web.db.domain.EntityEntityTypeXref;
+import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EntityEntityTypeXrefController_UT {

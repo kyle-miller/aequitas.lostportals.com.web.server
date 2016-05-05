@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.db.domain;
+package com.lostportals.aequitas.web.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,7 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.lostportals.aequitas.web.admin.domain.Entity;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DbEntity_UT {
+public class MapEntity_UT {
 
 	@Test
 	public void constructor() {
@@ -18,10 +18,10 @@ public class DbEntity_UT {
 		obj.setId("id");
 		obj.setTitle("title");
 
-		DbEntity actualDbObj = new DbEntity(obj);
+		MapEntity actualMapObj = new MapEntity(obj);
 
-		assertNotNull(actualDbObj);
-		assertEquals(obj.getId(), actualDbObj.getId());
-		assertEquals(obj.getTitle(), actualDbObj.getTitle());
+		assertNotNull(actualMapObj);
+		assertEquals(obj.getId(), actualMapObj.getId());
+		assertEquals(obj.getTitle(), actualMapObj.getTitle());
 	}
 }

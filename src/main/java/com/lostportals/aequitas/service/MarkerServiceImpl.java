@@ -14,7 +14,7 @@ import com.lostportals.aequitas.db.dao.MarkerDao;
 import com.lostportals.aequitas.db.domain.DbMarker;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.db.domain.Marker;
+import com.lostportals.aequitas.web.admin.domain.Marker;
 
 @Service
 public class MarkerServiceImpl implements MarkerService {

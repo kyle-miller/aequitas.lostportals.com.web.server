@@ -23,7 +23,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.service.PolygonService;
-import com.lostportals.aequitas.web.db.domain.Polygon;
+import com.lostportals.aequitas.web.admin.domain.Polygon;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PolygonController_UT {

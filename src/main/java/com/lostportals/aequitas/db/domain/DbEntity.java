@@ -4,7 +4,7 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lostportals.aequitas.web.db.domain.Entity;
+import com.lostportals.aequitas.web.admin.domain.Entity;
 
 public class DbEntity extends SqlType {
 	private String id;

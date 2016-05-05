@@ -4,7 +4,7 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lostportals.aequitas.web.db.domain.Icon;
+import com.lostportals.aequitas.web.admin.domain.Icon;
 
 public class MapIcon {
 	private String id;

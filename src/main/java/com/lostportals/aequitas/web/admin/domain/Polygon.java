@@ -1,24 +1,24 @@
-package com.lostportals.aequitas.web.db.domain;
+package com.lostportals.aequitas.web.admin.domain;
 
 import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lostportals.aequitas.db.domain.DbEntityEntityTypeXref;
+import com.lostportals.aequitas.db.domain.DbPolygon;
 
-public class EntityEntityTypeXref {
+public class Polygon {
 	private String id;
-	private String entityTypeId;
 	private String entityId;
+	private String vertices;
 
-	public EntityEntityTypeXref() {
+	public Polygon() {
 
 	}
 
-	public EntityEntityTypeXref(DbEntityEntityTypeXref dbEntityEntityTypeXref) {
-		this.id = dbEntityEntityTypeXref.getId();
-		this.entityTypeId = dbEntityEntityTypeXref.getEntityTypeId();
-		this.entityId = dbEntityEntityTypeXref.getEntityId();
+	public Polygon(DbPolygon dbPolygon) {
+		this.id = dbPolygon.getId();
+		this.entityId = dbPolygon.getEntityId();
+		this.vertices = dbPolygon.getVertices();
 	}
 
 	public String getId() {
@@ -29,20 +29,20 @@ public class EntityEntityTypeXref {
 		this.id = id;
 	}
 
-	public String getEntityTypeId() {
-		return entityTypeId;
-	}
-
-	public void setEntityTypeId(String entityTypeId) {
-		this.entityTypeId = entityTypeId;
-	}
-
 	public String getEntityId() {
 		return entityId;
 	}
 
 	public void setEntityId(String entityId) {
 		this.entityId = entityId;
+	}
+
+	public String getVertices() {
+		return vertices;
+	}
+
+	public void setVertices(String vertices) {
+		this.vertices = vertices;
 	}
 
 	public String toString() {

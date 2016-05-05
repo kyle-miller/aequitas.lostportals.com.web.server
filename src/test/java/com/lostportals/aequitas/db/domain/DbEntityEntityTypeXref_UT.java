@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.lostportals.aequitas.web.db.domain.EntityEntityTypeXref;
+import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DbEntityEntityTypeXref_UT {

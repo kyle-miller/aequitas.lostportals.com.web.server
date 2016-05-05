@@ -6,7 +6,7 @@ import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lostportals.aequitas.web.db.domain.Circle;
+import com.lostportals.aequitas.web.admin.domain.Circle;
 
 public class MapCircle {
 	private String id;

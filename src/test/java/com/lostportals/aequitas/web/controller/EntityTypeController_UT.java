@@ -23,7 +23,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.service.EntityTypeService;
-import com.lostportals.aequitas.web.db.domain.EntityType;
+import com.lostportals.aequitas.web.admin.domain.EntityType;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EntityTypeController_UT {

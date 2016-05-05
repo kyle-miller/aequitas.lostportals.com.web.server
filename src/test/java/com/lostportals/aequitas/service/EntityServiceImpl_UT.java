@@ -26,7 +26,7 @@ import com.lostportals.aequitas.db.dao.EntityDao;
 import com.lostportals.aequitas.db.domain.DbEntity;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.db.domain.Entity;
+import com.lostportals.aequitas.web.admin.domain.Entity;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EntityServiceImpl_UT {

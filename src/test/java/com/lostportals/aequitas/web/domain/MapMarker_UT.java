@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.db.domain;
+package com.lostportals.aequitas.web.domain;
 
 import static java.math.RoundingMode.DOWN;
 import static org.junit.Assert.assertEquals;
@@ -13,7 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.lostportals.aequitas.web.admin.domain.Marker;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DbMarker_UT {
+public class MapMarker_UT {
 
 	@Test
 	public void constructor() {
@@ -24,13 +24,13 @@ public class DbMarker_UT {
 		obj.setLatitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
 		obj.setLongitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
 
-		DbMarker actualDbObj = new DbMarker(obj);
+		MapMarker actualMapObj = new MapMarker(obj);
 
-		assertNotNull(actualDbObj);
-		assertEquals(obj.getId(), actualDbObj.getId());
-		assertEquals(obj.getEntityId(), actualDbObj.getEntityId());
-		assertEquals(obj.getIconId(), actualDbObj.getIconId());
-		assertEquals(obj.getLatitude(), actualDbObj.getLatitude());
-		assertEquals(obj.getLongitude(), actualDbObj.getLongitude());
+		assertNotNull(actualMapObj);
+		assertEquals(obj.getId(), actualMapObj.getId());
+		assertEquals(obj.getEntityId(), actualMapObj.getEntityId());
+		assertEquals(obj.getIconId(), actualMapObj.getIconId());
+		assertEquals(obj.getLatitude(), actualMapObj.getLatitude());
+		assertEquals(obj.getLongitude(), actualMapObj.getLongitude());
 	}
 }

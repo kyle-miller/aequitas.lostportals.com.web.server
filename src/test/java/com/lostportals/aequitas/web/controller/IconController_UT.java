@@ -23,7 +23,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.service.IconService;
-import com.lostportals.aequitas.web.db.domain.Icon;
+import com.lostportals.aequitas.web.admin.domain.Icon;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IconController_UT {

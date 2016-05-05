@@ -14,7 +14,7 @@ import com.lostportals.aequitas.db.dao.EntityEntityTypeXrefDao;
 import com.lostportals.aequitas.db.domain.DbEntityEntityTypeXref;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.db.domain.EntityEntityTypeXref;
+import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 
 @Service
 public class EntityEntityTypeXrefServiceImpl implements EntityEntityTypeXrefService {

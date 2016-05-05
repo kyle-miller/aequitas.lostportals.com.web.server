@@ -14,7 +14,7 @@ import com.lostportals.aequitas.db.dao.EntityTypeDao;
 import com.lostportals.aequitas.db.domain.DbEntityType;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.db.domain.EntityType;
+import com.lostportals.aequitas.web.admin.domain.EntityType;
 
 @Service
 public class EntityTypeServiceImpl implements EntityTypeService {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lostportals.aequitas.service.EntityEntityTypeXrefService;
-import com.lostportals.aequitas.web.db.domain.EntityEntityTypeXref;
+import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 
 @RestController
 @RequestMapping(value = "/api/entityEntityTypeXrefs", produces = { "application/json" })

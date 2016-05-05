@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.db.domain;
+package com.lostportals.aequitas.web.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,7 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.lostportals.aequitas.web.admin.domain.Icon;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DbIcon_UT {
+public class MapIcon_UT {
 
 	@Test
 	public void constructor() {
@@ -19,11 +19,11 @@ public class DbIcon_UT {
 		obj.setName("name");
 		obj.setUrl("url");
 
-		DbIcon actualDbObj = new DbIcon(obj);
+		MapIcon actualMapObj = new MapIcon(obj);
 
-		assertNotNull(actualDbObj);
-		assertEquals(obj.getId(), actualDbObj.getId());
-		assertEquals(obj.getUrl(), actualDbObj.getUrl());
-		assertEquals(obj.getName(), actualDbObj.getName());
+		assertNotNull(actualMapObj);
+		assertEquals(obj.getId(), actualMapObj.getId());
+		assertEquals(obj.getUrl(), actualMapObj.getUrl());
+		assertEquals(obj.getName(), actualMapObj.getName());
 	}
 }

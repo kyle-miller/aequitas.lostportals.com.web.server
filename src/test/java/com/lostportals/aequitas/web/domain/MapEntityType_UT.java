@@ -1,4 +1,4 @@
-package com.lostportals.aequitas.db.domain;
+package com.lostportals.aequitas.web.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,7 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.lostportals.aequitas.web.admin.domain.EntityType;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DbEntityType_UT {
+public class MapEntityType_UT {
 
 	@Test
 	public void constructor() {
@@ -20,12 +20,12 @@ public class DbEntityType_UT {
 		obj.setParentId("parentId");
 		obj.setShow(true);
 
-		DbEntityType actualDbObj = new DbEntityType(obj);
+		MapEntityType actualMapObj = new MapEntityType(obj);
 
-		assertNotNull(actualDbObj);
-		assertEquals(obj.getId(), actualDbObj.getId());
-		assertEquals(obj.getParentId(), actualDbObj.getParentId());
-		assertEquals(obj.getName(), actualDbObj.getName());
-		assertEquals(obj.isShow(), actualDbObj.isShow());
+		assertNotNull(actualMapObj);
+		assertEquals(obj.getId(), actualMapObj.getId());
+		assertEquals(obj.getParentId(), actualMapObj.getParentId());
+		assertEquals(obj.getName(), actualMapObj.getName());
+		assertEquals(obj.isShow(), actualMapObj.isShow());
 	}
 }

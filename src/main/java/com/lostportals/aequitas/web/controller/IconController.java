@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lostportals.aequitas.service.IconService;
-import com.lostportals.aequitas.web.db.domain.Icon;
+import com.lostportals.aequitas.web.admin.domain.Icon;
 
 @RestController
 @RequestMapping(value = "/api/icons", produces = { "application/json" })

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lostportals.aequitas.service.CircleService;
-import com.lostportals.aequitas.web.db.domain.Circle;
+import com.lostportals.aequitas.web.admin.domain.Circle;
 
 @RestController
 @RequestMapping(value = "/api/circles", produces = { "application/json" })

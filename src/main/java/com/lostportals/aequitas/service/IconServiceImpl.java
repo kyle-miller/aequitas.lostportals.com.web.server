@@ -14,7 +14,7 @@ import com.lostportals.aequitas.db.dao.IconDao;
 import com.lostportals.aequitas.db.domain.DbIcon;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.db.domain.Icon;
+import com.lostportals.aequitas.web.admin.domain.Icon;
 
 @Service
 public class IconServiceImpl implements IconService {

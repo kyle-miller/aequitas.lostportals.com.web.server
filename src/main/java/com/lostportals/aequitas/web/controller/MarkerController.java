@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lostportals.aequitas.service.MarkerService;
-import com.lostportals.aequitas.web.db.domain.Marker;
+import com.lostportals.aequitas.web.admin.domain.Marker;
 
 @RestController
 @RequestMapping(value = "/api/markers", produces = { "application/json" })
