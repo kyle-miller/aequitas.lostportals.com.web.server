@@ -70,7 +70,7 @@ public class MapEntityServiceImpl implements MapEntityService {
 	}
 
 	@Override
-	public MapEntity save(MapEntity icon) {
+	public MapEntity save(MapEntity mapEntity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
