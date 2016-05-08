@@ -139,7 +139,7 @@ public class MapEntity {
 			images = new ArrayList<>();
 		}
 
-		if (!notes.contains(mapImage)) {
+		if (!images.contains(mapImage)) {
 			images.add(mapImage);
 		}
 	}

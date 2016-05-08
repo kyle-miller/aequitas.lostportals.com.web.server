@@ -34,8 +34,9 @@ CREATE TABLE icons (
 
 CREATE TABLE images (
  id VARCHAR(36) NOT NULL PRIMARY KEY,
- entityType VARCHAR(36) NOT NULL,
- url VARCHAR(100)
+ entityId VARCHAR(36),
+ entityTypeId VARCHAR(36),
+ url VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE markers (

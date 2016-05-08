@@ -1,5 +1,8 @@
 package com.lostportals.aequitas.web.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,6 +14,7 @@ public class MapEntityType {
 	private String parentId;
 	private String name;
 	private boolean show;
+	private List<MapImage> images = new ArrayList<>();
 
 	public MapEntityType() {
 
@@ -53,6 +57,24 @@ public class MapEntityType {
 
 	public void setShow(boolean show) {
 		this.show = show;
+	}
+
+	public void addImage(MapImage mapImage) {
+		if (images == null) {
+			images = new ArrayList<>();
+		}
+
+		if (!images.contains(mapImage)) {
+			images.add(mapImage);
+		}
+	}
+
+	public List<MapImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<MapImage> images) {
+		this.images = images;
 	}
 
 	public String toString() {

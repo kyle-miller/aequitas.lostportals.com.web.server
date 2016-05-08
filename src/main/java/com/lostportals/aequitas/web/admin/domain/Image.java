@@ -9,6 +9,7 @@ import com.lostportals.aequitas.db.domain.DbImage;
 public class Image {
 	private String id;
 	private String entityId;
+	private String entityTypeId;
 	private String url;
 
 	public Image() {
@@ -18,6 +19,7 @@ public class Image {
 	public Image(DbImage dbImage) {
 		this.id = dbImage.getId();
 		this.entityId = dbImage.getEntityId();
+		this.entityTypeId = dbImage.getEntityTypeId();
 		this.url = dbImage.getUrl();
 	}
 
@@ -35,6 +37,14 @@ public class Image {
 
 	public void setEntityId(String entityId) {
 		this.entityId = entityId;
+	}
+
+	public String getEntityTypeId() {
+		return entityTypeId;
+	}
+
+	public void setEntityTypeId(String entityTypeId) {
+		this.entityTypeId = entityTypeId;
 	}
 
 	public String getUrl() {
