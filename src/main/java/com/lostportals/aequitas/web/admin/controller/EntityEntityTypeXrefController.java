@@ -17,7 +17,7 @@ import com.lostportals.aequitas.service.EntityEntityTypeXrefService;
 import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 
 @RestController
-@RequestMapping(value = "/api/entityEntityTypeXrefs", produces = { "application/json" })
+@RequestMapping(value = "/api/admin/entityEntityTypeXrefs", produces = { "application/json" })
 public class EntityEntityTypeXrefController {
 
 	@Autowired

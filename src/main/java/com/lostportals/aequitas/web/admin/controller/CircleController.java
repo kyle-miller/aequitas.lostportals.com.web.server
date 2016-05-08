@@ -17,7 +17,7 @@ import com.lostportals.aequitas.service.CircleService;
 import com.lostportals.aequitas.web.admin.domain.Circle;
 
 @RestController
-@RequestMapping(value = "/api/circles", produces = { "application/json" })
+@RequestMapping(value = "/api/admin/circles", produces = { "application/json" })
 public class CircleController {
 
 	@Autowired

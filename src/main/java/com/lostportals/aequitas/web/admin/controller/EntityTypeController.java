@@ -17,7 +17,7 @@ import com.lostportals.aequitas.service.EntityTypeService;
 import com.lostportals.aequitas.web.admin.domain.EntityType;
 
 @RestController
-@RequestMapping(value = "/api/entityTypes", produces = { "application/json" })
+@RequestMapping(value = "/api/admin/entityTypes", produces = { "application/json" })
 public class EntityTypeController {
 
 	@Autowired

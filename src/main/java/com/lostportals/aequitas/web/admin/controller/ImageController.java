@@ -17,7 +17,7 @@ import com.lostportals.aequitas.service.ImageService;
 import com.lostportals.aequitas.web.admin.domain.Image;
 
 @RestController
-@RequestMapping(value = "/api/images", produces = { "application/json" })
+@RequestMapping(value = "/api/admin/images", produces = { "application/json" })
 public class ImageController {
 
 	@Autowired

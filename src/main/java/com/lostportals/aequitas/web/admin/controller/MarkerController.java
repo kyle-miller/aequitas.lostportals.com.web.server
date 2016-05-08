@@ -17,7 +17,7 @@ import com.lostportals.aequitas.service.MarkerService;
 import com.lostportals.aequitas.web.admin.domain.Marker;
 
 @RestController
-@RequestMapping(value = "/api/markers", produces = { "application/json" })
+@RequestMapping(value = "/api/admin/markers", produces = { "application/json" })
 public class MarkerController {
 
 	@Autowired

@@ -17,7 +17,7 @@ import com.lostportals.aequitas.service.IconService;
 import com.lostportals.aequitas.web.admin.domain.Icon;
 
 @RestController
-@RequestMapping(value = "/api/icons", produces = { "application/json" })
+@RequestMapping(value = "/api/admin/icons", produces = { "application/json" })
 public class IconController {
 
 	@Autowired

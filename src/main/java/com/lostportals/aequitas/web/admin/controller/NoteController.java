@@ -17,7 +17,7 @@ import com.lostportals.aequitas.service.NoteService;
 import com.lostportals.aequitas.web.admin.domain.Note;
 
 @RestController
-@RequestMapping(value = "/api/notes", produces = { "application/json" })
+@RequestMapping(value = "/api/admin/notes", produces = { "application/json" })
 public class NoteController {
 
 	@Autowired

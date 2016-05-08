@@ -17,7 +17,7 @@ import com.lostportals.aequitas.service.PolygonService;
 import com.lostportals.aequitas.web.admin.domain.Polygon;
 
 @RestController
-@RequestMapping(value = "/api/polygons", produces = { "application/json" })
+@RequestMapping(value = "/api/admin/polygons", produces = { "application/json" })
 public class PolygonController {
 
 	@Autowired
