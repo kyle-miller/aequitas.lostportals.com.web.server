@@ -56,5 +56,7 @@ CREATE TABLE notes (
 CREATE TABLE polygons (
  id VARCHAR(36) NOT NULL PRIMARY KEY,
  entityId VARCHAR(36),
- vertices VARCHAR(500) NOT NULL
+ vertices VARCHAR(500) NOT NULL,
+ outlineColor VARCHAR(25) NOT NULL,
+ fillColor VARCHAR(25) NOT NULL
 );

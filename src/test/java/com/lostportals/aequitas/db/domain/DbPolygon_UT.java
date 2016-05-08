@@ -18,6 +18,8 @@ public class DbPolygon_UT {
 		obj.setId("id");
 		obj.setEntityId("entityId");
 		obj.setVertices("vertices");
+		obj.setOutlineColor("outlineColor");
+		obj.setFillColor("fillColor");
 
 		DbPolygon actualDbObj = new DbPolygon(obj);
 
@@ -25,5 +27,7 @@ public class DbPolygon_UT {
 		assertEquals(obj.getId(), actualDbObj.getId());
 		assertEquals(obj.getEntityId(), actualDbObj.getEntityId());
 		assertEquals(obj.getVertices(), actualDbObj.getVertices());
+		assertEquals(obj.getOutlineColor(), actualDbObj.getOutlineColor());
+		assertEquals(obj.getFillColor(), actualDbObj.getFillColor());
 	}
 }

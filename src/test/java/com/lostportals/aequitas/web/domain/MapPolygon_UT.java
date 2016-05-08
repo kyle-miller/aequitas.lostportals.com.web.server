@@ -18,6 +18,8 @@ public class MapPolygon_UT {
 		obj.setId("id");
 		obj.setEntityId("entityId");
 		obj.setVertices("vertices");
+		obj.setOutlineColor("outlineColor");
+		obj.setFillColor("fillColor");
 
 		MapPolygon actualMapObj = new MapPolygon(obj);
 
@@ -25,5 +27,7 @@ public class MapPolygon_UT {
 		assertEquals(obj.getId(), actualMapObj.getId());
 		assertEquals(obj.getEntityId(), actualMapObj.getEntityId());
 		assertEquals(obj.getVertices(), actualMapObj.getVertices());
+		assertEquals(obj.getOutlineColor(), actualMapObj.getOutlineColor());
+		assertEquals(obj.getFillColor(), actualMapObj.getFillColor());
 	}
 }

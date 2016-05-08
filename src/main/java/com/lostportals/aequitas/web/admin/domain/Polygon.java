@@ -10,6 +10,8 @@ public class Polygon {
 	private String id;
 	private String entityId;
 	private String vertices;
+	private String outlineColor;
+	private String fillColor;
 
 	public Polygon() {
 
@@ -19,6 +21,8 @@ public class Polygon {
 		this.id = dbPolygon.getId();
 		this.entityId = dbPolygon.getEntityId();
 		this.vertices = dbPolygon.getVertices();
+		this.outlineColor = dbPolygon.getOutlineColor();
+		this.fillColor = dbPolygon.getFillColor();
 	}
 
 	public String getId() {
@@ -43,6 +47,22 @@ public class Polygon {
 
 	public void setVertices(String vertices) {
 		this.vertices = vertices;
+	}
+
+	public String getOutlineColor() {
+		return outlineColor;
+	}
+
+	public void setOutlineColor(String outlineColor) {
+		this.outlineColor = outlineColor;
+	}
+
+	public String getFillColor() {
+		return fillColor;
+	}
+
+	public void setFillColor(String fillColor) {
+		this.fillColor = fillColor;
 	}
 
 	public String toString() {

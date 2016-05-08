@@ -10,6 +10,8 @@ public class DbPolygon extends SqlType {
 	private String id;
 	private String entityId;
 	private String vertices;
+	private String outlineColor;
+	private String fillColor;
 
 	public DbPolygon() {
 
@@ -19,6 +21,8 @@ public class DbPolygon extends SqlType {
 		this.id = polygon.getId();
 		this.entityId = polygon.getEntityId();
 		this.vertices = polygon.getVertices();
+		this.outlineColor = polygon.getOutlineColor();
+		this.fillColor = polygon.getFillColor();
 	}
 
 	public String getId() {
@@ -43,6 +47,22 @@ public class DbPolygon extends SqlType {
 
 	public void setVertices(String vertices) {
 		this.vertices = vertices;
+	}
+
+	public String getOutlineColor() {
+		return outlineColor;
+	}
+
+	public void setOutlineColor(String outlineColor) {
+		this.outlineColor = outlineColor;
+	}
+
+	public String getFillColor() {
+		return fillColor;
+	}
+
+	public void setFillColor(String fillColor) {
+		this.fillColor = fillColor;
 	}
 
 	public String toString() {

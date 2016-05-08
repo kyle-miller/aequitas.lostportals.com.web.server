@@ -17,11 +17,15 @@ public class Polygon_UT {
 		dbObj.setId("id");
 		dbObj.setEntityId("entityId");
 		dbObj.setVertices("vertices");
+		dbObj.setOutlineColor("outlineColor");
+		dbObj.setFillColor("fillColor");
 
 		Polygon actualObj = new Polygon(dbObj);
 
 		assertEquals(dbObj.getId(), actualObj.getId());
 		assertEquals(dbObj.getEntityId(), actualObj.getEntityId());
 		assertEquals(dbObj.getVertices(), actualObj.getVertices());
+		assertEquals(dbObj.getOutlineColor(), actualObj.getOutlineColor());
+		assertEquals(dbObj.getFillColor(), actualObj.getFillColor());
 	}
 }
