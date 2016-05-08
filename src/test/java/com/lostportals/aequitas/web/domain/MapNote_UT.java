@@ -16,6 +16,7 @@ public class MapNote_UT {
 	public void constructor() {
 		Note obj = new Note();
 		obj.setId("id");
+		obj.setEntityId("entityId");
 		obj.setNote("note");
 		obj.setPosition(1);
 
@@ -23,6 +24,7 @@ public class MapNote_UT {
 
 		assertNotNull(actualMapObj);
 		assertEquals(obj.getId(), actualMapObj.getId());
+		assertEquals(obj.getEntityId(), actualMapObj.getEntityId());
 		assertEquals(obj.getNote(), actualMapObj.getNote());
 		assertEquals(obj.getPosition(), actualMapObj.getPosition());
 	}

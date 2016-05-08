@@ -17,6 +17,7 @@ public class MapEntity {
 	private List<MapMarker> markers = new ArrayList<>();
 	private List<MapPolygon> polygons = new ArrayList<>();
 	private List<MapNote> notes = new ArrayList<>();
+	private List<MapImage> images = new ArrayList<>();
 
 	public MapEntity() {
 
@@ -131,6 +132,24 @@ public class MapEntity {
 
 	public void setNotes(List<MapNote> notes) {
 		this.notes = notes;
+	}
+
+	public void addImage(MapImage mapImage) {
+		if (images == null) {
+			images = new ArrayList<>();
+		}
+
+		if (!notes.contains(mapImage)) {
+			images.add(mapImage);
+		}
+	}
+
+	public List<MapImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<MapImage> images) {
+		this.images = images;
 	}
 
 	public String toString() {

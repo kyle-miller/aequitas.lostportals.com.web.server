@@ -16,6 +16,7 @@ public class DbNote_UT {
 	public void constructor() {
 		Note obj = new Note();
 		obj.setId("id");
+		obj.setEntityId("entityId");
 		obj.setNote("note");
 		obj.setPosition(1);
 
@@ -23,6 +24,7 @@ public class DbNote_UT {
 
 		assertNotNull(actualDbObj);
 		assertEquals(obj.getId(), actualDbObj.getId());
+		assertEquals(obj.getEntityId(), actualDbObj.getEntityId());
 		assertEquals(obj.getNote(), actualDbObj.getNote());
 		assertEquals(obj.getPosition(), actualDbObj.getPosition());
 	}

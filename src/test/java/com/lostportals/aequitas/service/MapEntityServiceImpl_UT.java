@@ -21,12 +21,14 @@ import com.lostportals.aequitas.web.admin.domain.Circle;
 import com.lostportals.aequitas.web.admin.domain.Entity;
 import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 import com.lostportals.aequitas.web.admin.domain.EntityType;
+import com.lostportals.aequitas.web.admin.domain.Image;
 import com.lostportals.aequitas.web.admin.domain.Marker;
 import com.lostportals.aequitas.web.admin.domain.Note;
 import com.lostportals.aequitas.web.admin.domain.Polygon;
 import com.lostportals.aequitas.web.domain.MapCircle;
 import com.lostportals.aequitas.web.domain.MapEntity;
 import com.lostportals.aequitas.web.domain.MapEntityType;
+import com.lostportals.aequitas.web.domain.MapImage;
 import com.lostportals.aequitas.web.domain.MapMarker;
 import com.lostportals.aequitas.web.domain.MapNote;
 import com.lostportals.aequitas.web.domain.MapPolygon;
@@ -62,6 +64,9 @@ public class MapEntityServiceImpl_UT {
 	@Mock
 	IconService iconService;
 
+	@Mock
+	ImageService imageService;
+
 	@Test
 	public void getAll_noEntities() {
 		when(entityService.getAll()).thenReturn(Collections.emptyList());
@@ -78,6 +83,7 @@ public class MapEntityServiceImpl_UT {
 		verify(polygonService).getAll();
 		verify(noteService).getAll();
 		verify(iconService).getAll();
+		verify(imageService).getAll();
 		verifyNoMoreInteractions(entityService);
 	}
 
@@ -196,6 +202,34 @@ public class MapEntityServiceImpl_UT {
 		assertNotNull(objList);
 		assertEquals(1, objList.size());
 		MapNote actualObj = objList.get(0);
+		assertNotNull(actualObj);
+		assertEquals(matching.getId(), actualObj.getId());
+	}
+
+	@Test
+	public void getAll_imageToEntity() {
+		Entity entity = createEntity();
+		when(entityService.getAll()).thenReturn(Collections.singletonList(entity));
+		Image matching = new Image();
+		matching.setId(UUID.randomUUID().toString());
+		matching.setEntityId(entityId);
+		Image nonMatching = new Image();
+		nonMatching.setId(UUID.randomUUID().toString());
+		String nonMatchingEntityId = entityId + "nonMatching";
+		nonMatching.setEntityId(nonMatchingEntityId);
+		when(imageService.getAll()).thenReturn(Arrays.asList(matching, nonMatching));
+
+		List<MapEntity> actualList = testObj.getAll();
+
+		assertNotNull(actualList);
+		assertEquals(1, actualList.size());
+		MapEntity actualMapEntity = actualList.get(0);
+		assertNotNull(actualMapEntity);
+		assertEquals(entity.getId(), actualMapEntity.getId());
+		List<MapImage> objList = actualMapEntity.getImages();
+		assertNotNull(objList);
+		assertEquals(1, objList.size());
+		MapImage actualObj = objList.get(0);
 		assertNotNull(actualObj);
 		assertEquals(matching.getId(), actualObj.getId());
 	}

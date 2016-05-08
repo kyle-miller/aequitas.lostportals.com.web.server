@@ -13,6 +13,7 @@ import com.lostportals.aequitas.web.domain.MapCircle;
 import com.lostportals.aequitas.web.domain.MapEntity;
 import com.lostportals.aequitas.web.domain.MapEntityType;
 import com.lostportals.aequitas.web.domain.MapIcon;
+import com.lostportals.aequitas.web.domain.MapImage;
 import com.lostportals.aequitas.web.domain.MapMarker;
 import com.lostportals.aequitas.web.domain.MapNote;
 import com.lostportals.aequitas.web.domain.MapPolygon;
@@ -44,6 +45,9 @@ public class MapEntityServiceImpl implements MapEntityService {
 	@Autowired
 	IconService iconService;
 
+	@Autowired
+	ImageService imageService;
+
 	@Override
 	public List<MapEntity> getAll() {
 		List<MapEntity> mapEntityList = entityService.getAll().stream().map(MapEntity::new).collect(Collectors.toList());
@@ -55,6 +59,7 @@ public class MapEntityServiceImpl implements MapEntityService {
 		List<MapCircle> mapCircleList = circleService.getAll().stream().map(MapCircle::new).collect(Collectors.toList());
 		List<MapPolygon> mapPolygonList = polygonService.getAll().stream().map(MapPolygon::new).collect(Collectors.toList());
 		List<MapMarker> mapMarkerList = markerService.getAll().stream().map(MapMarker::new).collect(Collectors.toList());
+		List<MapImage> mapImageList = imageService.getAll().stream().map(MapImage::new).collect(Collectors.toList());
 
 		mapMarkerList.forEach(m -> { m.setIcon(mapIconMap.get(m.getIconId())); });
 
@@ -64,6 +69,7 @@ public class MapEntityServiceImpl implements MapEntityService {
 			mapMarkerList.stream().filter(m -> e.getId().equals(m.getEntityId())).forEach(e::addMarker);
 			mapCircleList.stream().filter(c -> e.getId().equals(c.getEntityId())).forEach(e::addCircle);
 			mapPolygonList.stream().filter(p -> e.getId().equals(p.getEntityId())).forEach(e::addPolygon);
+			mapImageList.stream().filter(i -> e.getId().equals(i.getEntityId())).forEach(e::addImage);
 		});
 
 		return mapEntityList;
