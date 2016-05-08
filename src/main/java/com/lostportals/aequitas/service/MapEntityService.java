@@ -7,5 +7,5 @@ import com.lostportals.aequitas.web.domain.MapEntity;
 public interface MapEntityService {
 	List<MapEntity> getAll();
 
-	MapEntity save(MapEntity icon);
+	MapEntity save(MapEntity mapEntity);
 }
