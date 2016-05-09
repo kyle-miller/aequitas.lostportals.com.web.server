@@ -16,9 +16,10 @@ public class Application {
 
 	@Bean
 	public DataSource getDataSource() {
-		DriverManagerDataSource dmds = new DriverManagerDataSource("jdbc:postgresql://localhost:5432/aequitas", "aequitas", "");
 //		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 //		builder.setType(EmbeddedDatabaseType.H2).addScripts("h2-schema.sql", "h2-test-data.sql");
+//		return builder.build();
+		DriverManagerDataSource dmds = new DriverManagerDataSource("jdbc:postgresql://localhost:5432/aequitas", "aequitas", "");
 		return dmds;
 	}
 }
