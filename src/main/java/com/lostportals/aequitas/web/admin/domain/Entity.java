@@ -5,6 +5,7 @@ import org.springframework.core.style.ToStringCreator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lostportals.aequitas.db.domain.DbEntity;
+import com.lostportals.aequitas.web.domain.MapEntity;
 
 public class Entity {
 	private String id;
@@ -17,6 +18,11 @@ public class Entity {
 	public Entity(DbEntity dbEntity) {
 		this.id = dbEntity.getId();
 		this.title = dbEntity.getTitle();
+	}
+
+	public Entity(MapEntity mapEntity) {
+		this.id = mapEntity.getId();
+		this.title = mapEntity.getTitle();
 	}
 
 	public String getId() {

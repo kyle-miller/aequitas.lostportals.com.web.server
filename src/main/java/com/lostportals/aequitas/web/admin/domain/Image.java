@@ -5,6 +5,7 @@ import org.springframework.core.style.ToStringCreator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lostportals.aequitas.db.domain.DbImage;
+import com.lostportals.aequitas.web.domain.MapImage;
 
 public class Image {
 	private String id;
@@ -21,6 +22,13 @@ public class Image {
 		this.entityId = dbImage.getEntityId();
 		this.entityTypeId = dbImage.getEntityTypeId();
 		this.url = dbImage.getUrl();
+	}
+
+	public Image(MapImage mapImage) {
+		this.id = mapImage.getId();
+		this.entityId = mapImage.getEntityId();
+		this.entityTypeId = mapImage.getEntityTypeId();
+		this.url = mapImage.getUrl();
 	}
 
 	public String getId() {

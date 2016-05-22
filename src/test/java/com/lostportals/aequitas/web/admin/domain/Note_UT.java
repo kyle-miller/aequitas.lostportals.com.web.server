@@ -7,12 +7,13 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.lostportals.aequitas.db.domain.DbNote;
+import com.lostportals.aequitas.web.domain.MapNote;
 
 @RunWith(MockitoJUnitRunner.class)
 public class Note_UT {
 
 	@Test
-	public void constructor() {
+	public void constructor_db() {
 		DbNote dbObj = new DbNote();
 		dbObj.setId("id");
 		dbObj.setEntityId("entityId");
@@ -25,5 +26,21 @@ public class Note_UT {
 		assertEquals(dbObj.getEntityId(), actualObj.getEntityId());
 		assertEquals(dbObj.getNote(), actualObj.getNote());
 		assertEquals(dbObj.getPosition(), actualObj.getPosition());
+	}
+
+	@Test
+	public void constructor_map() {
+		MapNote mapObj = new MapNote();
+		mapObj.setId("id");
+		mapObj.setEntityId("entityId");
+		mapObj.setNote("note");
+		mapObj.setPosition(Double.valueOf(Math.random() * 10000).intValue());
+
+		Note actualObj = new Note(mapObj);
+
+		assertEquals(mapObj.getId(), actualObj.getId());
+		assertEquals(mapObj.getEntityId(), actualObj.getEntityId());
+		assertEquals(mapObj.getNote(), actualObj.getNote());
+		assertEquals(mapObj.getPosition(), actualObj.getPosition());
 	}
 }

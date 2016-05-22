@@ -7,6 +7,7 @@ import org.springframework.core.style.ToStringCreator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lostportals.aequitas.db.domain.DbCircle;
+import com.lostportals.aequitas.web.domain.MapCircle;
 
 public class Circle {
 	private String id;
@@ -29,6 +30,16 @@ public class Circle {
 		this.radius = dbCircle.getRadius();
 		this.outlineColor = dbCircle.getOutlineColor();
 		this.fillColor = dbCircle.getFillColor();
+	}
+
+	public Circle(MapCircle mapCircle) {
+		this.id = mapCircle.getId();
+		this.entityId = mapCircle.getEntityId();
+		this.latitude = mapCircle.getLatitude();
+		this.longitude = mapCircle.getLongitude();
+		this.radius = mapCircle.getRadius();
+		this.outlineColor = mapCircle.getOutlineColor();
+		this.fillColor = mapCircle.getFillColor();
 	}
 
 	public String getId() {

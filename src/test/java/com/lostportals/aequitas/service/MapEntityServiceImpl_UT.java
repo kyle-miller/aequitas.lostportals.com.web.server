@@ -1,11 +1,16 @@
 package com.lostportals.aequitas.service;
 
+import static java.math.RoundingMode.DOWN;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.lostportals.aequitas.web.admin.domain.Circle;
@@ -38,6 +44,7 @@ public class MapEntityServiceImpl_UT {
 	static final String entityId = UUID.randomUUID().toString();
 
 	@InjectMocks
+	@Spy
 	MapEntityServiceImpl testObj;
 
 	@Mock
@@ -260,6 +267,178 @@ public class MapEntityServiceImpl_UT {
 		MapPolygon actualObj = objList.get(0);
 		assertNotNull(actualObj);
 		assertEquals(matching.getId(), actualObj.getId());
+	}
+
+	@Test
+	public void save_entityAndTypeXrefsSaved() {
+		MapEntity mapEntityToSave = new MapEntity(createEntity());
+		doNothing().when(testObj).validate(mapEntityToSave);
+		mapEntityToSave.addType(new MapEntityType());
+		mapEntityToSave.addType(new MapEntityType());
+		Entity savedEntity = new Entity(mapEntityToSave);
+		when(entityService.save(any(Entity.class))).thenReturn(savedEntity);
+
+		MapEntity returnedMapEntity = testObj.save(mapEntityToSave);
+
+		assertNotNull(returnedMapEntity);
+		assertEquals(savedEntity.getId(), returnedMapEntity.getId());
+		assertNotNull(returnedMapEntity.getTypes());
+		assertEquals(2, returnedMapEntity.getTypes().size());
+		verify(entityService).save(any(Entity.class));
+		verify(entityEntityTypeXrefService, times(2)).save(any(EntityEntityTypeXref.class));
+	}
+
+	@Test
+	public void save_markersSaved() {
+		MapEntity mapEntityToSave = new MapEntity(createEntity());
+		doNothing().when(testObj).validate(mapEntityToSave);
+		MapMarker mapMarker1 = createMapMarker();
+		mapEntityToSave.addMarker(mapMarker1);
+		MapMarker mapMarker2 = createMapMarker();
+		mapEntityToSave.addMarker(mapMarker2);
+		Entity savedEntity = new Entity(mapEntityToSave);
+		when(entityService.save(any(Entity.class))).thenReturn(savedEntity);
+		Marker savedMarker1 = new Marker(mapMarker1);
+		Marker savedMarker2 = new Marker(mapMarker2);
+		when(markerService.save(any(Marker.class))).thenReturn(savedMarker1).thenReturn(savedMarker2);
+
+		MapEntity returnedMapEntity = testObj.save(mapEntityToSave);
+
+		assertNotNull(returnedMapEntity);
+		assertNotNull(returnedMapEntity.getMarkers());
+		assertEquals(2, returnedMapEntity.getMarkers().size());
+		verify(markerService, times(2)).save(any(Marker.class));
+	}
+
+	@Test
+	public void save_circlesSaved() {
+		MapEntity mapEntityToSave = new MapEntity(createEntity());
+		doNothing().when(testObj).validate(mapEntityToSave);
+		MapCircle mapCircle1 = createMapCircle();
+		mapEntityToSave.addCircle(mapCircle1);
+		MapCircle mapCircle2 = createMapCircle();
+		mapEntityToSave.addCircle(mapCircle2);
+		Entity savedEntity = new Entity(mapEntityToSave);
+		when(entityService.save(any(Entity.class))).thenReturn(savedEntity);
+		Circle savedCircle1 = new Circle(mapCircle1);
+		Circle savedCircle2 = new Circle(mapCircle2);
+		when(circleService.save(any(Circle.class))).thenReturn(savedCircle1).thenReturn(savedCircle2);
+
+		MapEntity returnedMapEntity = testObj.save(mapEntityToSave);
+
+		assertNotNull(returnedMapEntity);
+		assertNotNull(returnedMapEntity.getCircles());
+		assertEquals(2, returnedMapEntity.getCircles().size());
+		verify(circleService, times(2)).save(any(Circle.class));
+	}
+
+	@Test
+	public void save_polygonsSaved() {
+		MapEntity mapEntityToSave = new MapEntity(createEntity());
+		doNothing().when(testObj).validate(mapEntityToSave);
+		MapPolygon mapPolygon1 = createMapPolygon();
+		mapEntityToSave.addPolygon(mapPolygon1);
+		MapPolygon mapPolygon2 = createMapPolygon();
+		mapEntityToSave.addPolygon(mapPolygon2);
+		Entity savedEntity = new Entity(mapEntityToSave);
+		when(entityService.save(any(Entity.class))).thenReturn(savedEntity);
+		Polygon savedPolygon1 = new Polygon(mapPolygon1);
+		Polygon savedPolygon2 = new Polygon(mapPolygon2);
+		when(polygonService.save(any(Polygon.class))).thenReturn(savedPolygon1).thenReturn(savedPolygon2);
+
+		MapEntity returnedMapEntity = testObj.save(mapEntityToSave);
+
+		assertNotNull(returnedMapEntity);
+		assertNotNull(returnedMapEntity.getPolygons());
+		assertEquals(2, returnedMapEntity.getPolygons().size());
+		verify(polygonService, times(2)).save(any(Polygon.class));
+	}
+
+	@Test
+	public void save_notesSaved() {
+		MapEntity mapEntityToSave = new MapEntity(createEntity());
+		doNothing().when(testObj).validate(mapEntityToSave);
+		MapNote mapNote1 = createMapNote();
+		mapEntityToSave.addNote(mapNote1);
+		MapNote mapNote2 = createMapNote();
+		mapEntityToSave.addNote(mapNote2);
+		Entity savedEntity = new Entity(mapEntityToSave);
+		when(entityService.save(any(Entity.class))).thenReturn(savedEntity);
+		Note savedNote1 = new Note(mapNote1);
+		Note savedNote2 = new Note(mapNote2);
+		when(noteService.save(any(Note.class))).thenReturn(savedNote1).thenReturn(savedNote2);
+
+		MapEntity returnedMapEntity = testObj.save(mapEntityToSave);
+
+		assertNotNull(returnedMapEntity);
+		assertNotNull(returnedMapEntity.getNotes());
+		assertEquals(2, returnedMapEntity.getNotes().size());
+		verify(noteService, times(2)).save(any(Note.class));
+	}
+
+	@Test
+	public void save_imagesSaved() {
+		MapEntity mapEntityToSave = new MapEntity(createEntity());
+		doNothing().when(testObj).validate(mapEntityToSave);
+		MapImage mapImage1 = createMapImage();
+		mapEntityToSave.addImage(mapImage1);
+		MapImage mapImage2 = createMapImage();
+		mapEntityToSave.addImage(mapImage2);
+		Entity savedEntity = new Entity(mapEntityToSave);
+		when(entityService.save(any(Entity.class))).thenReturn(savedEntity);
+		Image savedImage1 = new Image(mapImage1);
+		Image savedImage2 = new Image(mapImage2);
+		when(imageService.save(any(Image.class))).thenReturn(savedImage1).thenReturn(savedImage2);
+
+		MapEntity returnedMapEntity = testObj.save(mapEntityToSave);
+
+		assertNotNull(returnedMapEntity);
+		assertNotNull(returnedMapEntity.getImages());
+		assertEquals(2, returnedMapEntity.getImages().size());
+		verify(imageService, times(2)).save(any(Image.class));
+	}
+
+	private MapImage createMapImage() {
+		MapImage mapImage = new MapImage();
+		mapImage.setId(UUID.randomUUID().toString());
+		mapImage.setUrl(UUID.randomUUID().toString());
+		return mapImage;
+	}
+
+	private MapNote createMapNote() {
+		MapNote mapNote = new MapNote();
+		mapNote.setId(UUID.randomUUID().toString());
+		mapNote.setNote(UUID.randomUUID().toString());
+		return mapNote;
+	}
+
+	private MapPolygon createMapPolygon() {
+		MapPolygon mapPolygon = new MapPolygon();
+		mapPolygon.setId(UUID.randomUUID().toString());
+		mapPolygon.setFillColor(UUID.randomUUID().toString());
+		mapPolygon.setOutlineColor(UUID.randomUUID().toString());
+		mapPolygon.setVertices(UUID.randomUUID().toString());
+		return mapPolygon;
+	}
+
+	private MapCircle createMapCircle() {
+		MapCircle mapCircle = new MapCircle();
+		mapCircle.setId(UUID.randomUUID().toString());
+		mapCircle.setFillColor(UUID.randomUUID().toString());
+		mapCircle.setOutlineColor(UUID.randomUUID().toString());
+		mapCircle.setRadius(Double.valueOf(Math.random() * 100).intValue());
+		mapCircle.setLatitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
+		mapCircle.setLongitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
+		return mapCircle;
+	}
+
+	private MapMarker createMapMarker() {
+		MapMarker mapMarker = new MapMarker();
+		mapMarker.setId(UUID.randomUUID().toString());
+		mapMarker.setIconId(UUID.randomUUID().toString());
+		mapMarker.setLatitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
+		mapMarker.setLongitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
+		return mapMarker;
 	}
 
 	private Entity createEntity() {

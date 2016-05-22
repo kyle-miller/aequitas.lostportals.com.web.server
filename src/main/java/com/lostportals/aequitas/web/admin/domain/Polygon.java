@@ -5,6 +5,7 @@ import org.springframework.core.style.ToStringCreator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lostportals.aequitas.db.domain.DbPolygon;
+import com.lostportals.aequitas.web.domain.MapPolygon;
 
 public class Polygon {
 	private String id;
@@ -23,6 +24,14 @@ public class Polygon {
 		this.vertices = dbPolygon.getVertices();
 		this.outlineColor = dbPolygon.getOutlineColor();
 		this.fillColor = dbPolygon.getFillColor();
+	}
+
+	public Polygon(MapPolygon mapPolygon) {
+		this.id = mapPolygon.getId();
+		this.entityId = mapPolygon.getEntityId();
+		this.vertices = mapPolygon.getVertices();
+		this.outlineColor = mapPolygon.getOutlineColor();
+		this.fillColor = mapPolygon.getFillColor();
 	}
 
 	public String getId() {
