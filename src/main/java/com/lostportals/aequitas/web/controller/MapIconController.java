@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lostportals.aequitas.service.MapEntityTypeService;
-import com.lostportals.aequitas.web.domain.MapEntityType;
+import com.lostportals.aequitas.service.MapIconService;
+import com.lostportals.aequitas.web.domain.MapIcon;
 
 @RestController
-@RequestMapping(value = "/api/mapEntityTypes", produces = { "application/json" })
+@RequestMapping(value = "/api/mapIcons", produces = { "application/json" })
 @CrossOrigin(allowedHeaders = {"*"})
-public class MapEntityTypeController {
+public class MapIconController {
 
 	@Autowired
-	MapEntityTypeService mapEntityTypeService;
+	MapIconService mapIconService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<MapEntityType> getAll() {
-		List<MapEntityType> mapEntityTypeList = mapEntityTypeService.getAll();
-		return mapEntityTypeList;
+	public List<MapIcon> getAll() {
+		List<MapIcon> mapIconList = mapIconService.getAll();
+		return mapIconList;
 	}
 }
