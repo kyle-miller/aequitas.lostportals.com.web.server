@@ -4,7 +4,18 @@ INSERT INTO icons (id, name, url) VALUES ('1f66a0df-f112-4065-acfa-c28c3f001f08'
 INSERT INTO icons (id, name, url) VALUES ('26c9dc03-d8c9-4ec9-b523-b13f70c4101c', 'horse', 'img/horse.png');
 INSERT INTO icons (id, name, url) VALUES ('83400f84-f628-4e85-80f0-ee165ea16c4e', 'boss', 'img/boss.png');
 INSERT INTO icons (id, name, url) VALUES ('54cd3f2b-8c82-444b-abe0-6da31cc1827c', 'misc', 'img/misc.png');
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('aabdbdb5-5654-4e97-b122-c189267bfa68', NULL, 'Fishing', 1);
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('f0868919-78a5-4d4d-9840-2c33ff812729', NULL, 'Villages', 1);
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('ed196143-9c0b-4df5-a947-b8cecce0bd0c', NULL, 'Farms', 1);
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('891a8e51-59ce-42f5-811a-3cf9a248e022', NULL, 'Danger', 1);
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('0922ff1a-5fad-4946-bce7-3e92b137c5a3', NULL, 'Connect', 1);
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('aecd58a6-8e96-4ba2-ac15-8dde1478ae40', NULL, 'Trade', 1);
 INSERT INTO entityTypes (id, parentId, name, show) VALUES ('cc87f654-5795-42f2-8813-c4943d339069', NULL, 'Towns', 1);
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('88bf287b-348e-49bd-b07b-ec65845757c1', NULL, 'Horse Spawns', 1);
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('33e07c06-824d-4b1e-8d03-a94a9513c454', NULL, 'Treasure Chests', 1);
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('e9f73027-1482-4e9e-a03e-6878a7e8b763', NULL, 'Boss Spawns', 1);
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('0350916c-fefa-4182-b2b2-12217e4bffac', NULL, 'Wood Gathering', 1);
+INSERT INTO entityTypes (id, parentId, name, show) VALUES ('36f9f5bf-3205-4405-902f-d0dc028d4bcf', NULL, 'Rainbow Nodes', 1);
 INSERT INTO images (id, entityId, entityTypeId, url) VALUES ('a909907a-5df8-41d0-b78f-020f08b5659a', NULL, 'cc87f654-5795-42f2-8813-c4943d339069', 'undefined');
 INSERT INTO entities (id, title) VALUES ('01b83345-c4e6-4f27-b030-35cf54efcc2a', 'Altinova');
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('95f5c92d-cca6-4207-a9d9-0bea91aa59c5', '01b83345-c4e6-4f27-b030-35cf54efcc2a', 'cc87f654-5795-42f2-8813-c4943d339069');
@@ -51,7 +62,6 @@ INSERT INTO markers (id, entityId, latitude, longitude, iconId) VALUES ('5a5bf70
 INSERT INTO entities (id, title) VALUES ('2b426d98-67ba-4af7-8aec-db6ad591d2f2', 'Western Guard Camp');
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('0f447d54-abec-4ab3-8ac7-ca3d750627fb', '2b426d98-67ba-4af7-8aec-db6ad591d2f2', 'cc87f654-5795-42f2-8813-c4943d339069');
 INSERT INTO markers (id, entityId, latitude, longitude, iconId) VALUES ('f54de361-084f-4d9b-8646-01dbdeaf8790', '2b426d98-67ba-4af7-8aec-db6ad591d2f2', -74.30735, -86.96777, '1f66a0df-f112-4065-acfa-c28c3f001f08');
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('aabdbdb5-5654-4e97-b122-c189267bfa68', NULL, 'Fishing', 1);
 INSERT INTO images (id, entityId, entityTypeId, url) VALUES ('7b7bd273-1908-4d50-9554-845d2fc8856c', NULL, 'aabdbdb5-5654-4e97-b122-c189267bfa68', 'undefined');
 INSERT INTO entities (id, title) VALUES ('f4a7b77c-d4f4-4bf2-84e9-9f044d2a559c', 'Thermian 1');
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('44d861d9-0cb0-4ab2-8c84-080242ea6215', 'f4a7b77c-d4f4-4bf2-84e9-9f044d2a559c', 'aabdbdb5-5654-4e97-b122-c189267bfa68');
@@ -70,7 +80,6 @@ INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('205b0db7
 INSERT INTO markers (id, entityId, latitude, longitude, iconId) VALUES ('0d0a33bf-9b6c-4668-b18c-b8596aa7ea83', '5f7dc81d-9021-4a74-895b-6ba5ab10092c', -71.08118191, -78.55224609, '246e45b0-c552-469e-89f4-95d792032e6f');
 INSERT INTO images (id, entityId, entityTypeId, url) VALUES('a92b9d7f-9efb-40f1-a20c-3f0d89f28fc0', '5f7dc81d-9021-4a74-895b-6ba5ab10092c', NULL, 'http://i.imgur.com/kXYv1Bl.jpg');
 INSERT INTO notes (id, entityId, note, position) VALUES('da3a02d9-7c3a-4644-9a4c-1e6f4902e9db', '5f7dc81d-9021-4a74-895b-6ba5ab10092c', 'Very busy spot.', 1);
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('88bf287b-348e-49bd-b07b-ec65845757c1', NULL, 'Horse Spawns', 1);
 INSERT INTO entities (id, title) VALUES ('0fba2b45-aac1-425a-b0f0-979a3a0c5b4f', 'Calpheon Shrine Spawn');
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('819c1177-f108-42b3-a6c8-7447d75232c4', '0fba2b45-aac1-425a-b0f0-979a3a0c5b4f', '88bf287b-348e-49bd-b07b-ec65845757c1');
 INSERT INTO polygons (id, entityId, vertices, outlineColor, fillColor) VALUES ('8046e140-356f-4c1d-bd6c-19ea26926a39', '0fba2b45-aac1-425a-b0f0-979a3a0c5b4f', '[[-81.50529869762794, -150.1611328125],[-82.37331716529225, -155.3466796875],[-82.48908147830929, -157.8955078125],[-81.4597372638345, -152.7099609375],[-81.49230582149612, -152.40234375]]', 'orange', 'orange');
@@ -83,7 +92,6 @@ INSERT INTO polygons (id, entityId, vertices, outlineColor, fillColor) VALUES ('
 INSERT INTO entities (id, title) VALUES ('d3e502d2-31c8-41ab-b372-12aab50c00ab', 'Florin Spawn West');
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('acb7a447-6dab-4864-bd54-cbebade8d01a', 'd3e502d2-31c8-41ab-b372-12aab50c00ab', '88bf287b-348e-49bd-b07b-ec65845757c1');
 INSERT INTO polygons (id, entityId, vertices, outlineColor, fillColor) VALUES ('aa14548e-af43-4c74-aab7-9514847eee2b', 'd3e502d2-31c8-41ab-b372-12aab50c00ab', '[[-72.99690914812648, -111.8408203125],[-73.03541866058295, -112.74169921875],[-73.29630993228643, -113.115234375],[-73.38449896285545, -111.95068359374999]]', 'orange', 'orange');
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('33e07c06-824d-4b1e-8d03-a94a9513c454', NULL, 'Treasure Chests', 1);
 INSERT INTO images (id, entityId, entityTypeId, url) VALUES ('32d19da6-6cc6-44b1-b68b-5693e9e97555', NULL, '33e07c06-824d-4b1e-8d03-a94a9513c454', 'undefined');
 INSERT INTO entities (id, title) VALUES ('bd8f0030-c2fe-450d-b8f6-5e896d8ef8d8', 'Bloody Monastery Chest 1');
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('c2da9fa2-525c-4c2a-af80-b02958d9fe3c', 'bd8f0030-c2fe-450d-b8f6-5e896d8ef8d8', '33e07c06-824d-4b1e-8d03-a94a9513c454');
@@ -268,7 +276,6 @@ INSERT INTO entities (id, title) VALUES ('6a038672-51be-4fcf-8d80-556bbd46c1f0',
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('ae46ad20-da54-43bc-bd66-42cf4e815f75', '6a038672-51be-4fcf-8d80-556bbd46c1f0', '33e07c06-824d-4b1e-8d03-a94a9513c454');
 INSERT INTO markers (id, entityId, latitude, longitude, iconId) VALUES ('8b102d5d-8511-4fe3-bdae-35df6fbd2260', '6a038672-51be-4fcf-8d80-556bbd46c1f0', -71.00981101, -65.96191406, 'f09260b3-8016-408b-84ec-d34d3a16a119');
 INSERT INTO images (id, entityId, entityTypeId, url) VALUES('97c9f25a-c298-4d20-87c7-7b2bfcaecf8d', '6a038672-51be-4fcf-8d80-556bbd46c1f0', NULL, 'http://i.imgur.com/3wHt13y.jpg');
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('e9f73027-1482-4e9e-a03e-6878a7e8b763', NULL, 'Boss Spawns', 1);
 INSERT INTO images (id, entityId, entityTypeId, url) VALUES ('2b45627b-1062-44e9-82d5-a1db9d8eee4e', NULL, 'e9f73027-1482-4e9e-a03e-6878a7e8b763', 'undefined');
 INSERT INTO entities (id, title) VALUES ('2f42eed6-6995-4bab-89ac-018c8638a9be', 'Altar Imp');
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('cdcb7bb8-d216-4cc4-ab40-6add5b69d35a', '2f42eed6-6995-4bab-89ac-018c8638a9be', 'e9f73027-1482-4e9e-a03e-6878a7e8b763');
@@ -342,7 +349,6 @@ INSERT INTO entities (id, title) VALUES ('d894ed2d-c410-4cb8-9833-e16818be52c2',
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('e9b39b97-b5d8-42f9-89d8-5413fb1ab723', 'd894ed2d-c410-4cb8-9833-e16818be52c2', 'e9f73027-1482-4e9e-a03e-6878a7e8b763');
 INSERT INTO circles (id, entityId, latitude, longitude, radius, outlineColor, fillColor) VALUES ('7bf73949-18cb-49f1-8c99-bf0f98836a11', 'd894ed2d-c410-4cb8-9833-e16818be52c2', -79.38390486, -110.8959961, 11000, 'red', 'red');
 INSERT INTO notes (id, entityId, note, position) VALUES('e54c4958-598b-46fb-831f-bf4a3c5960ed', 'd894ed2d-c410-4cb8-9833-e16818be52c2', 'Scroll Boss: Hebetate Tree Spirits', 1);
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('0350916c-fefa-4182-b2b2-12217e4bffac', NULL, 'Wood Gathering', 1);
 INSERT INTO entities (id, title) VALUES ('fd73c5a3-4b92-4085-ba6d-3060edd2cb14', 'Birch Trees');
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('f8c7d136-4809-4bf4-befa-354be3cea855', 'fd73c5a3-4b92-4085-ba6d-3060edd2cb14', '0350916c-fefa-4182-b2b2-12217e4bffac');
 INSERT INTO polygons (id, entityId, vertices, outlineColor, fillColor) VALUES ('c2781d93-3157-4082-8988-2e71ca0cc9ba', 'fd73c5a3-4b92-4085-ba6d-3060edd2cb14', '[[-75.61772069705145, -110.5224609375],[-73.75120539084017, -109.51171875],[-72.47527631092942, -119.70703125],[-73.46598351882643, -124.365234375],[-74.84492867694821, -125.94726562499999],[-75.70478638174053, -125.0244140625]]', 'green', 'green');
@@ -364,7 +370,6 @@ INSERT INTO polygons (id, entityId, vertices, outlineColor, fillColor) VALUES ('
 INSERT INTO entities (id, title) VALUES ('e9d8a5a5-eaef-491f-be97-ea2b2e308a16', 'Maple Trees');
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('7dc9a2ce-8e08-4a9a-b288-67ad6bf9ac0a', 'e9d8a5a5-eaef-491f-be97-ea2b2e308a16', '0350916c-fefa-4182-b2b2-12217e4bffac');
 INSERT INTO polygons (id, entityId, vertices, outlineColor, fillColor) VALUES ('3cbe339f-3b59-4d30-a338-cf3ae3692a98', 'e9d8a5a5-eaef-491f-be97-ea2b2e308a16', '[[-80.55733847711531, -110.9619140625],[-80.58253901012532, -115.81787109375],[-81.30832090051811, -114.49951171875],[-81.29170291808761, -106.63330078125]]', 'green', 'green');
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('36f9f5bf-3205-4405-902f-d0dc028d4bcf', NULL, 'Rainbow Nodes', 1);
 INSERT INTO images (id, entityId, entityTypeId, url) VALUES ('5dc2401f-df6d-4ed3-8022-7452b2fef7bd', NULL, '36f9f5bf-3205-4405-902f-d0dc028d4bcf', 'undefined');
 INSERT INTO entities (id, title) VALUES ('e9afd821-f139-41ac-b413-6c6562d83800', 'rainbow stone');
 INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('297482b4-7c53-4696-8552-4da6f73399cb', 'e9afd821-f139-41ac-b413-6c6562d83800', '36f9f5bf-3205-4405-902f-d0dc028d4bcf');
@@ -550,8 +555,3 @@ INSERT INTO entityEntityTypeXrefs (id, entityId, entityTypeId) VALUES ('d5d2261c
 INSERT INTO circles (id, entityId, latitude, longitude, radius, outlineColor, fillColor) VALUES ('f16072bc-ee4f-4e0e-a22f-dc4e18adacdc', '449d1d23-c556-40ef-af89-d51181c9613f', -75.05035357, -48.93310547, 11000, 'purple', 'purple');
 INSERT INTO images (id, entityId, entityTypeId, url) VALUES('c3569ae2-34a8-4de0-b85f-8d1c21150c66', '449d1d23-c556-40ef-af89-d51181c9613f', NULL, 'https://gyazo.com/454f42b0b5fe910bb321dbcb3d1cab46');
 INSERT INTO notes (id, entityId, note, position) VALUES('e4ee262a-97c1-4137-852d-fc88401d0232', '449d1d23-c556-40ef-af89-d51181c9613f', 'outside of the opening at the bottom', 1);
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('f0868919-78a5-4d4d-9840-2c33ff812729', NULL, 'Villages', 1);
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('ed196143-9c0b-4df5-a947-b8cecce0bd0c', NULL, 'Farms', 1);
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('891a8e51-59ce-42f5-811a-3cf9a248e022', NULL, 'Danger', 1);
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('0922ff1a-5fad-4946-bce7-3e92b137c5a3', NULL, 'Connect', 1);
-INSERT INTO entityTypes (id, parentId, name, show) VALUES ('aecd58a6-8e96-4ba2-ac15-8dde1478ae40', NULL, 'Trade', 1);

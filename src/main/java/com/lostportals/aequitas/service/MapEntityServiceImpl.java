@@ -5,10 +5,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.apache.maven.shared.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.web.admin.domain.Circle;
 import com.lostportals.aequitas.web.admin.domain.Entity;
 import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
@@ -161,8 +163,98 @@ public class MapEntityServiceImpl implements MapEntityService {
 		return savedMapEntity;
 	}
 
-	void validate(MapEntity mapEntity) {
-		// TODO Auto-generated method stub
+	void validate(MapEntity mapEntity) { // TODO - test...
+		if (mapEntity == null) {
+			throw new UnprocessableEntityException("No entity to save");
+		}
+
+		if (CollectionUtils.isEmpty(mapEntity.getTypes())) {
+			throw new UnprocessableEntityException("At least one type is required");
+		}
+
+		if (CollectionUtils.isEmpty(mapEntity.getCircles()) && CollectionUtils.isEmpty(mapEntity.getMarkers()) && CollectionUtils.isEmpty(mapEntity.getPolygons())) {
+			throw new UnprocessableEntityException("A circle, marker, or polygon is required to save an entity");
+		}
+
+		if (!CollectionUtils.isEmpty(mapEntity.getCircles())) {
+			for (MapCircle mapCircle : mapEntity.getCircles()) {
+				if (mapCircle == null) {
+					throw new UnprocessableEntityException("Circle cannot be null");
+				}
+
+				if (mapCircle.getLatitude() == null) {
+					throw new UnprocessableEntityException("latitude is a required field for circle");
+				}
+
+				if (mapCircle.getLongitude() == null) {
+					throw new UnprocessableEntityException("longitude is a required field for circle");
+				}
+
+				if (StringUtils.isBlank(mapCircle.getFillColor())) {
+					throw new UnprocessableEntityException("fillColor is a required field for circle");
+				} else if (!mapCircle.getFillColor().matches("^#[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
+					throw new UnprocessableEntityException("fillColor must be a hex color (ex. #0Ab35F)");
+				}
+
+				if (StringUtils.isBlank(mapCircle.getOutlineColor())) {
+					throw new UnprocessableEntityException("outlineColor is a required field for circle");
+				} else if (!mapCircle.getOutlineColor().matches("^#[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
+					throw new UnprocessableEntityException("outlineColor must be a hex color (ex. #0Ab35F)");
+				}
+
+				if (mapCircle.getRadius() == null) {
+					throw new UnprocessableEntityException("radius is a required field for circle");
+				} else if (mapCircle.getRadius() <= 0) {
+					throw new UnprocessableEntityException("radius must be greater than zero");
+				}
+			}
+		}
+
+		if (!CollectionUtils.isEmpty(mapEntity.getMarkers())) {
+			for (MapMarker mapMarker : mapEntity.getMarkers()) {
+				if (mapMarker == null) {
+					throw new UnprocessableEntityException("Marker cannot be null");
+				}
+
+				if (mapMarker.getLatitude() == null) {
+					throw new UnprocessableEntityException("latitude is a required field for marker");
+				}
+
+				if (mapMarker.getLongitude() == null) {
+					throw new UnprocessableEntityException("longitude is a required field for marker");
+				}
+
+				if (StringUtils.isBlank(mapMarker.getIconId())) {
+					throw new UnprocessableEntityException("iconId is a required field for marker");
+				} else if (iconService.get(mapMarker.getIconId()) == null) {
+					throw new UnprocessableEntityException("iconId must match that for an existing icon");
+				}
+			}
+		}
+
+		if (!CollectionUtils.isEmpty(mapEntity.getPolygons())) {
+			for (MapPolygon mapPolygon : mapEntity.getPolygons()) {
+				if (mapPolygon == null) {
+					throw new UnprocessableEntityException("Polygon cannot be null");
+				}
+
+				if (mapPolygon.getVertices() == null) {
+					throw new UnprocessableEntityException("vertices is a required field for polygon");
+				}
+
+				if (StringUtils.isBlank(mapPolygon.getFillColor())) {
+					throw new UnprocessableEntityException("fillColor is a required field for polygon");
+				} else if (!mapPolygon.getFillColor().matches("^#[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
+					throw new UnprocessableEntityException("fillColor must be a hex color (ex. #0Ab35F)");
+				}
+
+				if (StringUtils.isBlank(mapPolygon.getOutlineColor())) {
+					throw new UnprocessableEntityException("outlineColor is a required field for polygon");
+				} else if (!mapPolygon.getOutlineColor().matches("^#[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
+					throw new UnprocessableEntityException("outlineColor must be a hex color (ex. #0Ab35F)");
+				}
+			}
+		}
 	}
 
 }
