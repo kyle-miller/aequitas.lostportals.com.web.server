@@ -224,10 +224,10 @@ public class MapEntityServiceImpl implements MapEntityService {
 					throw new UnprocessableEntityException("longitude is a required field for marker");
 				}
 
-				if (StringUtils.isBlank(mapMarker.getIconId())) {
-					throw new UnprocessableEntityException("iconId is a required field for marker");
-				} else if (iconService.get(mapMarker.getIconId()) == null) {
-					throw new UnprocessableEntityException("iconId must match that for an existing icon");
+				if (mapMarker.getIcon() == null || mapMarker.getIcon().getId() == null) {
+					throw new UnprocessableEntityException("icon is a required field for marker");
+				} else if (iconService.get(mapMarker.getIcon().getId()) == null) {
+					throw new UnprocessableEntityException("Icon must match an existing icon");
 				}
 			}
 		}
