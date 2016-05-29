@@ -123,6 +123,8 @@ public class MapEntityServiceImpl implements MapEntityService {
 			for (MapCircle mapCircle : mapCircles) {
 				Circle circle = new Circle(mapCircle);
 				circle.setEntityId(entity.getId());
+				circle.setOutlineColor(circle.getOutlineColor().replaceFirst("^#?([0-9a-fA-F]{3}[0-9a-fA-F]{3}?)$", "#$1"));
+				circle.setFillColor(circle.getFillColor().replaceFirst("^#?([0-9a-fA-F]{3}[0-9a-fA-F]{3}?)$", "#$1"));
 				circle = circleService.save(circle);
 				savedMapEntity.addCircle(new MapCircle(circle));
 			}
@@ -133,6 +135,8 @@ public class MapEntityServiceImpl implements MapEntityService {
 			for (MapPolygon mapPolygon : mapPolygons) {
 				Polygon polygon = new Polygon(mapPolygon);
 				polygon.setEntityId(entity.getId());
+				polygon.setOutlineColor(polygon.getOutlineColor().replaceFirst("^#?([0-9a-fA-F]{3}[0-9a-fA-F]{3}?)$", "#$1"));
+				polygon.setFillColor(polygon.getFillColor().replaceFirst("^#?([0-9a-fA-F]{3}[0-9a-fA-F]{3}?)$", "#$1"));
 				polygon = polygonService.save(polygon);
 				savedMapEntity.addPolygon(new MapPolygon(polygon));
 			}
@@ -192,13 +196,13 @@ public class MapEntityServiceImpl implements MapEntityService {
 
 				if (StringUtils.isBlank(mapCircle.getFillColor())) {
 					throw new UnprocessableEntityException("fillColor is a required field for circle");
-				} else if (!mapCircle.getFillColor().matches("^#[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
+				} else if (!mapCircle.getFillColor().matches("^#?[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
 					throw new UnprocessableEntityException("fillColor must be a hex color (ex. #0Ab35F)");
 				}
 
 				if (StringUtils.isBlank(mapCircle.getOutlineColor())) {
 					throw new UnprocessableEntityException("outlineColor is a required field for circle");
-				} else if (!mapCircle.getOutlineColor().matches("^#[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
+				} else if (!mapCircle.getOutlineColor().matches("^#?[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
 					throw new UnprocessableEntityException("outlineColor must be a hex color (ex. #0Ab35F)");
 				}
 
@@ -244,13 +248,13 @@ public class MapEntityServiceImpl implements MapEntityService {
 
 				if (StringUtils.isBlank(mapPolygon.getFillColor())) {
 					throw new UnprocessableEntityException("fillColor is a required field for polygon");
-				} else if (!mapPolygon.getFillColor().matches("^#[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
+				} else if (!mapPolygon.getFillColor().matches("^#?[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
 					throw new UnprocessableEntityException("fillColor must be a hex color (ex. #0Ab35F)");
 				}
 
 				if (StringUtils.isBlank(mapPolygon.getOutlineColor())) {
 					throw new UnprocessableEntityException("outlineColor is a required field for polygon");
-				} else if (!mapPolygon.getOutlineColor().matches("^#[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
+				} else if (!mapPolygon.getOutlineColor().matches("^#?[0-9a-fA-F]{3}[0-9a-fA-F]{3}?$")) {
 					throw new UnprocessableEntityException("outlineColor must be a hex color (ex. #0Ab35F)");
 				}
 			}

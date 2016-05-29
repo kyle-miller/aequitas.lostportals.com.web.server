@@ -1,9 +1,9 @@
-INSERT INTO icons (id, name, url) VALUES ('246e45b0-c552-469e-89f4-95d792032e6f', 'fish', 'img/fish.png');
-INSERT INTO icons (id, name, url) VALUES ('f09260b3-8016-408b-84ec-d34d3a16a119', 'treasure', 'img/treasure.png');
-INSERT INTO icons (id, name, url) VALUES ('1f66a0df-f112-4065-acfa-c28c3f001f08', 'town', 'img/town.png');
-INSERT INTO icons (id, name, url) VALUES ('26c9dc03-d8c9-4ec9-b523-b13f70c4101c', 'horse', 'img/horse.png');
-INSERT INTO icons (id, name, url) VALUES ('83400f84-f628-4e85-80f0-ee165ea16c4e', 'boss', 'img/boss.png');
-INSERT INTO icons (id, name, url) VALUES ('54cd3f2b-8c82-444b-abe0-6da31cc1827c', 'misc', 'img/misc.png');
+INSERT INTO icons (id, name, url) VALUES ('246e45b0-c552-469e-89f4-95d792032e6f', 'Fish', 'img/fish.png');
+INSERT INTO icons (id, name, url) VALUES ('f09260b3-8016-408b-84ec-d34d3a16a119', 'Treasure', 'img/treasure.png');
+INSERT INTO icons (id, name, url) VALUES ('1f66a0df-f112-4065-acfa-c28c3f001f08', 'Town', 'img/town.png');
+INSERT INTO icons (id, name, url) VALUES ('26c9dc03-d8c9-4ec9-b523-b13f70c4101c', 'Horse', 'img/horse.png');
+INSERT INTO icons (id, name, url) VALUES ('83400f84-f628-4e85-80f0-ee165ea16c4e', 'Boss', 'img/boss.png');
+INSERT INTO icons (id, name, url) VALUES ('54cd3f2b-8c82-444b-abe0-6da31cc1827c', 'Misc', 'img/misc.png');
 INSERT INTO entityTypes (id, parentId, name, show) VALUES ('aabdbdb5-5654-4e97-b122-c189267bfa68', NULL, 'Fishing', 1);
 INSERT INTO entityTypes (id, parentId, name, show) VALUES ('f0868919-78a5-4d4d-9840-2c33ff812729', NULL, 'Villages', 1);
 INSERT INTO entityTypes (id, parentId, name, show) VALUES ('ed196143-9c0b-4df5-a947-b8cecce0bd0c', NULL, 'Farms', 1);
