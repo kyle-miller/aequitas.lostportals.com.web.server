@@ -1,7 +1,5 @@
 package com.lostportals.aequitas.db.domain;
 
-import java.math.BigDecimal;
-
 import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,8 +9,8 @@ import com.lostportals.aequitas.web.admin.domain.Circle;
 public class DbCircle extends SqlType {
 	private String id;
 	private String entityId;
-	private BigDecimal latitude;
-	private BigDecimal longitude;
+	private Double latitude;
+	private Double longitude;
 	private Integer radius;
 	private String outlineColor;
 	private String fillColor;
@@ -24,8 +22,8 @@ public class DbCircle extends SqlType {
 	public DbCircle(Circle circle) {
 		this.id = circle.getId();
 		this.entityId = circle.getEntityId();
-		this.latitude = circle.getLatitude();
-		this.longitude = circle.getLongitude();
+		this.latitude = circle.getLatitude() == null ? null : circle.getLatitude().doubleValue();
+		this.longitude = circle.getLongitude() == null ? null : circle.getLongitude().doubleValue();
 		this.radius = circle.getRadius();
 		this.outlineColor = circle.getOutlineColor();
 		this.fillColor = circle.getFillColor();
@@ -47,19 +45,19 @@ public class DbCircle extends SqlType {
 		this.entityId = entityId;
 	}
 
-	public BigDecimal getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(BigDecimal latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public BigDecimal getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(BigDecimal longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 

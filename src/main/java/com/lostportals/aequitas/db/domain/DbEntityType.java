@@ -10,7 +10,7 @@ public class DbEntityType extends SqlType {
 	private String id;
 	private String parentId;
 	private String name;
-	private boolean show;
+	private Integer show;
 
 	public DbEntityType() {
 
@@ -20,7 +20,7 @@ public class DbEntityType extends SqlType {
 		this.id = entityType.getId();
 		this.parentId = entityType.getParentId();
 		this.name = entityType.getName();
-		this.show = entityType.isShow();
+		this.show = entityType.isShow() ? 1 : 0;
 	}
 
 	public String getId() {
@@ -47,11 +47,11 @@ public class DbEntityType extends SqlType {
 		this.name = name;
 	}
 
-	public boolean isShow() {
+	public Integer getShow() {
 		return show;
 	}
 
-	public void setShow(boolean show) {
+	public void setShow(Integer show) {
 		this.show = show;
 	}
 

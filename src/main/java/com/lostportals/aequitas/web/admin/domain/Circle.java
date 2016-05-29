@@ -25,8 +25,8 @@ public class Circle {
 	public Circle(DbCircle dbCircle) {
 		this.id = dbCircle.getId();
 		this.entityId = dbCircle.getEntityId();
-		this.latitude = dbCircle.getLatitude();
-		this.longitude = dbCircle.getLongitude();
+		this.latitude = dbCircle.getLatitude() == null ? null : new BigDecimal(dbCircle.getLatitude());
+		this.longitude = dbCircle.getLongitude() == null ? null : new BigDecimal(dbCircle.getLongitude());
 		this.radius = dbCircle.getRadius();
 		this.outlineColor = dbCircle.getOutlineColor();
 		this.fillColor = dbCircle.getFillColor();

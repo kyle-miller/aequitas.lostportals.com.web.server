@@ -1,6 +1,5 @@
 package com.lostportals.aequitas.service;
 
-import static java.math.RoundingMode.DOWN;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
@@ -8,7 +7,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -58,8 +56,8 @@ public class CircleServiceImpl_UT {
 		for (int i = 0; i < daoList.size(); i++) {
 			assertEquals(daoList.get(i).getId(), actualList.get(i).getId());
 			assertEquals(daoList.get(i).getEntityId(), actualList.get(i).getEntityId());
-			assertEquals(daoList.get(i).getLatitude(), actualList.get(i).getLatitude());
-			assertEquals(daoList.get(i).getLongitude(), actualList.get(i).getLongitude());
+			assertEquals(daoList.get(i).getLatitude(), new Double(actualList.get(i).getLatitude().doubleValue()));
+			assertEquals(daoList.get(i).getLongitude(), new Double(actualList.get(i).getLongitude().doubleValue()));
 			assertEquals(daoList.get(i).getFillColor(), actualList.get(i).getFillColor());
 			assertEquals(daoList.get(i).getOutlineColor(), actualList.get(i).getOutlineColor());
 			assertEquals(daoList.get(i).getRadius(), actualList.get(i).getRadius());
@@ -70,8 +68,8 @@ public class CircleServiceImpl_UT {
 		DbCircle dbObj = new DbCircle();
 		dbObj.setId(UUID.randomUUID().toString());
 		dbObj.setEntityId(UUID.randomUUID().toString());
-		dbObj.setLatitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
-		dbObj.setLongitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
+		dbObj.setLatitude(Math.random() * 100);
+		dbObj.setLongitude(Math.random() * 100);
 		dbObj.setFillColor(UUID.randomUUID().toString());
 		dbObj.setOutlineColor(UUID.randomUUID().toString());
 		dbObj.setRadius(Double.valueOf(Math.random() * 10000).intValue());
@@ -121,8 +119,8 @@ public class CircleServiceImpl_UT {
 		assertNotNull(capturedDbObj);
 		assertEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
-		assertEquals(toSave.getLatitude(), capturedDbObj.getLatitude());
-		assertEquals(toSave.getLongitude(), capturedDbObj.getLongitude());
+		assertEquals(new Double(toSave.getLatitude().doubleValue()), capturedDbObj.getLatitude());
+		assertEquals(new Double(toSave.getLongitude().doubleValue()), capturedDbObj.getLongitude());
 		assertEquals(toSave.getFillColor(), capturedDbObj.getFillColor());
 		assertEquals(toSave.getOutlineColor(), capturedDbObj.getOutlineColor());
 		assertEquals(toSave.getRadius(), capturedDbObj.getRadius());
@@ -166,8 +164,8 @@ public class CircleServiceImpl_UT {
 		assertNotNull(capturedDbObj);
 		assertEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
-		assertEquals(toSave.getLatitude(), capturedDbObj.getLatitude());
-		assertEquals(toSave.getLongitude(), capturedDbObj.getLongitude());
+		assertEquals(new Double(toSave.getLatitude().doubleValue()), capturedDbObj.getLatitude());
+		assertEquals(new Double(toSave.getLongitude().doubleValue()), capturedDbObj.getLongitude());
 		assertEquals(toSave.getFillColor(), capturedDbObj.getFillColor());
 		assertEquals(toSave.getOutlineColor(), capturedDbObj.getOutlineColor());
 		assertEquals(toSave.getRadius(), capturedDbObj.getRadius());

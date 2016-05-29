@@ -30,7 +30,7 @@ public class DbMarker_UT {
 		assertEquals(obj.getId(), actualDbObj.getId());
 		assertEquals(obj.getEntityId(), actualDbObj.getEntityId());
 		assertEquals(obj.getIconId(), actualDbObj.getIconId());
-		assertEquals(obj.getLatitude(), actualDbObj.getLatitude());
-		assertEquals(obj.getLongitude(), actualDbObj.getLongitude());
+		assertEquals(new Double(obj.getLatitude().doubleValue()), actualDbObj.getLatitude());
+		assertEquals(new Double(obj.getLongitude().doubleValue()), actualDbObj.getLongitude());
 	}
 }

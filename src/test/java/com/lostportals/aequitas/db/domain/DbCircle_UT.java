@@ -32,8 +32,8 @@ public class DbCircle_UT {
 		assertEquals(obj.getId(), actualDbObj.getId());
 		assertEquals(obj.getEntityId(), actualDbObj.getEntityId());
 		assertEquals(obj.getFillColor(), actualDbObj.getFillColor());
-		assertEquals(obj.getLatitude(), actualDbObj.getLatitude());
-		assertEquals(obj.getLongitude(), actualDbObj.getLongitude());
+		assertEquals(new Double(obj.getLatitude().doubleValue()), actualDbObj.getLatitude());
+		assertEquals(new Double(obj.getLongitude().doubleValue()), actualDbObj.getLongitude());
 		assertEquals(obj.getOutlineColor(), actualDbObj.getOutlineColor());
 		assertEquals(obj.getRadius(), actualDbObj.getRadius());
 	}

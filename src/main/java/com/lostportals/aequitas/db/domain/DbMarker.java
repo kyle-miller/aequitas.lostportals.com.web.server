@@ -1,7 +1,5 @@
 package com.lostportals.aequitas.db.domain;
 
-import java.math.BigDecimal;
-
 import org.springframework.core.style.ToStringCreator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,8 +10,8 @@ public class DbMarker extends SqlType {
 	private String id;
 	private String entityId;
 	private String iconId;
-	private BigDecimal latitude;
-	private BigDecimal longitude;
+	private Double latitude;
+	private Double longitude;
 
 	public DbMarker() {
 
@@ -23,8 +21,8 @@ public class DbMarker extends SqlType {
 		this.id = marker.getId();
 		this.entityId = marker.getEntityId();
 		this.iconId = marker.getIconId();
-		this.latitude = marker.getLatitude();
-		this.longitude = marker.getLongitude();
+		this.latitude = marker.getLatitude() == null ? null : marker.getLatitude().doubleValue();
+		this.longitude = marker.getLongitude() == null ? null : marker.getLongitude().doubleValue();
 	}
 
 	public String getId() {
@@ -51,19 +49,19 @@ public class DbMarker extends SqlType {
 		this.iconId = iconId;
 	}
 
-	public BigDecimal getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(BigDecimal latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public BigDecimal getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(BigDecimal longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 

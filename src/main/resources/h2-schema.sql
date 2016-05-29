@@ -4,8 +4,8 @@ CREATE TABLE circles (
  latitude DECIMAL(11, 8) NOT NULL,
  longitude DECIMAL(11, 8) NOT NULL,
  radius INTEGER NOT NULL,
- outlineColor VARCHAR(25) NOT NULL,
- fillColor VARCHAR(25) NOT NULL
+ outlineColor VARCHAR(7) NOT NULL,
+ fillColor VARCHAR(7) NOT NULL
 );
 
 CREATE TABLE entities (
@@ -23,12 +23,12 @@ CREATE TABLE entityTypes (
  id VARCHAR(36) NOT NULL PRIMARY KEY,
  parentId VARCHAR(36),
  name VARCHAR(50) NOT NULL,
- show BOOLEAN NOT NULL
+ show INTEGER NOT NULL
 );
 
 CREATE TABLE icons (
  id VARCHAR(36) NOT NULL PRIMARY KEY,
- url VARCHAR(100),
+ url VARCHAR(1000),
  name VARCHAR(50) NOT NULL
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE images (
  id VARCHAR(36) NOT NULL PRIMARY KEY,
  entityId VARCHAR(36),
  entityTypeId VARCHAR(36),
- url VARCHAR(100) NOT NULL
+ url VARCHAR(1000) NOT NULL
 );
 
 CREATE TABLE markers (
@@ -50,14 +50,14 @@ CREATE TABLE markers (
 CREATE TABLE notes (
  id VARCHAR(36) NOT NULL PRIMARY KEY,
  entityId VARCHAR(36),
- note VARCHAR(500) NOT NULL,
+ note VARCHAR(5000) NOT NULL,
  position INTEGER NOT NULL
 );
 
 CREATE TABLE polygons (
  id VARCHAR(36) NOT NULL PRIMARY KEY,
  entityId VARCHAR(36),
- vertices VARCHAR(500) NOT NULL,
- outlineColor VARCHAR(25) NOT NULL,
- fillColor VARCHAR(25) NOT NULL
+ vertices VARCHAR(2000) NOT NULL,
+ outlineColor VARCHAR(7) NOT NULL,
+ fillColor VARCHAR(7) NOT NULL
 );

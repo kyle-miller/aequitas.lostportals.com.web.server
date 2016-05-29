@@ -21,16 +21,16 @@ public class Marker_UT {
 		dbObj.setId("id");
 		dbObj.setEntityId("entityId");
 		dbObj.setIconId("iconId");
-		dbObj.setLatitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
-		dbObj.setLongitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
+		dbObj.setLatitude(Math.random() * 100);
+		dbObj.setLongitude(Math.random() * 100);
 
 		Marker actualObj = new Marker(dbObj);
 
 		assertEquals(dbObj.getId(), actualObj.getId());
 		assertEquals(dbObj.getEntityId(), actualObj.getEntityId());
 		assertEquals(dbObj.getIconId(), actualObj.getIconId());
-		assertEquals(dbObj.getLatitude(), actualObj.getLatitude());
-		assertEquals(dbObj.getLongitude(), actualObj.getLongitude());
+		assertEquals(dbObj.getLatitude(), new Double(actualObj.getLatitude().doubleValue()));
+		assertEquals(dbObj.getLongitude(), new Double(actualObj.getLongitude().doubleValue()));
 	}
 
 	@Test

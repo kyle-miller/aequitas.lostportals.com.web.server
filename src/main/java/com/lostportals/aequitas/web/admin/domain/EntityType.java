@@ -20,7 +20,7 @@ public class EntityType {
 		this.id = dbEntityType.getId();
 		this.parentId = dbEntityType.getParentId();
 		this.name = dbEntityType.getName();
-		this.show = dbEntityType.isShow();
+		this.show = new Integer(1).equals(dbEntityType.getShow()) ? true : false;
 	}
 
 	public String getId() {

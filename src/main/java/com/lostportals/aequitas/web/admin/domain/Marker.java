@@ -24,8 +24,8 @@ public class Marker {
 		this.id = dbMarker.getId();
 		this.entityId = dbMarker.getEntityId();
 		this.iconId = dbMarker.getIconId();
-		this.latitude = dbMarker.getLatitude();
-		this.longitude = dbMarker.getLongitude();
+		this.latitude = dbMarker.getLatitude() == null ? null : new BigDecimal(dbMarker.getLatitude());
+		this.longitude = dbMarker.getLongitude() == null ? null : new BigDecimal(dbMarker.getLongitude());
 	}
 
 	public Marker(MapMarker mapMarker) {

@@ -1,6 +1,5 @@
 package com.lostportals.aequitas.service;
 
-import static java.math.RoundingMode.DOWN;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,7 +8,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -60,8 +58,8 @@ public class MarkerServiceImpl_UT {
 			assertEquals(daoList.get(i).getId(), actualList.get(i).getId());
 			assertEquals(daoList.get(i).getEntityId(), actualList.get(i).getEntityId());
 			assertEquals(daoList.get(i).getIconId(), actualList.get(i).getIconId());
-			assertEquals(daoList.get(i).getLatitude(), actualList.get(i).getLatitude());
-			assertEquals(daoList.get(i).getLongitude(), actualList.get(i).getLongitude());
+			assertEquals(daoList.get(i).getLatitude(), new Double(actualList.get(i).getLatitude().doubleValue()));
+			assertEquals(daoList.get(i).getLongitude(), new Double(actualList.get(i).getLongitude().doubleValue()));
 		}
 	}
 
@@ -70,8 +68,8 @@ public class MarkerServiceImpl_UT {
 		dbObj.setId(UUID.randomUUID().toString());
 		dbObj.setEntityId(UUID.randomUUID().toString());
 		dbObj.setIconId(UUID.randomUUID().toString());
-		dbObj.setLatitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
-		dbObj.setLongitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
+		dbObj.setLatitude(Math.random() * 100);
+		dbObj.setLongitude(Math.random() * 100);
 		return dbObj;
 	}
 
@@ -89,8 +87,8 @@ public class MarkerServiceImpl_UT {
 		assertEquals(dbObj.getId(), actualObj.getId());
 		assertEquals(dbObj.getEntityId(), actualObj.getEntityId());
 		assertEquals(dbObj.getIconId(), actualObj.getIconId());
-		assertEquals(dbObj.getLatitude(), actualObj.getLatitude());
-		assertEquals(dbObj.getLongitude(), actualObj.getLongitude());
+		assertEquals(dbObj.getLatitude(), new Double(actualObj.getLatitude().doubleValue()));
+		assertEquals(dbObj.getLongitude(), new Double(actualObj.getLongitude().doubleValue()));
 	}
 
 	@Test
@@ -118,8 +116,8 @@ public class MarkerServiceImpl_UT {
 		assertNotEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
 		assertEquals(toSave.getIconId(), capturedDbObj.getIconId());
-		assertEquals(toSave.getLatitude(), capturedDbObj.getLatitude());
-		assertEquals(toSave.getLongitude(), capturedDbObj.getLongitude());
+		assertEquals(new Double(toSave.getLatitude().doubleValue()), capturedDbObj.getLatitude());
+		assertEquals(new Double(toSave.getLongitude().doubleValue()), capturedDbObj.getLongitude());
 	}
 
 	@Test
@@ -161,7 +159,7 @@ public class MarkerServiceImpl_UT {
 		assertEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
 		assertEquals(toSave.getIconId(), capturedDbObj.getIconId());
-		assertEquals(toSave.getLatitude(), capturedDbObj.getLatitude());
-		assertEquals(toSave.getLongitude(), capturedDbObj.getLongitude());
+		assertEquals(new Double(toSave.getLatitude().doubleValue()), capturedDbObj.getLatitude());
+		assertEquals(new Double(toSave.getLongitude().doubleValue()), capturedDbObj.getLongitude());
 	}
 }

@@ -66,6 +66,7 @@ public class EntityTypeServiceImpl_UT {
 		dbObj.setId(UUID.randomUUID().toString());
 		dbObj.setName(UUID.randomUUID().toString());
 		dbObj.setParentId(UUID.randomUUID().toString());
+		dbObj.setShow(1);
 		return dbObj;
 	}
 

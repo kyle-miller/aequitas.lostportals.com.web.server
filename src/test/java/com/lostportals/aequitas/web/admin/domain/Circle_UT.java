@@ -21,8 +21,8 @@ public class Circle_UT {
 		dbObj.setId("id");
 		dbObj.setEntityId("entityId");
 		dbObj.setFillColor("fillColor");
-		dbObj.setLatitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
-		dbObj.setLongitude(new BigDecimal(Double.toString(Math.random() * 100)).setScale(8, DOWN));
+		dbObj.setLatitude(Math.random() * 100);
+		dbObj.setLongitude(Math.random() * 100);
 		dbObj.setOutlineColor("outlineColor");
 		dbObj.setRadius(Double.valueOf(Math.random() * 100000).intValue());
 
@@ -31,8 +31,8 @@ public class Circle_UT {
 		assertEquals(dbObj.getId(), actualObj.getId());
 		assertEquals(dbObj.getEntityId(), actualObj.getEntityId());
 		assertEquals(dbObj.getFillColor(), actualObj.getFillColor());
-		assertEquals(dbObj.getLatitude(), actualObj.getLatitude());
-		assertEquals(dbObj.getLongitude(), actualObj.getLongitude());
+		assertEquals(dbObj.getLatitude(), new Double(actualObj.getLatitude().doubleValue()));
+		assertEquals(dbObj.getLongitude(), new Double(actualObj.getLongitude().doubleValue()));
 		assertEquals(dbObj.getOutlineColor(), actualObj.getOutlineColor());
 		assertEquals(dbObj.getRadius(), actualObj.getRadius());
 	}

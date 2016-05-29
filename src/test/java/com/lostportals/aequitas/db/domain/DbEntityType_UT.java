@@ -26,6 +26,6 @@ public class DbEntityType_UT {
 		assertEquals(obj.getId(), actualDbObj.getId());
 		assertEquals(obj.getParentId(), actualDbObj.getParentId());
 		assertEquals(obj.getName(), actualDbObj.getName());
-		assertEquals(obj.isShow(), actualDbObj.isShow());
+		assertEquals(new Integer(1), actualDbObj.getShow());
 	}
 }
