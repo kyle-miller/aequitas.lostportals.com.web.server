@@ -41,4 +41,9 @@ public class NoteDaoImpl extends Dao<DbNote> implements NoteDao {
 	public boolean save(DbNote dbNote) throws IllegalAccessException, DataAccessException {
 		return super.save(dbNote);
 	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

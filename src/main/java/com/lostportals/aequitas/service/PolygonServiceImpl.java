@@ -14,6 +14,7 @@ import com.lostportals.aequitas.db.dao.PolygonDao;
 import com.lostportals.aequitas.db.domain.DbPolygon;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.web.admin.domain.Polygon;
 
 @Service
@@ -64,5 +65,14 @@ public class PolygonServiceImpl implements PolygonService {
 
 		Polygon savedPolygon = new Polygon(dbPolygon);
 		return savedPolygon;
+	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		if (id == null) {
+			throw new UnprocessableEntityException("id is required");
+		} else if (get(id) != null) {
+			polygonDao.delete(id);	
+		}
 	}
 }

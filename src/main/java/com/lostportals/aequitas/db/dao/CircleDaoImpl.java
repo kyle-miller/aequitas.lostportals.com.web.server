@@ -41,4 +41,9 @@ public class CircleDaoImpl extends Dao<DbCircle> implements CircleDao {
 	public boolean save(DbCircle dbCircle) throws IllegalAccessException, DataAccessException {
 		return super.save(dbCircle);
 	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

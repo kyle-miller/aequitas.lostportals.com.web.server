@@ -10,4 +10,6 @@ public interface ImageService {
 	Image get(String id);
 
 	Image save(Image image);
+
+	void delete(String id);
 }

@@ -12,4 +12,6 @@ public interface CircleDao {
 	DbCircle get(String id);
 
 	boolean save(DbCircle dbCircle) throws IllegalAccessException, DataAccessException;
+
+	void delete(String id);
 }

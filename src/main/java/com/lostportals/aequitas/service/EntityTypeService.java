@@ -10,4 +10,6 @@ public interface EntityTypeService {
 	EntityType get(String id);
 
 	EntityType save(EntityType entityType);
+
+	void delete(String id);
 }

@@ -41,4 +41,9 @@ public class PolygonDaoImpl extends Dao<DbPolygon> implements PolygonDao {
 	public boolean save(DbPolygon dbPolygon) throws IllegalAccessException, DataAccessException {
 		return super.save(dbPolygon);
 	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

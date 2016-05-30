@@ -14,6 +14,7 @@ import com.lostportals.aequitas.db.dao.EntityEntityTypeXrefDao;
 import com.lostportals.aequitas.db.domain.DbEntityEntityTypeXref;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 
 @Service
@@ -64,5 +65,14 @@ public class EntityEntityTypeXrefServiceImpl implements EntityEntityTypeXrefServ
 
 		EntityEntityTypeXref savedEntityEntityTypeXref = new EntityEntityTypeXref(dbEntityEntityTypeXref);
 		return savedEntityEntityTypeXref;
+	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		if (id == null) {
+			throw new UnprocessableEntityException("id is required");
+		} else if (get(id) != null) {
+			entityEntityTypeXrefDao.delete(id);	
+		}
 	}
 }

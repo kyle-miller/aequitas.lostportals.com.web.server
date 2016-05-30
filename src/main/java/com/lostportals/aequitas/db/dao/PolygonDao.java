@@ -12,4 +12,6 @@ public interface PolygonDao {
 	DbPolygon get(String id);
 
 	boolean save(DbPolygon dbPolygon) throws IllegalAccessException, DataAccessException;
+
+	void delete(String id);
 }

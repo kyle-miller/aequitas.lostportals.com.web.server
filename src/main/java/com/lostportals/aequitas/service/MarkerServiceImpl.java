@@ -14,6 +14,7 @@ import com.lostportals.aequitas.db.dao.MarkerDao;
 import com.lostportals.aequitas.db.domain.DbMarker;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.web.admin.domain.Marker;
 
 @Service
@@ -64,5 +65,14 @@ public class MarkerServiceImpl implements MarkerService {
 
 		Marker savedMarker = new Marker(dbMarker);
 		return savedMarker;
+	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		if (id == null) {
+			throw new UnprocessableEntityException("id is required");
+		} else if (get(id) != null) {
+			markerDao.delete(id);	
+		}
 	}
 }

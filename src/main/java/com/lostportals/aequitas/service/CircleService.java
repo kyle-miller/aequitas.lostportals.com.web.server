@@ -10,4 +10,6 @@ public interface CircleService {
 	Circle get(String id);
 
 	Circle save(Circle circle);
+
+	void delete(String id);
 }

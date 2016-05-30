@@ -192,10 +192,12 @@ public class MapEntityServiceImpl_UT {
 		Note matching = new Note();
 		matching.setId(UUID.randomUUID().toString());
 		matching.setEntityId(entityId);
+		matching.setPosition(0);
 		Note nonMatching = new Note();
 		nonMatching.setId(UUID.randomUUID().toString());
 		String nonMatchingEntityId = entityId + "nonMatching";
 		nonMatching.setEntityId(nonMatchingEntityId);
+		nonMatching.setPosition(1);
 		when(noteService.getAll()).thenReturn(Arrays.asList(matching, nonMatching));
 
 		List<MapEntity> actualList = testObj.getAll();

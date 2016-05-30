@@ -12,4 +12,6 @@ public interface IconDao {
 	DbIcon get(String id);
 
 	boolean save(DbIcon dbIcon) throws IllegalAccessException, DataAccessException;
+
+	void delete(String id);
 }

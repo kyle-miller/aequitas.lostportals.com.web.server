@@ -14,6 +14,7 @@ import com.lostportals.aequitas.db.dao.NoteDao;
 import com.lostportals.aequitas.db.domain.DbNote;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.web.admin.domain.Note;
 
 @Service
@@ -64,5 +65,14 @@ public class NoteServiceImpl implements NoteService {
 
 		Note savedNote = new Note(dbNote);
 		return savedNote;
+	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		if (id == null) {
+			throw new UnprocessableEntityException("id is required");
+		} else if (get(id) != null) {
+			noteDao.delete(id);	
+		}
 	}
 }

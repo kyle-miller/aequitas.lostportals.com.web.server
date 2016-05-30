@@ -10,4 +10,6 @@ public interface EntityEntityTypeXrefService {
 	EntityEntityTypeXref get(String id);
 
 	EntityEntityTypeXref save(EntityEntityTypeXref entityEntityTypeXref);
+
+	void delete(String id);
 }

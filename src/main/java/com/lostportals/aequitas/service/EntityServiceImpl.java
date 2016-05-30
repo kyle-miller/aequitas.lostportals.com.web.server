@@ -14,6 +14,7 @@ import com.lostportals.aequitas.db.dao.EntityDao;
 import com.lostportals.aequitas.db.domain.DbEntity;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.web.admin.domain.Entity;
 
 @Service
@@ -64,5 +65,14 @@ public class EntityServiceImpl implements EntityService {
 
 		Entity savedEntity = new Entity(dbEntity);
 		return savedEntity;
+	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		if (id == null) {
+			throw new UnprocessableEntityException("id is required");
+		} else if (get(id) != null) {
+			entityDao.delete(id);	
+		}
 	}
 }

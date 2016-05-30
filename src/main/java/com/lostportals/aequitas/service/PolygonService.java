@@ -10,4 +10,6 @@ public interface PolygonService {
 	Polygon get(String id);
 
 	Polygon save(Polygon polygon);
+
+	void delete(String id);
 }

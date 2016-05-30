@@ -41,4 +41,9 @@ public class ImageDaoImpl extends Dao<DbImage> implements ImageDao {
 	public boolean save(DbImage dbImage) throws IllegalAccessException, DataAccessException {
 		return super.save(dbImage);
 	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

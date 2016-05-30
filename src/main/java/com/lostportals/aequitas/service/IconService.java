@@ -10,4 +10,6 @@ public interface IconService {
 	Icon get(String id);
 
 	Icon save(Icon icon);
+
+	void delete(String id);
 }

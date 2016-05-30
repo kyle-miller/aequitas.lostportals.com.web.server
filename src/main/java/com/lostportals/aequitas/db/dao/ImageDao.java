@@ -12,4 +12,6 @@ public interface ImageDao {
 	DbImage get(String id);
 
 	boolean save(DbImage dbImage) throws IllegalAccessException, DataAccessException;
+
+	void delete(String id);
 }

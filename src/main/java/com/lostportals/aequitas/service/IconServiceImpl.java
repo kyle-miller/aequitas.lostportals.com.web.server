@@ -14,6 +14,7 @@ import com.lostportals.aequitas.db.dao.IconDao;
 import com.lostportals.aequitas.db.domain.DbIcon;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.web.admin.domain.Icon;
 
 @Service
@@ -64,5 +65,14 @@ public class IconServiceImpl implements IconService {
 
 		Icon savedIcon = new Icon(dbIcon);
 		return savedIcon;
+	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		if (id == null) {
+			throw new UnprocessableEntityException("id is required");
+		} else if (get(id) != null) {
+			iconDao.delete(id);	
+		}
 	}
 }

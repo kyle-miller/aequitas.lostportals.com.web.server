@@ -41,4 +41,9 @@ public class EntityTypeDaoImpl extends Dao<DbEntityType> implements EntityTypeDa
 	public boolean save(DbEntityType dbEntityType) throws IllegalAccessException, DataAccessException {
 		return super.save(dbEntityType);
 	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

@@ -12,4 +12,6 @@ public interface MarkerDao {
 	DbMarker get(String id);
 
 	boolean save(DbMarker dbMarker) throws IllegalAccessException, DataAccessException;
+
+	void delete(String id);
 }

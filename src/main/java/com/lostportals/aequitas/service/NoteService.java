@@ -10,4 +10,6 @@ public interface NoteService {
 	Note get(String id);
 
 	Note save(Note note);
+
+	void delete(String id);
 }

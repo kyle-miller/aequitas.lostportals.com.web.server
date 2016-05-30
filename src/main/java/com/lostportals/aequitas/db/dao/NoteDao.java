@@ -12,4 +12,6 @@ public interface NoteDao {
 	DbNote get(String id);
 
 	boolean save(DbNote dbNote) throws IllegalAccessException, DataAccessException;
+
+	void delete(String id);
 }

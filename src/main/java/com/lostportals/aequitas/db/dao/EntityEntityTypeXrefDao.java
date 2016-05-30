@@ -12,4 +12,6 @@ public interface EntityEntityTypeXrefDao {
 	DbEntityEntityTypeXref get(String id);
 
 	boolean save(DbEntityEntityTypeXref dbEntityEntityTypeXref) throws IllegalAccessException, DataAccessException;
+
+	void delete(String id);
 }

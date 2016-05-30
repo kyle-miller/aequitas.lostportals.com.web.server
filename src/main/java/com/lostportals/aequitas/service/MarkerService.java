@@ -10,4 +10,6 @@ public interface MarkerService {
 	Marker get(String id);
 
 	Marker save(Marker marker);
+
+	void delete(String id);
 }

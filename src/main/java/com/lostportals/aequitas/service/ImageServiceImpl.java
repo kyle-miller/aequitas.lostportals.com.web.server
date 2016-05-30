@@ -14,6 +14,7 @@ import com.lostportals.aequitas.db.dao.ImageDao;
 import com.lostportals.aequitas.db.domain.DbImage;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.web.admin.domain.Image;
 
 @Service
@@ -64,5 +65,14 @@ public class ImageServiceImpl implements ImageService {
 
 		Image savedImage = new Image(dbImage);
 		return savedImage;
+	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		if (id == null) {
+			throw new UnprocessableEntityException("id is required");
+		} else if (get(id) != null) {
+			imageDao.delete(id);	
+		}
 	}
 }

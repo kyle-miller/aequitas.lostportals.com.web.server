@@ -8,4 +8,6 @@ public interface MapEntityService {
 	List<MapEntity> getAll();
 
 	MapEntity save(MapEntity mapEntity);
+	
+	void delete(String id);
 }

@@ -12,4 +12,6 @@ public interface EntityDao {
 	DbEntity get(String id);
 
 	boolean save(DbEntity dbEntity) throws IllegalAccessException, DataAccessException;
+
+	void delete(String id);
 }

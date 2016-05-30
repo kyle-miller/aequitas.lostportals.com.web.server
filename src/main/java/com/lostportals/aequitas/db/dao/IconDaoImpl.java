@@ -41,4 +41,9 @@ public class IconDaoImpl extends Dao<DbIcon> implements IconDao {
 	public boolean save(DbIcon dbIcon) throws IllegalAccessException, DataAccessException {
 		return super.save(dbIcon);
 	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

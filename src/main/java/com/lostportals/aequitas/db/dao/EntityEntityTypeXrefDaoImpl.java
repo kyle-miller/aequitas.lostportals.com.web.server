@@ -41,4 +41,9 @@ public class EntityEntityTypeXrefDaoImpl extends Dao<DbEntityEntityTypeXref> imp
 	public boolean save(DbEntityEntityTypeXref dbEntityEntityTypeXref) throws IllegalAccessException, DataAccessException {
 		return super.save(dbEntityEntityTypeXref);
 	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

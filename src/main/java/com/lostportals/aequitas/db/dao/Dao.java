@@ -8,6 +8,8 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,8 +17,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.lostportals.aequitas.db.domain.SqlType;
+import com.lostportals.aequitas.exception.InternalServerException;
 
 public abstract class Dao<T extends SqlType> extends JdbcDaoSupport {
+	final Logger log = LogManager.getLogger();
+
 	abstract String getTableName();
 
 	abstract RowMapper<T> getRowMapper();
@@ -96,5 +101,14 @@ public abstract class Dao<T extends SqlType> extends JdbcDaoSupport {
 		}
 
 		return false;
+	}
+
+	void delete(String id) {
+		String sql = "delete from " + getTableName() + " where id='" + id + "'";
+		try {
+			getJdbcTemplate().execute(sql);
+		} catch (DataAccessException e) {
+			throw new InternalServerException("Failed to delete id=" + id + " from " + getTableName(), e);
+		}
 	}
 }

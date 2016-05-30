@@ -41,4 +41,9 @@ public class MarkerDaoImpl extends Dao<DbMarker> implements MarkerDao {
 	public boolean save(DbMarker dbMarker) throws IllegalAccessException, DataAccessException {
 		return super.save(dbMarker);
 	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

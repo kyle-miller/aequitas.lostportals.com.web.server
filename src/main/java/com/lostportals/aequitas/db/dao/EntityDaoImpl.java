@@ -41,4 +41,9 @@ public class EntityDaoImpl extends Dao<DbEntity> implements EntityDao {
 	public boolean save(DbEntity dbEntity) throws IllegalAccessException, DataAccessException {
 		return super.save(dbEntity);
 	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

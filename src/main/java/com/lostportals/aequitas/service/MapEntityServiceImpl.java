@@ -2,14 +2,18 @@ package com.lostportals.aequitas.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import javax.validation.ValidationException;
 
 import org.apache.maven.shared.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.web.admin.domain.Circle;
 import com.lostportals.aequitas.web.admin.domain.Entity;
@@ -64,7 +68,7 @@ public class MapEntityServiceImpl implements MapEntityService {
 
 		Map<String, MapIcon> mapIconMap = iconService.getAll().stream().map(MapIcon::new).collect(Collectors.toMap(MapIcon::getId, Function.identity()));
 		Map<String, MapEntityType> mapEntityTypeMap = entityTypeService.getAll().stream().map(MapEntityType::new).collect(Collectors.toMap(MapEntityType::getId, Function.identity()));
-		List<MapNote> mapNoteList = noteService.getAll().stream().map(MapNote::new).collect(Collectors.toList());
+		List<MapNote> mapNoteList = noteService.getAll().stream().sorted((n1, n2) -> n1 == null || n2 == null ? -1 : n1.getPosition().compareTo(n2.getPosition())).map(MapNote::new).collect(Collectors.toList());
 		List<MapCircle> mapCircleList = circleService.getAll().stream().map(MapCircle::new).collect(Collectors.toList());
 		List<MapPolygon> mapPolygonList = polygonService.getAll().stream().map(MapPolygon::new).collect(Collectors.toList());
 		List<MapMarker> mapMarkerList = markerService.getAll().stream().map(MapMarker::new).collect(Collectors.toList());
@@ -111,6 +115,7 @@ public class MapEntityServiceImpl implements MapEntityService {
 			for (MapMarker mapMarker : mapMarkers) {
 				Marker marker = new Marker(mapMarker);
 				marker.setEntityId(entity.getId());
+				marker.setIconId(mapMarker.getIcon() == null ? null : mapMarker.getIcon().getId());
 				marker = markerService.save(marker);
 				MapMarker savedMapMarker = new MapMarker(marker);
 				savedMapMarker.setIcon(mapIconMap.get(savedMapMarker.getIconId()));
@@ -258,6 +263,53 @@ public class MapEntityServiceImpl implements MapEntityService {
 					throw new UnprocessableEntityException("outlineColor must be a hex color (ex. #0Ab35F)");
 				}
 			}
+		}
+	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		if (id == null) {
+			throw new ValidationException("id is required");
+		}
+
+		Optional<MapEntity> optionalMapEntity = getAll().stream().filter(e -> id.equals(e.getId())).findFirst();
+
+		if (optionalMapEntity.isPresent()) {
+			MapEntity mapEntity = optionalMapEntity.get();
+
+			if (!CollectionUtils.isEmpty(mapEntity.getNotes())) {
+				for (MapNote mapNote : mapEntity.getNotes()) {
+					noteService.delete(mapNote.getId());
+				}
+			}
+
+			if (!CollectionUtils.isEmpty(mapEntity.getImages())) {
+				for (MapImage mapImage : mapEntity.getImages()) {
+					imageService.delete(mapImage.getId());
+				}
+			}
+
+			if (!CollectionUtils.isEmpty(mapEntity.getMarkers())) {
+				for (MapMarker mapMarker : mapEntity.getMarkers()) {
+					markerService.delete(mapMarker.getId());
+				}
+			}
+
+			if (!CollectionUtils.isEmpty(mapEntity.getCircles())) {
+				for (MapCircle mapCircle : mapEntity.getCircles()) {
+					circleService.delete(mapCircle.getId());
+				}
+			}
+
+			if (!CollectionUtils.isEmpty(mapEntity.getPolygons())) {
+				for (MapPolygon mapPolygon : mapEntity.getPolygons()) {
+					polygonService.delete(mapPolygon.getId());
+				}
+			}
+
+			entityService.delete(mapEntity.getId());
+		} else {
+			throw new NotFoundException("MapEntity with id=" + id + " not found");
 		}
 	}
 
