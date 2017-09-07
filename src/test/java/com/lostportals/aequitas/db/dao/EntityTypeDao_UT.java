@@ -9,9 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class IconDaoImpl_UT {
+public class EntityTypeDao_UT {
 	@InjectMocks
-	IconDaoImpl testObj;
+    EntityTypeDao testObj;
 
 	@Test
 	public void getRowMapper_notNull() {
@@ -20,6 +20,6 @@ public class IconDaoImpl_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("icons", testObj.getTableName());
+		assertEquals("entityTypes", testObj.getTableName());
 	}
 }

@@ -1,17 +1,17 @@
 package com.lostportals.aequitas.db.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 @RunWith(MockitoJUnitRunner.class)
-public class EntityEntityTypeXrefDaoImpl_UT {
+public class ImageDao_UT {
 	@InjectMocks
-	EntityEntityTypeXrefDaoImpl testObj;
+    ImageDao testObj;
 
 	@Test
 	public void getRowMapper_notNull() {
@@ -20,6 +20,6 @@ public class EntityEntityTypeXrefDaoImpl_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("entityEntityTypeXrefs", testObj.getTableName());
+		assertEquals("images", testObj.getTableName());
 	}
 }

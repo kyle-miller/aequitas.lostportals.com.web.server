@@ -1,17 +1,41 @@
 package com.lostportals.aequitas.db.dao;
 
+import com.lostportals.aequitas.db.domain.DbNote;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
+@Repository
+public class NoteDao extends Dao<DbNote> {
+	@Override
+	RowMapper<DbNote> getRowMapper() {
+		return (rs, rowNum) -> mapFieldsTo(rs, new DbNote());
+	}
 
-import com.lostportals.aequitas.db.domain.DbNote;
+	@Override
+	String getTableName() {
+		return "notes";
+	}
 
-public interface NoteDao {
-	List<DbNote> getAll();
+	@Override
+	public List<DbNote> getAll() {
+		return super.getAll();
+	}
 
-	DbNote get(String id);
+	@Override
+	public DbNote get(String id) {
+		return super.get(id);
+	}
 
-	boolean save(DbNote dbNote) throws IllegalAccessException, DataAccessException;
+	@Override
+	public boolean save(DbNote dbNote) throws IllegalAccessException, DataAccessException {
+		return super.save(dbNote);
+	}
 
-	void delete(String id);
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

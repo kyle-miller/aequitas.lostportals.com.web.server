@@ -1,17 +1,44 @@
 package com.lostportals.aequitas.db.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.lostportals.aequitas.db.domain.DbEntityEntityTypeXref;
 
-public interface EntityEntityTypeXrefDao {
-	List<DbEntityEntityTypeXref> getAll();
+@Repository
+public class EntityEntityTypeXrefDao extends Dao<DbEntityEntityTypeXref> {
+	@Override
+	RowMapper<DbEntityEntityTypeXref> getRowMapper() {
+		return (rs, rowNum) -> mapFieldsTo(rs, new DbEntityEntityTypeXref());
+	}
 
-	DbEntityEntityTypeXref get(String id);
+	@Override
+	String getTableName() {
+		return "entityEntityTypeXrefs";
+	}
 
-	boolean save(DbEntityEntityTypeXref dbEntityEntityTypeXref) throws IllegalAccessException, DataAccessException;
+	@Override
+	public List<DbEntityEntityTypeXref> getAll() {
+		return super.getAll();
+	}
 
-	void delete(String id);
+	@Override
+	public DbEntityEntityTypeXref get(String id) {
+		return super.get(id);
+	}
+
+	@Override
+	public boolean save(DbEntityEntityTypeXref dbEntityEntityTypeXref) throws IllegalAccessException, DataAccessException {
+		return super.save(dbEntityEntityTypeXref);
+	}
+
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

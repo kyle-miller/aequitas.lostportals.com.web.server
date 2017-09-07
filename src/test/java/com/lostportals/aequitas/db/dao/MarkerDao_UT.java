@@ -9,9 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MarkerDaoImpl_UT {
+public class MarkerDao_UT {
 	@InjectMocks
-	MarkerDaoImpl testObj;
+    MarkerDao testObj;
 
 	@Test
 	public void getRowMapper_notNull() {

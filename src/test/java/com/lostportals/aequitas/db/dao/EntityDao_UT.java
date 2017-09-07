@@ -9,9 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class NoteDaoImpl_UT {
+public class EntityDao_UT {
 	@InjectMocks
-	NoteDaoImpl testObj;
+    EntityDao testObj;
 
 	@Test
 	public void getRowMapper_notNull() {
@@ -20,6 +20,6 @@ public class NoteDaoImpl_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("notes", testObj.getTableName());
+		assertEquals("entities", testObj.getTableName());
 	}
 }

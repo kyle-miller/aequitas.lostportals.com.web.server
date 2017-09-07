@@ -22,132 +22,132 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.lostportals.aequitas.db.dao.ImageDao;
-import com.lostportals.aequitas.db.domain.DbImage;
+import com.lostportals.aequitas.db.dao.PolygonDao;
+import com.lostportals.aequitas.db.domain.DbPolygon;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.admin.domain.Image;
+import com.lostportals.aequitas.web.admin.domain.Polygon;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ImageServiceImpl_UT {
+public class PolygonService_UT {
 
 	@InjectMocks
-	ImageServiceImpl testObj;
+	PolygonService testObj;
 
 	@Mock
-	ImageDao imageDao;
+	PolygonDao polygonDao;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Captor
-	ArgumentCaptor<DbImage> dbImageCaptor;
+	ArgumentCaptor<DbPolygon> dbPolygonCaptor;
 
 	@Test
 	public void getAll() {
-		List<DbImage> daoList = Arrays.asList(createDbImage(), createDbImage(), createDbImage());
-		when(imageDao.getAll()).thenReturn(daoList);
+		List<DbPolygon> daoList = Arrays.asList(createDbPolygon(), createDbPolygon(), createDbPolygon());
+		when(polygonDao.getAll()).thenReturn(daoList);
 
-		List<Image> actualList = testObj.getAll();
+		List<Polygon> actualList = testObj.getAll();
 
-		verify(imageDao).getAll();
-		verifyNoMoreInteractions(imageDao);
+		verify(polygonDao).getAll();
+		verifyNoMoreInteractions(polygonDao);
 		assertNotNull(actualList);
 		assertEquals(daoList.size(), actualList.size());
 		for (int i = 0; i < daoList.size(); i++) {
 			assertEquals(daoList.get(i).getId(), actualList.get(i).getId());
 			assertEquals(daoList.get(i).getEntityId(), actualList.get(i).getEntityId());
-			assertEquals(daoList.get(i).getUrl(), actualList.get(i).getUrl());
+			assertEquals(daoList.get(i).getVertices(), actualList.get(i).getVertices());
 		}
 	}
 
-	DbImage createDbImage() {
-		DbImage dbObj = new DbImage();
+	DbPolygon createDbPolygon() {
+		DbPolygon dbObj = new DbPolygon();
 		dbObj.setId(UUID.randomUUID().toString());
 		dbObj.setEntityId(UUID.randomUUID().toString());
-		dbObj.setUrl(UUID.randomUUID().toString());
+		dbObj.setVertices(UUID.randomUUID().toString());
 		return dbObj;
 	}
 
 	@Test
 	public void get() {
 		String id = "id";
-		DbImage dbObj = createDbImage();
-		when(imageDao.get(id)).thenReturn(dbObj);
+		DbPolygon dbObj = createDbPolygon();
+		when(polygonDao.get(id)).thenReturn(dbObj);
 
-		Image actualObj = testObj.get(id);
+		Polygon actualObj = testObj.get(id);
 
-		verify(imageDao).get(id);
-		verifyNoMoreInteractions(imageDao);
+		verify(polygonDao).get(id);
+		verifyNoMoreInteractions(polygonDao);
 		assertNotNull(actualObj);
 		assertEquals(dbObj.getId(), actualObj.getId());
 		assertEquals(dbObj.getEntityId(), actualObj.getEntityId());
-		assertEquals(dbObj.getUrl(), actualObj.getUrl());
+		assertEquals(dbObj.getVertices(), actualObj.getVertices());
 	}
 
 	@Test
 	public void get_notFound() {
 		expectedException.expect(NotFoundException.class);
 		String id = "id";
-		String expectedMessage = "Cannot find Image for id=" + id;
+		String expectedMessage = "Cannot find Polygon for id=" + id;
 		expectedException.expectMessage(expectedMessage);
-		when(imageDao.get(id)).thenReturn(null);
+		when(polygonDao.get(id)).thenReturn(null);
 
 		testObj.get(id);
 	}
 
 	@Test
 	public void save_new_checkDaoCall() throws Exception {
-		Image toSave = new Image(createDbImage());
+		Polygon toSave = new Polygon(createDbPolygon());
 		toSave.setId(null);
 
 		testObj.save(toSave);
 
-		verify(imageDao).save(dbImageCaptor.capture());
-		verifyNoMoreInteractions(imageDao);
-		DbImage capturedDbObj = dbImageCaptor.getValue();
+		verify(polygonDao).save(dbPolygonCaptor.capture());
+		verifyNoMoreInteractions(polygonDao);
+		DbPolygon capturedDbObj = dbPolygonCaptor.getValue();
 		assertNotNull(capturedDbObj);
 		assertNotEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
-		assertEquals(toSave.getUrl(), capturedDbObj.getUrl());
+		assertEquals(toSave.getVertices(), capturedDbObj.getVertices());
 	}
 
 	@Test
 	public void save_new_daoFail() throws Exception {
 		expectedException.expect(InternalServerException.class);
-		Image toSave = new Image(createDbImage());
+		Polygon toSave = new Polygon(createDbPolygon());
 		toSave.setId(null);
-		expectedException.expectMessage("Unable to save image=" + toSave);
-		when(imageDao.save(any(DbImage.class))).thenThrow(new IllegalAccessException("something"));
+		expectedException.expectMessage("Unable to save polygon=" + toSave);
+		when(polygonDao.save(any(DbPolygon.class))).thenThrow(new IllegalAccessException("something"));
 
 		testObj.save(toSave);
 	}
 
 	@Test
 	public void save_new_checkReturn() throws Exception {
-		Image toSave = new Image(createDbImage());
+		Polygon toSave = new Polygon(createDbPolygon());
 		toSave.setId(null);
 
-		Image actualObj = testObj.save(toSave);
+		Polygon actualObj = testObj.save(toSave);
 
 		assertNotNull(actualObj);
 		assertNotEquals(toSave.getId(), actualObj.getId());
 		assertEquals(toSave.getEntityId(), actualObj.getEntityId());
-		assertEquals(toSave.getUrl(), actualObj.getUrl());
+		assertEquals(toSave.getVertices(), actualObj.getVertices());
 	}
 
 	@Test
 	public void save_hasId_checkDaoCall() throws Exception {
-		Image toSave = new Image(createDbImage());
+		Polygon toSave = new Polygon(createDbPolygon());
 
 		testObj.save(toSave);
 
-		verify(imageDao).save(dbImageCaptor.capture());
-		verifyNoMoreInteractions(imageDao);
-		DbImage capturedDbObj = dbImageCaptor.getValue();
+		verify(polygonDao).save(dbPolygonCaptor.capture());
+		verifyNoMoreInteractions(polygonDao);
+		DbPolygon capturedDbObj = dbPolygonCaptor.getValue();
 		assertNotNull(capturedDbObj);
 		assertEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
-		assertEquals(toSave.getUrl(), capturedDbObj.getUrl());
+		assertEquals(toSave.getVertices(), capturedDbObj.getVertices());
 	}
 }

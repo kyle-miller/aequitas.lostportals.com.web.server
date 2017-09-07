@@ -22,138 +22,132 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.lostportals.aequitas.db.dao.NoteDao;
-import com.lostportals.aequitas.db.domain.DbNote;
+import com.lostportals.aequitas.db.dao.ImageDao;
+import com.lostportals.aequitas.db.domain.DbImage;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.admin.domain.Note;
+import com.lostportals.aequitas.web.admin.domain.Image;
 
 @RunWith(MockitoJUnitRunner.class)
-public class NoteServiceImpl_UT {
+public class ImageService_UT {
 
 	@InjectMocks
-	NoteServiceImpl testObj;
+	ImageService testObj;
 
 	@Mock
-	NoteDao noteDao;
+	ImageDao imageDao;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Captor
-	ArgumentCaptor<DbNote> dbNoteCaptor;
+	ArgumentCaptor<DbImage> dbImageCaptor;
 
 	@Test
 	public void getAll() {
-		List<DbNote> daoList = Arrays.asList(createDbNote(), createDbNote(), createDbNote());
-		when(noteDao.getAll()).thenReturn(daoList);
+		List<DbImage> daoList = Arrays.asList(createDbImage(), createDbImage(), createDbImage());
+		when(imageDao.getAll()).thenReturn(daoList);
 
-		List<Note> actualList = testObj.getAll();
+		List<Image> actualList = testObj.getAll();
 
-		verify(noteDao).getAll();
-		verifyNoMoreInteractions(noteDao);
+		verify(imageDao).getAll();
+		verifyNoMoreInteractions(imageDao);
 		assertNotNull(actualList);
 		assertEquals(daoList.size(), actualList.size());
 		for (int i = 0; i < daoList.size(); i++) {
 			assertEquals(daoList.get(i).getId(), actualList.get(i).getId());
 			assertEquals(daoList.get(i).getEntityId(), actualList.get(i).getEntityId());
-			assertEquals(daoList.get(i).getNote(), actualList.get(i).getNote());
-			assertEquals(daoList.get(i).getPosition(), actualList.get(i).getPosition());
+			assertEquals(daoList.get(i).getUrl(), actualList.get(i).getUrl());
 		}
 	}
 
-	DbNote createDbNote() {
-		DbNote dbObj = new DbNote();
+	DbImage createDbImage() {
+		DbImage dbObj = new DbImage();
 		dbObj.setId(UUID.randomUUID().toString());
 		dbObj.setEntityId(UUID.randomUUID().toString());
-		dbObj.setNote(UUID.randomUUID().toString());
-		dbObj.setPosition(Double.valueOf(Math.random() * 100000).intValue());
+		dbObj.setUrl(UUID.randomUUID().toString());
 		return dbObj;
 	}
 
 	@Test
 	public void get() {
 		String id = "id";
-		DbNote dbObj = createDbNote();
-		when(noteDao.get(id)).thenReturn(dbObj);
+		DbImage dbObj = createDbImage();
+		when(imageDao.get(id)).thenReturn(dbObj);
 
-		Note actualObj = testObj.get(id);
+		Image actualObj = testObj.get(id);
 
-		verify(noteDao).get(id);
-		verifyNoMoreInteractions(noteDao);
+		verify(imageDao).get(id);
+		verifyNoMoreInteractions(imageDao);
 		assertNotNull(actualObj);
 		assertEquals(dbObj.getId(), actualObj.getId());
 		assertEquals(dbObj.getEntityId(), actualObj.getEntityId());
-		assertEquals(dbObj.getNote(), actualObj.getNote());
-		assertEquals(dbObj.getPosition(), actualObj.getPosition());
+		assertEquals(dbObj.getUrl(), actualObj.getUrl());
 	}
 
 	@Test
 	public void get_notFound() {
 		expectedException.expect(NotFoundException.class);
 		String id = "id";
-		String expectedMessage = "Cannot find Note for id=" + id;
+		String expectedMessage = "Cannot find Image for id=" + id;
 		expectedException.expectMessage(expectedMessage);
-		when(noteDao.get(id)).thenReturn(null);
+		when(imageDao.get(id)).thenReturn(null);
 
 		testObj.get(id);
 	}
 
 	@Test
 	public void save_new_checkDaoCall() throws Exception {
-		Note toSave = new Note(createDbNote());
+		Image toSave = new Image(createDbImage());
 		toSave.setId(null);
 
 		testObj.save(toSave);
 
-		verify(noteDao).save(dbNoteCaptor.capture());
-		verifyNoMoreInteractions(noteDao);
-		DbNote capturedDbObj = dbNoteCaptor.getValue();
+		verify(imageDao).save(dbImageCaptor.capture());
+		verifyNoMoreInteractions(imageDao);
+		DbImage capturedDbObj = dbImageCaptor.getValue();
 		assertNotNull(capturedDbObj);
 		assertNotEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
-		assertEquals(toSave.getNote(), capturedDbObj.getNote());
-		assertEquals(toSave.getPosition(), capturedDbObj.getPosition());
+		assertEquals(toSave.getUrl(), capturedDbObj.getUrl());
 	}
 
 	@Test
 	public void save_new_daoFail() throws Exception {
 		expectedException.expect(InternalServerException.class);
-		Note toSave = new Note(createDbNote());
+		Image toSave = new Image(createDbImage());
 		toSave.setId(null);
-		expectedException.expectMessage("Unable to save note=" + toSave);
-		when(noteDao.save(any(DbNote.class))).thenThrow(new IllegalAccessException("something"));
+		expectedException.expectMessage("Unable to save image=" + toSave);
+		when(imageDao.save(any(DbImage.class))).thenThrow(new IllegalAccessException("something"));
 
 		testObj.save(toSave);
 	}
 
 	@Test
 	public void save_new_checkReturn() throws Exception {
-		Note toSave = new Note(createDbNote());
+		Image toSave = new Image(createDbImage());
 		toSave.setId(null);
 
-		Note actualObj = testObj.save(toSave);
+		Image actualObj = testObj.save(toSave);
 
 		assertNotNull(actualObj);
 		assertNotEquals(toSave.getId(), actualObj.getId());
 		assertEquals(toSave.getEntityId(), actualObj.getEntityId());
-		assertEquals(toSave.getNote(), actualObj.getNote());
-		assertEquals(toSave.getPosition(), actualObj.getPosition());
+		assertEquals(toSave.getUrl(), actualObj.getUrl());
 	}
 
 	@Test
 	public void save_hasId_checkDaoCall() throws Exception {
-		Note toSave = new Note(createDbNote());
+		Image toSave = new Image(createDbImage());
 
 		testObj.save(toSave);
 
-		verify(noteDao).save(dbNoteCaptor.capture());
-		verifyNoMoreInteractions(noteDao);
-		DbNote capturedDbObj = dbNoteCaptor.getValue();
+		verify(imageDao).save(dbImageCaptor.capture());
+		verifyNoMoreInteractions(imageDao);
+		DbImage capturedDbObj = dbImageCaptor.getValue();
 		assertNotNull(capturedDbObj);
 		assertEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
-		assertEquals(toSave.getNote(), capturedDbObj.getNote());
-		assertEquals(toSave.getPosition(), capturedDbObj.getPosition());
+		assertEquals(toSave.getUrl(), capturedDbObj.getUrl());
 	}
 }

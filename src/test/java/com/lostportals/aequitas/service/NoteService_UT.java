@@ -22,132 +22,138 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.lostportals.aequitas.db.dao.PolygonDao;
-import com.lostportals.aequitas.db.domain.DbPolygon;
+import com.lostportals.aequitas.db.dao.NoteDao;
+import com.lostportals.aequitas.db.domain.DbNote;
 import com.lostportals.aequitas.exception.InternalServerException;
 import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.admin.domain.Polygon;
+import com.lostportals.aequitas.web.admin.domain.Note;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PolygonServiceImpl_UT {
+public class NoteService_UT {
 
 	@InjectMocks
-	PolygonServiceImpl testObj;
+	NoteService testObj;
 
 	@Mock
-	PolygonDao polygonDao;
+	NoteDao noteDao;
 
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Captor
-	ArgumentCaptor<DbPolygon> dbPolygonCaptor;
+	ArgumentCaptor<DbNote> dbNoteCaptor;
 
 	@Test
 	public void getAll() {
-		List<DbPolygon> daoList = Arrays.asList(createDbPolygon(), createDbPolygon(), createDbPolygon());
-		when(polygonDao.getAll()).thenReturn(daoList);
+		List<DbNote> daoList = Arrays.asList(createDbNote(), createDbNote(), createDbNote());
+		when(noteDao.getAll()).thenReturn(daoList);
 
-		List<Polygon> actualList = testObj.getAll();
+		List<Note> actualList = testObj.getAll();
 
-		verify(polygonDao).getAll();
-		verifyNoMoreInteractions(polygonDao);
+		verify(noteDao).getAll();
+		verifyNoMoreInteractions(noteDao);
 		assertNotNull(actualList);
 		assertEquals(daoList.size(), actualList.size());
 		for (int i = 0; i < daoList.size(); i++) {
 			assertEquals(daoList.get(i).getId(), actualList.get(i).getId());
 			assertEquals(daoList.get(i).getEntityId(), actualList.get(i).getEntityId());
-			assertEquals(daoList.get(i).getVertices(), actualList.get(i).getVertices());
+			assertEquals(daoList.get(i).getNote(), actualList.get(i).getNote());
+			assertEquals(daoList.get(i).getPosition(), actualList.get(i).getPosition());
 		}
 	}
 
-	DbPolygon createDbPolygon() {
-		DbPolygon dbObj = new DbPolygon();
+	DbNote createDbNote() {
+		DbNote dbObj = new DbNote();
 		dbObj.setId(UUID.randomUUID().toString());
 		dbObj.setEntityId(UUID.randomUUID().toString());
-		dbObj.setVertices(UUID.randomUUID().toString());
+		dbObj.setNote(UUID.randomUUID().toString());
+		dbObj.setPosition(Double.valueOf(Math.random() * 100000).intValue());
 		return dbObj;
 	}
 
 	@Test
 	public void get() {
 		String id = "id";
-		DbPolygon dbObj = createDbPolygon();
-		when(polygonDao.get(id)).thenReturn(dbObj);
+		DbNote dbObj = createDbNote();
+		when(noteDao.get(id)).thenReturn(dbObj);
 
-		Polygon actualObj = testObj.get(id);
+		Note actualObj = testObj.get(id);
 
-		verify(polygonDao).get(id);
-		verifyNoMoreInteractions(polygonDao);
+		verify(noteDao).get(id);
+		verifyNoMoreInteractions(noteDao);
 		assertNotNull(actualObj);
 		assertEquals(dbObj.getId(), actualObj.getId());
 		assertEquals(dbObj.getEntityId(), actualObj.getEntityId());
-		assertEquals(dbObj.getVertices(), actualObj.getVertices());
+		assertEquals(dbObj.getNote(), actualObj.getNote());
+		assertEquals(dbObj.getPosition(), actualObj.getPosition());
 	}
 
 	@Test
 	public void get_notFound() {
 		expectedException.expect(NotFoundException.class);
 		String id = "id";
-		String expectedMessage = "Cannot find Polygon for id=" + id;
+		String expectedMessage = "Cannot find Note for id=" + id;
 		expectedException.expectMessage(expectedMessage);
-		when(polygonDao.get(id)).thenReturn(null);
+		when(noteDao.get(id)).thenReturn(null);
 
 		testObj.get(id);
 	}
 
 	@Test
 	public void save_new_checkDaoCall() throws Exception {
-		Polygon toSave = new Polygon(createDbPolygon());
+		Note toSave = new Note(createDbNote());
 		toSave.setId(null);
 
 		testObj.save(toSave);
 
-		verify(polygonDao).save(dbPolygonCaptor.capture());
-		verifyNoMoreInteractions(polygonDao);
-		DbPolygon capturedDbObj = dbPolygonCaptor.getValue();
+		verify(noteDao).save(dbNoteCaptor.capture());
+		verifyNoMoreInteractions(noteDao);
+		DbNote capturedDbObj = dbNoteCaptor.getValue();
 		assertNotNull(capturedDbObj);
 		assertNotEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
-		assertEquals(toSave.getVertices(), capturedDbObj.getVertices());
+		assertEquals(toSave.getNote(), capturedDbObj.getNote());
+		assertEquals(toSave.getPosition(), capturedDbObj.getPosition());
 	}
 
 	@Test
 	public void save_new_daoFail() throws Exception {
 		expectedException.expect(InternalServerException.class);
-		Polygon toSave = new Polygon(createDbPolygon());
+		Note toSave = new Note(createDbNote());
 		toSave.setId(null);
-		expectedException.expectMessage("Unable to save polygon=" + toSave);
-		when(polygonDao.save(any(DbPolygon.class))).thenThrow(new IllegalAccessException("something"));
+		expectedException.expectMessage("Unable to save note=" + toSave);
+		when(noteDao.save(any(DbNote.class))).thenThrow(new IllegalAccessException("something"));
 
 		testObj.save(toSave);
 	}
 
 	@Test
 	public void save_new_checkReturn() throws Exception {
-		Polygon toSave = new Polygon(createDbPolygon());
+		Note toSave = new Note(createDbNote());
 		toSave.setId(null);
 
-		Polygon actualObj = testObj.save(toSave);
+		Note actualObj = testObj.save(toSave);
 
 		assertNotNull(actualObj);
 		assertNotEquals(toSave.getId(), actualObj.getId());
 		assertEquals(toSave.getEntityId(), actualObj.getEntityId());
-		assertEquals(toSave.getVertices(), actualObj.getVertices());
+		assertEquals(toSave.getNote(), actualObj.getNote());
+		assertEquals(toSave.getPosition(), actualObj.getPosition());
 	}
 
 	@Test
 	public void save_hasId_checkDaoCall() throws Exception {
-		Polygon toSave = new Polygon(createDbPolygon());
+		Note toSave = new Note(createDbNote());
 
 		testObj.save(toSave);
 
-		verify(polygonDao).save(dbPolygonCaptor.capture());
-		verifyNoMoreInteractions(polygonDao);
-		DbPolygon capturedDbObj = dbPolygonCaptor.getValue();
+		verify(noteDao).save(dbNoteCaptor.capture());
+		verifyNoMoreInteractions(noteDao);
+		DbNote capturedDbObj = dbNoteCaptor.getValue();
 		assertNotNull(capturedDbObj);
 		assertEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
-		assertEquals(toSave.getVertices(), capturedDbObj.getVertices());
+		assertEquals(toSave.getNote(), capturedDbObj.getNote());
+		assertEquals(toSave.getPosition(), capturedDbObj.getPosition());
 	}
 }

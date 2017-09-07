@@ -1,17 +1,41 @@
 package com.lostportals.aequitas.db.dao;
 
+import com.lostportals.aequitas.db.domain.DbPolygon;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
+@Repository
+public class PolygonDao extends Dao<DbPolygon> {
+	@Override
+	RowMapper<DbPolygon> getRowMapper() {
+		return (rs, rowNum) -> mapFieldsTo(rs, new DbPolygon());
+	}
 
-import com.lostportals.aequitas.db.domain.DbPolygon;
+	@Override
+	String getTableName() {
+		return "polygons";
+	}
 
-public interface PolygonDao {
-	List<DbPolygon> getAll();
+	@Override
+	public List<DbPolygon> getAll() {
+		return super.getAll();
+	}
 
-	DbPolygon get(String id);
+	@Override
+	public DbPolygon get(String id) {
+		return super.get(id);
+	}
 
-	boolean save(DbPolygon dbPolygon) throws IllegalAccessException, DataAccessException;
+	@Override
+	public boolean save(DbPolygon dbPolygon) throws IllegalAccessException, DataAccessException {
+		return super.save(dbPolygon);
+	}
 
-	void delete(String id);
+	@Override
+	public void delete(String id) { // TODO Test
+		super.delete(id);
+	}
 }

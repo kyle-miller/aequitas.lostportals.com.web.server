@@ -29,10 +29,10 @@ import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EntityEntityTypeXrefServiceImpl_UT {
+public class EntityEntityTypeXrefService_UT {
 
 	@InjectMocks
-	EntityEntityTypeXrefServiceImpl testObj;
+	EntityEntityTypeXrefService testObj;
 
 	@Mock
 	EntityEntityTypeXrefDao entityEntityTypeXrefDao;

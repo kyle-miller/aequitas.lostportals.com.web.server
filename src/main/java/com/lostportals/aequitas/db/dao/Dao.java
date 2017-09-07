@@ -103,7 +103,7 @@ public abstract class Dao<T extends SqlType> extends JdbcDaoSupport {
 		return false;
 	}
 
-	void delete(String id) {
+	public void delete(String id) {
 		String sql = "delete from " + getTableName() + " where id='" + id + "'";
 		try {
 			getJdbcTemplate().execute(sql);

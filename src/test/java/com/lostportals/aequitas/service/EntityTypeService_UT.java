@@ -29,10 +29,10 @@ import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.web.admin.domain.EntityType;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EntityTypeServiceImpl_UT {
+public class EntityTypeService_UT {
 
 	@InjectMocks
-	EntityTypeServiceImpl testObj;
+	EntityTypeService testObj;
 
 	@Mock
 	EntityTypeDao entityTypeDao;
