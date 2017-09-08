@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import com.lostportals.aequitas.db.domain.DbNote;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -149,5 +151,23 @@ public class PolygonService_UT {
 		assertEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
 		assertEquals(toSave.getVertices(), capturedDbObj.getVertices());
+	}
+
+	@Test
+	public void delete_noId() {
+		expectedException.expect(UnprocessableEntityException.class);
+		expectedException.expectMessage("id is required");
+
+		testObj.delete(null);
+	}
+
+	@Test
+	public void delete_success() {
+		String id = "objectId";
+		when(polygonDao.get(id)).thenReturn(new DbPolygon());
+
+		testObj.delete(id);
+
+		verify(polygonDao).delete(id);
 	}
 }

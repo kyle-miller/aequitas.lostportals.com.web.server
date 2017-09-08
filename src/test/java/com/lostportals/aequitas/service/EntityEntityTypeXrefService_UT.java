@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -149,5 +150,23 @@ public class EntityEntityTypeXrefService_UT {
 		assertEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityTypeId(), capturedDbObj.getEntityTypeId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
+	}
+
+	@Test
+	public void delete_noId() {
+		expectedException.expect(UnprocessableEntityException.class);
+		expectedException.expectMessage("id is required");
+
+		testObj.delete(null);
+	}
+
+	@Test
+	public void delete_success() {
+		String id = "objectId";
+		when(entityEntityTypeXrefDao.get(id)).thenReturn(new DbEntityEntityTypeXref());
+
+		testObj.delete(id);
+
+		verify(entityEntityTypeXrefDao).delete(id);
 	}
 }

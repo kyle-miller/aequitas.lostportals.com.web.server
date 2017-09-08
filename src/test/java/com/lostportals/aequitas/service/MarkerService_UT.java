@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import com.lostportals.aequitas.db.domain.DbNote;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -161,5 +163,23 @@ public class MarkerService_UT {
 		assertEquals(toSave.getIconId(), capturedDbObj.getIconId());
 		assertEquals(new Double(toSave.getLatitude().doubleValue()), capturedDbObj.getLatitude());
 		assertEquals(new Double(toSave.getLongitude().doubleValue()), capturedDbObj.getLongitude());
+	}
+
+	@Test
+	public void delete_noId() {
+		expectedException.expect(UnprocessableEntityException.class);
+		expectedException.expectMessage("id is required");
+
+		testObj.delete(null);
+	}
+
+	@Test
+	public void delete_success() {
+		String id = "objectId";
+		when(markerDao.get(id)).thenReturn(new DbMarker());
+
+		testObj.delete(id);
+
+		verify(markerDao).delete(id);
 	}
 }

@@ -1,16 +1,11 @@
 package com.lostportals.aequitas.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
+import com.lostportals.aequitas.db.dao.CircleDao;
+import com.lostportals.aequitas.db.domain.DbCircle;
+import com.lostportals.aequitas.exception.InternalServerException;
+import com.lostportals.aequitas.exception.NotFoundException;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
+import com.lostportals.aequitas.web.admin.domain.Circle;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -21,11 +16,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.lostportals.aequitas.db.dao.CircleDao;
-import com.lostportals.aequitas.db.domain.DbCircle;
-import com.lostportals.aequitas.exception.InternalServerException;
-import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.web.admin.domain.Circle;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CircleService_UT {
@@ -110,6 +107,7 @@ public class CircleService_UT {
 	@Test
 	public void save_new_checkDaoCall() throws Exception {
 		Circle toSave = new Circle(createDbCircle());
+		toSave.setId(null);
 
 		testObj.save(toSave);
 
@@ -117,7 +115,7 @@ public class CircleService_UT {
 		verifyNoMoreInteractions(circleDao);
 		DbCircle capturedDbObj = dbCircleCaptor.getValue();
 		assertNotNull(capturedDbObj);
-		assertEquals(toSave.getId(), capturedDbObj.getId());
+		assertNotEquals(toSave.getId(), capturedDbObj.getId());
 		assertEquals(toSave.getEntityId(), capturedDbObj.getEntityId());
 		assertEquals(new Double(toSave.getLatitude().doubleValue()), capturedDbObj.getLatitude());
 		assertEquals(new Double(toSave.getLongitude().doubleValue()), capturedDbObj.getLongitude());
@@ -169,5 +167,23 @@ public class CircleService_UT {
 		assertEquals(toSave.getFillColor(), capturedDbObj.getFillColor());
 		assertEquals(toSave.getOutlineColor(), capturedDbObj.getOutlineColor());
 		assertEquals(toSave.getRadius(), capturedDbObj.getRadius());
+	}
+
+	@Test
+	public void delete_noId() {
+		expectedException.expect(UnprocessableEntityException.class);
+		expectedException.expectMessage("id is required");
+
+		testObj.delete(null);
+	}
+
+	@Test
+	public void delete_success() {
+		String id = "objectId";
+		when(circleDao.get(id)).thenReturn(new DbCircle());
+
+		testObj.delete(id);
+
+		verify(circleDao).delete(id);
 	}
 }

@@ -65,7 +65,7 @@ public class PolygonService {
 		return new Polygon(dbPolygon);
 	}
 
-	public void delete(String id) { // TODO Test
+	public void delete(String id) {
 		if (id == null) {
 			throw new UnprocessableEntityException("id is required");
 		} else if (get(id) != null) {

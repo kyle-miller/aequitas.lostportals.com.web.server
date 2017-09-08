@@ -65,7 +65,7 @@ public class EntityEntityTypeXrefService {
 		return new EntityEntityTypeXref(dbEntityEntityTypeXref);
 	}
 
-	public void delete(String id) { // TODO Test
+	public void delete(String id) {
 		if (id == null) {
 			throw new UnprocessableEntityException("id is required");
 		} else if (get(id) != null) {
