@@ -12,6 +12,9 @@ import com.lostportals.aequitas.db.domain.DbCircle;
 
 @Repository
 public class CircleDao extends Dao<DbCircle> {
+
+	public static final String TABLE_NAME = "circles";
+
 	@Override
 	RowMapper<DbCircle> getRowMapper() {
 		return (rs, rowNum) -> mapFieldsTo(rs, new DbCircle());
@@ -19,26 +22,6 @@ public class CircleDao extends Dao<DbCircle> {
 
 	@Override
 	String getTableName() {
-		return "circles";
-	}
-
-	@Override
-	public List<DbCircle> getAll() {
-		return super.getAll();
-	}
-
-	@Override
-	public DbCircle get(String id) {
-		return super.get(id);
-	}
-
-	@Override
-	public boolean save(DbCircle dbCircle) throws IllegalAccessException, DataAccessException {
-		return super.save(dbCircle);
-	}
-
-	@Override
-	public void delete(String id) { // TODO Test
-		super.delete(id);
+		return TABLE_NAME;
 	}
 }

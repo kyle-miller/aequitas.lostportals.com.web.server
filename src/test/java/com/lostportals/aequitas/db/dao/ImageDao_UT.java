@@ -10,6 +10,7 @@ import static org.junit.Assert.assertNotNull;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ImageDao_UT {
+
 	@InjectMocks
     ImageDao testObj;
 
@@ -20,6 +21,6 @@ public class ImageDao_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("images", testObj.getTableName());
+		assertEquals(ImageDao.TABLE_NAME, testObj.getTableName());
 	}
 }

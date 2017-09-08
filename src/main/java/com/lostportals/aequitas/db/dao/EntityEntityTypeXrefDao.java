@@ -12,6 +12,9 @@ import com.lostportals.aequitas.db.domain.DbEntityEntityTypeXref;
 
 @Repository
 public class EntityEntityTypeXrefDao extends Dao<DbEntityEntityTypeXref> {
+
+	public static final String TABLE_NAME = "entityEntityTypeXrefs";
+
 	@Override
 	RowMapper<DbEntityEntityTypeXref> getRowMapper() {
 		return (rs, rowNum) -> mapFieldsTo(rs, new DbEntityEntityTypeXref());
@@ -19,26 +22,6 @@ public class EntityEntityTypeXrefDao extends Dao<DbEntityEntityTypeXref> {
 
 	@Override
 	String getTableName() {
-		return "entityEntityTypeXrefs";
-	}
-
-	@Override
-	public List<DbEntityEntityTypeXref> getAll() {
-		return super.getAll();
-	}
-
-	@Override
-	public DbEntityEntityTypeXref get(String id) {
-		return super.get(id);
-	}
-
-	@Override
-	public boolean save(DbEntityEntityTypeXref dbEntityEntityTypeXref) throws IllegalAccessException, DataAccessException {
-		return super.save(dbEntityEntityTypeXref);
-	}
-
-	@Override
-	public void delete(String id) { // TODO Test
-		super.delete(id);
+		return TABLE_NAME;
 	}
 }

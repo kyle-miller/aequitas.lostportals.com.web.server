@@ -9,6 +9,9 @@ import java.util.List;
 
 @Repository
 public class PolygonDao extends Dao<DbPolygon> {
+
+	public static final String TABLE_NAME = "polygons";
+
 	@Override
 	RowMapper<DbPolygon> getRowMapper() {
 		return (rs, rowNum) -> mapFieldsTo(rs, new DbPolygon());
@@ -16,26 +19,6 @@ public class PolygonDao extends Dao<DbPolygon> {
 
 	@Override
 	String getTableName() {
-		return "polygons";
-	}
-
-	@Override
-	public List<DbPolygon> getAll() {
-		return super.getAll();
-	}
-
-	@Override
-	public DbPolygon get(String id) {
-		return super.get(id);
-	}
-
-	@Override
-	public boolean save(DbPolygon dbPolygon) throws IllegalAccessException, DataAccessException {
-		return super.save(dbPolygon);
-	}
-
-	@Override
-	public void delete(String id) { // TODO Test
-		super.delete(id);
+		return TABLE_NAME;
 	}
 }

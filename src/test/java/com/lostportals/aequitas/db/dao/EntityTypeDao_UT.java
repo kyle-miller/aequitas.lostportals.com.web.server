@@ -3,6 +3,7 @@ package com.lostportals.aequitas.db.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import com.lostportals.aequitas.web.admin.domain.EntityType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EntityTypeDao_UT {
+
 	@InjectMocks
     EntityTypeDao testObj;
 
@@ -20,6 +22,6 @@ public class EntityTypeDao_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("entityTypes", testObj.getTableName());
+		assertEquals(EntityTypeDao.TABLE_NAME, testObj.getTableName());
 	}
 }

@@ -12,6 +12,9 @@ import com.lostportals.aequitas.db.domain.DbImage;
 
 @Repository
 public class ImageDao extends Dao<DbImage> {
+
+	public static final String TABLE_NAME = "images";
+
 	@Override
 	RowMapper<DbImage> getRowMapper() {
 		return (rs, rowNum) -> mapFieldsTo(rs, new DbImage());
@@ -19,26 +22,6 @@ public class ImageDao extends Dao<DbImage> {
 
 	@Override
 	String getTableName() {
-		return "images";
-	}
-
-	@Override
-	public List<DbImage> getAll() {
-		return super.getAll();
-	}
-
-	@Override
-	public DbImage get(String id) {
-		return super.get(id);
-	}
-
-	@Override
-	public boolean save(DbImage dbImage) throws IllegalAccessException, DataAccessException {
-		return super.save(dbImage);
-	}
-
-	@Override
-	public void delete(String id) { // TODO Test
-		super.delete(id);
+		return TABLE_NAME;
 	}
 }

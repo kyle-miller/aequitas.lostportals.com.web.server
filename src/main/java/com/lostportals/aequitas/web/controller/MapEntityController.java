@@ -42,7 +42,7 @@ public class MapEntityController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable String id) { // TODO Test
+	public ResponseEntity<Void> delete(@PathVariable String id) {
 		mapEntityService.delete(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}

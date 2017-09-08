@@ -58,13 +58,13 @@ public abstract class Dao<T extends SqlType> extends JdbcDaoSupport {
 		return dbObj;
 	}
 
-	List<T> getAll() {
+	public List<T> getAll() {
 		String sql = "select * from " + getTableName();
 		List<T> objList = getJdbcTemplate().query(sql, getRowMapper());
 		return objList;
 	}
 
-	T get(String id) {
+	public T get(String id) {
 		String sql = "select * from " + getTableName() + " where id='" + id + "'";
 
 		T obj = null;
@@ -77,7 +77,7 @@ public abstract class Dao<T extends SqlType> extends JdbcDaoSupport {
 		return obj;
 	}
 
-	boolean save(T obj) throws IllegalAccessException, DataAccessException {
+	public boolean save(T obj) throws IllegalAccessException, DataAccessException {
 		String id = obj.getId();
 
 		int numRowsAffected = 0;

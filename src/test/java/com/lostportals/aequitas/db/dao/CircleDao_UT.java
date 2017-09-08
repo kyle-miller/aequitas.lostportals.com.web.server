@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CircleDao_UT {
+
 	@InjectMocks
 	CircleDao testObj;
 
@@ -20,11 +21,6 @@ public class CircleDao_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("circles", testObj.getTableName());
-	}
-
-	@Test
-	public void delete() {
-
+		assertEquals(CircleDao.TABLE_NAME, testObj.getTableName());
 	}
 }

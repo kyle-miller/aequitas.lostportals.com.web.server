@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MarkerDao_UT {
+
 	@InjectMocks
     MarkerDao testObj;
 
@@ -20,6 +21,6 @@ public class MarkerDao_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("markers", testObj.getTableName());
+		assertEquals(MarkerDao.TABLE_NAME, testObj.getTableName());
 	}
 }

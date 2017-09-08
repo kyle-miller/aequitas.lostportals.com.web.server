@@ -3,8 +3,14 @@ package com.lostportals.aequitas.db.domain;
 import java.lang.reflect.Field;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.core.style.ToStringCreator;
 
 public abstract class SqlType {
+
+	private String strFmt = "'%s'";
+
 	public abstract String getId();
 
 	@JsonIgnore
@@ -16,10 +22,7 @@ public abstract class SqlType {
 			Field field = fields[i];
 
 			sqlFields += field.getName();
-
-			if (i < fields.length - 1) {
-				sqlFields += ", ";
-			}
+			sqlFields += (i < fields.length - 1) ? ", " : "";
 		}
 
 		return sqlFields;
@@ -35,15 +38,8 @@ public abstract class SqlType {
 			Field field = fields[i];
 			field.setAccessible(true);
 
-			if (field.getType() == String.class) {
-				sqlValues += "'" + field.get(this) + "'";
-			} else {
-				sqlValues += field.get(this);
-			}
-
-			if (i < fields.length - 1) {
-				sqlValues += ", ";
-			}
+			sqlValues += String.class.equals(field.getType()) ? String.format(strFmt, field.get(this)) : field.get(this);
+			sqlValues += (i < fields.length - 1) ? ", " : "";
 
 			field.setAccessible(false);
 		}
@@ -62,20 +58,28 @@ public abstract class SqlType {
 			field.setAccessible(true);
 
 			sqlValues += field.getName() + "=";
-
-			if (field.getType() == String.class) {
-				sqlValues += "'" + field.get(this) + "'";
-			} else {
-				sqlValues += field.get(this);
-			}
-
-			if (i < fields.length - 1) {
-				sqlValues += ", ";
-			}
+			sqlValues += String.class.equals(field.getType()) ? String.format(strFmt, field.get(this)) : field.get(this);
+			sqlValues += (i < fields.length - 1) ? ", " : "";
 
 			field.setAccessible(false);
 		}
 
 		return sqlValues;
+	}
+
+	@Override
+	public int hashCode() {
+		int hashcode;
+		try {
+			hashcode = new ObjectMapper().writeValueAsString(this).hashCode();
+		} catch (JsonProcessingException e) {
+			hashcode = new ToStringCreator(this).toString().hashCode();
+		}
+		return hashcode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return this.hashCode() == obj.hashCode();
 	}
 }

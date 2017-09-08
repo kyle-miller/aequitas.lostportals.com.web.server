@@ -12,6 +12,9 @@ import com.lostportals.aequitas.db.domain.DbEntityType;
 
 @Repository
 public class EntityTypeDao extends Dao<DbEntityType> {
+
+	public static final String TABLE_NAME = "entityTypes";
+
 	@Override
 	RowMapper<DbEntityType> getRowMapper() {
 		return (rs, rowNum) -> mapFieldsTo(rs, new DbEntityType());
@@ -19,26 +22,6 @@ public class EntityTypeDao extends Dao<DbEntityType> {
 
 	@Override
 	String getTableName() {
-		return "entityTypes";
-	}
-
-	@Override
-	public List<DbEntityType> getAll() {
-		return super.getAll();
-	}
-
-	@Override
-	public DbEntityType get(String id) {
-		return super.get(id);
-	}
-
-	@Override
-	public boolean save(DbEntityType dbEntityType) throws IllegalAccessException, DataAccessException {
-		return super.save(dbEntityType);
-	}
-
-	@Override
-	public void delete(String id) { // TODO Test
-		super.delete(id);
+		return TABLE_NAME;
 	}
 }

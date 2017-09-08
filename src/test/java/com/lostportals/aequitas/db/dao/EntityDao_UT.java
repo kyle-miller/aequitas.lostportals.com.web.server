@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EntityDao_UT {
+
 	@InjectMocks
     EntityDao testObj;
 
@@ -20,6 +21,6 @@ public class EntityDao_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("entities", testObj.getTableName());
+		assertEquals(EntityDao.TABLE_NAME, testObj.getTableName());
 	}
 }

@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NoteDao_UT {
+
 	@InjectMocks
     NoteDao testObj;
 
@@ -20,6 +21,6 @@ public class NoteDao_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("notes", testObj.getTableName());
+		assertEquals(NoteDao.TABLE_NAME, testObj.getTableName());
 	}
 }

@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PolygonDao_UT {
+
 	@InjectMocks
     PolygonDao testObj;
 
@@ -20,6 +21,6 @@ public class PolygonDao_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("polygons", testObj.getTableName());
+		assertEquals(PolygonDao.TABLE_NAME, testObj.getTableName());
 	}
 }

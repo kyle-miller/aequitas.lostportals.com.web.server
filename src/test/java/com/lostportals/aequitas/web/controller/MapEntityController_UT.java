@@ -2,6 +2,7 @@ package com.lostportals.aequitas.web.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -73,5 +74,22 @@ public class MapEntityController_UT {
 		List<MapEntity> actualList = testObj.getAll();
 
 		assertEquals(expectedList, actualList);
+	}
+
+	@Test
+	public void delete() {
+		String id = "MapEntityId";
+
+		ResponseEntity<Void> response = testObj.delete(id);
+
+		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+	}
+
+	@Test (expected = RuntimeException.class)
+	public void delete_fail() {
+		String id = "MapEntityId";
+		doThrow(new RuntimeException()).when(mapEntityService).delete(id);
+
+		testObj.delete(id);
 	}
 }

@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IconDao_UT {
+
 	@InjectMocks
     IconDao testObj;
 
@@ -20,6 +21,6 @@ public class IconDao_UT {
 
 	@Test
 	public void getTableName() {
-		assertEquals("icons", testObj.getTableName());
+		assertEquals(IconDao.TABLE_NAME, testObj.getTableName());
 	}
 }

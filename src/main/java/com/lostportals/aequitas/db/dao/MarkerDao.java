@@ -12,6 +12,9 @@ import com.lostportals.aequitas.db.domain.DbMarker;
 
 @Repository
 public class MarkerDao extends Dao<DbMarker> {
+
+	public static final String TABLE_NAME = "markers";
+
 	@Override
 	RowMapper<DbMarker> getRowMapper() {
 		return (rs, rowNum) -> mapFieldsTo(rs, new DbMarker());
@@ -19,26 +22,6 @@ public class MarkerDao extends Dao<DbMarker> {
 
 	@Override
 	String getTableName() {
-		return "markers";
-	}
-
-	@Override
-	public List<DbMarker> getAll() {
-		return super.getAll();
-	}
-
-	@Override
-	public DbMarker get(String id) {
-		return super.get(id);
-	}
-
-	@Override
-	public boolean save(DbMarker dbMarker) throws IllegalAccessException, DataAccessException {
-		return super.save(dbMarker);
-	}
-
-	@Override
-	public void delete(String id) { // TODO Test
-		super.delete(id);
+		return TABLE_NAME;
 	}
 }
