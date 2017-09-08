@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Polygon;
 @RequestMapping(value = "/api/admin/polygons", produces = { "application/json" })
 public class PolygonController {
 
+	private final PolygonService polygonService;
+
 	@Autowired
-	PolygonService polygonService;
+	public PolygonController(PolygonService polygonService) {
+		this.polygonService = polygonService;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Polygon polygon) {
@@ -34,13 +38,11 @@ public class PolygonController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Polygon> getAll() {
-		List<Polygon> polygonList = polygonService.getAll();
-		return polygonList;
+		return polygonService.getAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Polygon get(@PathVariable String id) {
-		Polygon polygon = polygonService.get(id);
-		return polygon;
+		return polygonService.get(id);
 	}
 }

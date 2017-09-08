@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Marker;
 @Service
 public class MarkerService {
 
+	private final MarkerDao markerDao;
+
 	@Autowired
-	MarkerDao markerDao;
+	public MarkerService(MarkerDao markerDao) {
+		this.markerDao = markerDao;
+	}
 
 	public List<Marker> getAll() {
 		List<DbMarker> dbMarkerList = markerDao.getAll();
@@ -42,9 +46,7 @@ public class MarkerService {
 			throw new NotFoundException("Cannot find Marker for id=" + id);
 		}
 
-		Marker marker = new Marker(dbMarker);
-
-		return marker;
+		return new Marker(dbMarker);
 	}
 
 	public Marker save(Marker markerToSave) {
@@ -60,8 +62,7 @@ public class MarkerService {
 			throw new InternalServerException("Unable to save marker=" + markerToSave, e);
 		}
 
-		Marker savedMarker = new Marker(dbMarker);
-		return savedMarker;
+		return new Marker(dbMarker);
 	}
 
 	public void delete(String id) { // TODO Test

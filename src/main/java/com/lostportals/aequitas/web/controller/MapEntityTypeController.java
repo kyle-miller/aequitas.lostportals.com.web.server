@@ -16,12 +16,15 @@ import com.lostportals.aequitas.web.domain.MapEntityType;
 @CrossOrigin(allowedHeaders = {"*"})
 public class MapEntityTypeController {
 
+	private final MapEntityTypeService mapEntityTypeService;
+
 	@Autowired
-	MapEntityTypeService mapEntityTypeService;
+	public MapEntityTypeController(MapEntityTypeService mapEntityTypeService) {
+		this.mapEntityTypeService = mapEntityTypeService;
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<MapEntityType> getAll() {
-		List<MapEntityType> mapEntityTypeList = mapEntityTypeService.getAll();
-		return mapEntityTypeList;
+		return mapEntityTypeService.getAll();
 	}
 }

@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.EntityType;
 @RequestMapping(value = "/api/admin/entityTypes", produces = { "application/json" })
 public class EntityTypeController {
 
+	private final EntityTypeService entityTypeService;
+
 	@Autowired
-	EntityTypeService entityTypeService;
+	public EntityTypeController(EntityTypeService entityTypeService) {
+		this.entityTypeService = entityTypeService;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody EntityType entityType) {
@@ -34,13 +38,11 @@ public class EntityTypeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<EntityType> getAll() {
-		List<EntityType> entityTypeList = entityTypeService.getAll();
-		return entityTypeList;
+		return entityTypeService.getAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public EntityType get(@PathVariable String id) {
-		EntityType entityType = entityTypeService.get(id);
-		return entityType;
+		return entityTypeService.get(id);
 	}
 }

@@ -23,8 +23,12 @@ import com.lostportals.aequitas.web.domain.MapEntity;
 @CrossOrigin(allowedHeaders = { "*" })
 public class MapEntityController {
 
+	private final MapEntityService mapEntityService;
+
 	@Autowired
-	MapEntityService mapEntityService;
+	public MapEntityController(MapEntityService mapEntityService) {
+		this.mapEntityService = mapEntityService;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody MapEntity mapEntity) {
@@ -37,8 +41,7 @@ public class MapEntityController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<MapEntity> getAll() {
-		List<MapEntity> mapEntityList = mapEntityService.getAll();
-		return mapEntityList;
+		return mapEntityService.getAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

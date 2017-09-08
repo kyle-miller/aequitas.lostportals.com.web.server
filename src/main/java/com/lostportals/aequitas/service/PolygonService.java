@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Polygon;
 @Service
 public class PolygonService {
 
+	private final PolygonDao polygonDao;
+
 	@Autowired
-	PolygonDao polygonDao;
+	public PolygonService(PolygonDao polygonDao) {
+		this.polygonDao = polygonDao;
+	}
 
 	public List<Polygon> getAll() {
 		List<DbPolygon> dbPolygonList = polygonDao.getAll();
@@ -42,9 +46,7 @@ public class PolygonService {
 			throw new NotFoundException("Cannot find Polygon for id=" + id);
 		}
 
-		Polygon polygon = new Polygon(dbPolygon);
-
-		return polygon;
+		return new Polygon(dbPolygon);
 	}
 
 	public Polygon save(Polygon polygonToSave) {
@@ -60,8 +62,7 @@ public class PolygonService {
 			throw new InternalServerException("Unable to save polygon=" + polygonToSave, e);
 		}
 
-		Polygon savedPolygon = new Polygon(dbPolygon);
-		return savedPolygon;
+		return new Polygon(dbPolygon);
 	}
 
 	public void delete(String id) { // TODO Test

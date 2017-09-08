@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Note;
 @Service
 public class NoteService {
 
+	private final NoteDao noteDao;
+
 	@Autowired
-	NoteDao noteDao;
+	public NoteService(NoteDao noteDao) {
+		this.noteDao = noteDao;
+	}
 
 	public List<Note> getAll() {
 		List<DbNote> dbNoteList = noteDao.getAll();
@@ -42,9 +46,7 @@ public class NoteService {
 			throw new NotFoundException("Cannot find Note for id=" + id);
 		}
 
-		Note note = new Note(dbNote);
-
-		return note;
+		return new Note(dbNote);
 	}
 
 	public Note save(Note noteToSave) {
@@ -60,8 +62,7 @@ public class NoteService {
 			throw new InternalServerException("Unable to save note=" + noteToSave, e);
 		}
 
-		Note savedNote = new Note(dbNote);
-		return savedNote;
+		return new Note(dbNote);
 	}
 
 	public void delete(String id) { // TODO Test

@@ -77,9 +77,4 @@ public abstract class SqlType {
 		}
 		return hashcode;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return this.hashCode() == obj.hashCode();
-	}
 }

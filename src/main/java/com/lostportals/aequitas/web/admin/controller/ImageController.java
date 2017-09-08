@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Image;
 @RequestMapping(value = "/api/admin/images", produces = { "application/json" })
 public class ImageController {
 
+	private final ImageService imageService;
+
 	@Autowired
-	ImageService imageService;
+	public ImageController(ImageService imageService) {
+		this.imageService = imageService;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Image image) {
@@ -34,13 +38,11 @@ public class ImageController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Image> getAll() {
-		List<Image> imageList = imageService.getAll();
-		return imageList;
+		return imageService.getAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Image get(@PathVariable String id) {
-		Image image = imageService.get(id);
-		return image;
+		return imageService.get(id);
 	}
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @ControllerAdvice  
 @RestController 
 public class AequitasExceptionHandler {
-	static final Logger log = LogManager.getLogger();
+	private static final Logger log = LogManager.getLogger();
 
 	@ExceptionHandler(value = Exception.class)
 	public String handleException(Exception e) throws Exception {

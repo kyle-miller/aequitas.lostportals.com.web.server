@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Icon;
 @Service
 public class IconService {
 
+	private final IconDao iconDao;
+
 	@Autowired
-	IconDao iconDao;
+	public IconService(IconDao iconDao) {
+		this.iconDao = iconDao;
+	}
 
 	public List<Icon> getAll() {
 		List<DbIcon> dbIconList = iconDao.getAll();
@@ -42,9 +46,7 @@ public class IconService {
 			throw new NotFoundException("Cannot find Icon for id=" + id);
 		}
 
-		Icon icon = new Icon(dbIcon);
-
-		return icon;
+		return new Icon(dbIcon);
 	}
 
 	public Icon save(Icon iconToSave) {
@@ -60,8 +62,7 @@ public class IconService {
 			throw new InternalServerException("Unable to save icon=" + iconToSave, e);
 		}
 
-		Icon savedIcon = new Icon(dbIcon);
-		return savedIcon;
+		return new Icon(dbIcon);
 	}
 
 	public void delete(String id) { // TODO Test

@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Marker;
 @RequestMapping(value = "/api/admin/markers", produces = { "application/json" })
 public class MarkerController {
 
+	private final MarkerService markerService;
+
 	@Autowired
-	MarkerService markerService;
+	public MarkerController(MarkerService markerService) {
+		this.markerService = markerService;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Marker marker) {
@@ -34,13 +38,11 @@ public class MarkerController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Marker> getAll() {
-		List<Marker> markerList = markerService.getAll();
-		return markerList;
+		return markerService.getAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Marker get(@PathVariable String id) {
-		Marker marker = markerService.get(id);
-		return marker;
+		return markerService.get(id);
 	}
 }

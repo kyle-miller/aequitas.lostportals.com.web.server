@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 @Service
 public class EntityEntityTypeXrefService {
 
+	private final EntityEntityTypeXrefDao entityEntityTypeXrefDao;
+
 	@Autowired
-	EntityEntityTypeXrefDao entityEntityTypeXrefDao;
+	public EntityEntityTypeXrefService(EntityEntityTypeXrefDao entityEntityTypeXrefDao) {
+		this.entityEntityTypeXrefDao = entityEntityTypeXrefDao;
+	}
 
 	public List<EntityEntityTypeXref> getAll() {
 		List<DbEntityEntityTypeXref> dbEntityEntityTypeXrefList = entityEntityTypeXrefDao.getAll();
@@ -42,9 +46,7 @@ public class EntityEntityTypeXrefService {
 			throw new NotFoundException("Cannot find EntityEntityTypeXref for id=" + id);
 		}
 
-		EntityEntityTypeXref entityEntityTypeXref = new EntityEntityTypeXref(dbEntityEntityTypeXref);
-
-		return entityEntityTypeXref;
+		return new EntityEntityTypeXref(dbEntityEntityTypeXref);
 	}
 
 	public EntityEntityTypeXref save(EntityEntityTypeXref entityEntityTypeXrefToSave) {
@@ -60,8 +62,7 @@ public class EntityEntityTypeXrefService {
 			throw new InternalServerException("Unable to save entityEntityTypeXref=" + entityEntityTypeXrefToSave, e);
 		}
 
-		EntityEntityTypeXref savedEntityEntityTypeXref = new EntityEntityTypeXref(dbEntityEntityTypeXref);
-		return savedEntityEntityTypeXref;
+		return new EntityEntityTypeXref(dbEntityEntityTypeXref);
 	}
 
 	public void delete(String id) { // TODO Test

@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Note;
 @RequestMapping(value = "/api/admin/notes", produces = { "application/json" })
 public class NoteController {
 
+	private final NoteService noteService;
+
 	@Autowired
-	NoteService noteService;
+	public NoteController(NoteService noteService) {
+		this.noteService = noteService;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Note note) {
@@ -34,13 +38,11 @@ public class NoteController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Note> getAll() {
-		List<Note> noteList = noteService.getAll();
-		return noteList;
+		return noteService.getAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Note get(@PathVariable String id) {
-		Note note = noteService.get(id);
-		return note;
+		return noteService.get(id);
 	}
 }

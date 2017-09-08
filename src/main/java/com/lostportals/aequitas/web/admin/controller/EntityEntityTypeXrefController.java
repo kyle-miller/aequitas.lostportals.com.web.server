@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
 @RequestMapping(value = "/api/admin/entityEntityTypeXrefs", produces = { "application/json" })
 public class EntityEntityTypeXrefController {
 
+	private final EntityEntityTypeXrefService entityEntityTypeXrefService;
+
 	@Autowired
-	EntityEntityTypeXrefService entityEntityTypeXrefService;
+	public EntityEntityTypeXrefController(EntityEntityTypeXrefService entityEntityTypeXrefService) {
+		this.entityEntityTypeXrefService = entityEntityTypeXrefService;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody EntityEntityTypeXref entityEntityTypeXref) {
@@ -34,13 +38,11 @@ public class EntityEntityTypeXrefController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<EntityEntityTypeXref> getAll() {
-		List<EntityEntityTypeXref> entityEntityTypeXrefList = entityEntityTypeXrefService.getAll();
-		return entityEntityTypeXrefList;
+		return entityEntityTypeXrefService.getAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public EntityEntityTypeXref get(@PathVariable String id) {
-		EntityEntityTypeXref entityEntityTypeXref = entityEntityTypeXrefService.get(id);
-		return entityEntityTypeXref;
+		return entityEntityTypeXrefService.get(id);
 	}
 }

@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Circle;
 @Service
 public class CircleService {
 
+	private final CircleDao circleDao;
+
 	@Autowired
-	CircleDao circleDao;
+	public CircleService(CircleDao circleDao) {
+		this.circleDao = circleDao;
+	}
 
 	public List<Circle> getAll() {
 		List<DbCircle> dbCircleList = circleDao.getAll();
@@ -42,9 +46,7 @@ public class CircleService {
 			throw new NotFoundException("Cannot find Circle for id=" + id);
 		}
 
-		Circle circle = new Circle(dbCircle);
-
-		return circle;
+		return new Circle(dbCircle);
 	}
 
 	public Circle save(Circle circleToSave) {
@@ -60,8 +62,7 @@ public class CircleService {
 			throw new InternalServerException("Unable to save circle=" + circleToSave, e);
 		}
 
-		Circle savedCircle = new Circle(dbCircle);
-		return savedCircle;
+		return new Circle(dbCircle);
 	}
 
 	public void delete(String id) { // TODO Test

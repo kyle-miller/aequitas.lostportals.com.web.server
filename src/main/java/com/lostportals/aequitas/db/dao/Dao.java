@@ -20,8 +20,6 @@ import com.lostportals.aequitas.db.domain.SqlType;
 import com.lostportals.aequitas.exception.InternalServerException;
 
 public abstract class Dao<T extends SqlType> extends JdbcDaoSupport {
-	final Logger log = LogManager.getLogger();
-
 	abstract String getTableName();
 
 	abstract RowMapper<T> getRowMapper();
@@ -33,8 +31,7 @@ public abstract class Dao<T extends SqlType> extends JdbcDaoSupport {
 
 	T mapFieldsTo(ResultSet rs, T dbObj) throws SQLException {
 		Field[] fields = dbObj.getClass().getDeclaredFields();
-		for (int i = 0; i < fields.length; i++) {
-			Field field = fields[i];
+		for (Field field : fields) {
 			field.setAccessible(true);
 
 			Object obj = rs.getObject(field.getName());
@@ -60,8 +57,7 @@ public abstract class Dao<T extends SqlType> extends JdbcDaoSupport {
 
 	public List<T> getAll() {
 		String sql = "select * from " + getTableName();
-		List<T> objList = getJdbcTemplate().query(sql, getRowMapper());
-		return objList;
+		return getJdbcTemplate().query(sql, getRowMapper());
 	}
 
 	public T get(String id) {
@@ -96,11 +92,8 @@ public abstract class Dao<T extends SqlType> extends JdbcDaoSupport {
 			numRowsAffected = getJdbcTemplate().update(sql);
 		}
 
-		if (numRowsAffected == 1) {
-			return true;
-		}
+		return numRowsAffected == 1;
 
-		return false;
 	}
 
 	public void delete(String id) {

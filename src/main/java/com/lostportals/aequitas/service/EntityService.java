@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Entity;
 @Service
 public class EntityService {
 
+	private final EntityDao entityDao;
+
 	@Autowired
-	EntityDao entityDao;
+	public EntityService(EntityDao entityDao) {
+		this.entityDao = entityDao;
+	}
 
 	public List<Entity> getAll() {
 		List<DbEntity> dbEntityList = entityDao.getAll();
@@ -42,9 +46,7 @@ public class EntityService {
 			throw new NotFoundException("Cannot find Entity for id=" + id);
 		}
 
-		Entity entity = new Entity(dbEntity);
-
-		return entity;
+		return new Entity(dbEntity);
 	}
 
 	public Entity save(Entity entityToSave) {
@@ -60,8 +62,7 @@ public class EntityService {
 			throw new InternalServerException("Unable to save entity=" + entityToSave, e);
 		}
 
-		Entity savedEntity = new Entity(dbEntity);
-		return savedEntity;
+		return new Entity(dbEntity);
 	}
 
 	public void delete(String id) { // TODO Test

@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Image;
 @Service
 public class ImageService {
 
+	private final ImageDao imageDao;
+
 	@Autowired
-	ImageDao imageDao;
+	public ImageService(ImageDao imageDao) {
+		this.imageDao = imageDao;
+	}
 
 	public List<Image> getAll() {
 		List<DbImage> dbImageList = imageDao.getAll();
@@ -42,9 +46,7 @@ public class ImageService {
 			throw new NotFoundException("Cannot find Image for id=" + id);
 		}
 
-		Image image = new Image(dbImage);
-
-		return image;
+		return new Image(dbImage);
 	}
 
 	public Image save(Image imageToSave) {
@@ -60,8 +62,7 @@ public class ImageService {
 			throw new InternalServerException("Unable to save image=" + imageToSave, e);
 		}
 
-		Image savedImage = new Image(dbImage);
-		return savedImage;
+		return new Image(dbImage);
 	}
 
 	public void delete(String id) { // TODO Test

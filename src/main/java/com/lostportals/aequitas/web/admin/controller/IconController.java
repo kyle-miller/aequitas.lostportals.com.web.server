@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Icon;
 @RequestMapping(value = "/api/admin/icons", produces = { "application/json" })
 public class IconController {
 
+	private final IconService iconService;
+
 	@Autowired
-	IconService iconService;
+	public IconController(IconService iconService) {
+		this.iconService = iconService;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Icon icon) {
@@ -34,13 +38,11 @@ public class IconController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Icon> getAll() {
-		List<Icon> iconList = iconService.getAll();
-		return iconList;
+		return iconService.getAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Icon get(@PathVariable String id) {
-		Icon icon = iconService.get(id);
-		return icon;
+		return iconService.get(id);
 	}
 }

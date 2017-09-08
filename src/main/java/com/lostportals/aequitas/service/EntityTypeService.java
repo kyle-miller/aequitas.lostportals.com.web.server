@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.EntityType;
 @Service
 public class EntityTypeService {
 
+	private final EntityTypeDao entityTypeDao;
+
 	@Autowired
-	EntityTypeDao entityTypeDao;
+	public EntityTypeService(EntityTypeDao entityTypeDao) {
+		this.entityTypeDao = entityTypeDao;
+	}
 
 	public List<EntityType> getAll() {
 		List<DbEntityType> dbEntityTypeList = entityTypeDao.getAll();
@@ -42,9 +46,7 @@ public class EntityTypeService {
 			throw new NotFoundException("Cannot find EntityType for id=" + id);
 		}
 
-		EntityType entityType = new EntityType(dbEntityType);
-
-		return entityType;
+		return new EntityType(dbEntityType);
 	}
 
 	public EntityType save(EntityType entityTypeToSave) {
@@ -60,8 +62,7 @@ public class EntityTypeService {
 			throw new InternalServerException("Unable to save entityType=" + entityTypeToSave, e);
 		}
 
-		EntityType savedEntityType = new EntityType(dbEntityType);
-		return savedEntityType;
+		return new EntityType(dbEntityType);
 	}
 
 	public void delete(String id) { // TODO Test

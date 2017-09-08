@@ -20,8 +20,12 @@ import com.lostportals.aequitas.web.admin.domain.Circle;
 @RequestMapping(value = "/api/admin/circles", produces = { "application/json" })
 public class CircleController {
 
+	private final CircleService circleService;
+
 	@Autowired
-	CircleService circleService;
+	public CircleController(CircleService circleService) {
+		this.circleService = circleService;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> post(HttpServletRequest request, @RequestBody Circle circle) {
@@ -34,13 +38,11 @@ public class CircleController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Circle> getAll() {
-		List<Circle> circleList = circleService.getAll();
-		return circleList;
+		return circleService.getAll();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Circle get(@PathVariable String id) {
-		Circle circle = circleService.get(id);
-		return circle;
+		return circleService.get(id);
 	}
 }

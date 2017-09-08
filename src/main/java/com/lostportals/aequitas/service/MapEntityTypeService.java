@@ -11,11 +11,14 @@ import com.lostportals.aequitas.web.domain.MapEntityType;
 @Service
 public class MapEntityTypeService {
 
+	private final EntityTypeService entityTypeService;
+
 	@Autowired
-	EntityTypeService entityTypeService;
+	public MapEntityTypeService(EntityTypeService entityTypeService) {
+		this.entityTypeService = entityTypeService;
+	}
 
 	public List<MapEntityType> getAll() {
-		List<MapEntityType> mapEntityTypeList = entityTypeService.getAll().stream().map(MapEntityType::new).collect(Collectors.toList());
-		return mapEntityTypeList;
+		return entityTypeService.getAll().stream().map(MapEntityType::new).collect(Collectors.toList());
 	}
 }

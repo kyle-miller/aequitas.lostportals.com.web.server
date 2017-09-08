@@ -16,12 +16,15 @@ import com.lostportals.aequitas.web.domain.MapIcon;
 @CrossOrigin(allowedHeaders = {"*"})
 public class MapIconController {
 
+	private final MapIconService mapIconService;
+
 	@Autowired
-	MapIconService mapIconService;
+	public MapIconController(MapIconService mapIconService) {
+		this.mapIconService = mapIconService;
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<MapIcon> getAll() {
-		List<MapIcon> mapIconList = mapIconService.getAll();
-		return mapIconList;
+		return mapIconService.getAll();
 	}
 }

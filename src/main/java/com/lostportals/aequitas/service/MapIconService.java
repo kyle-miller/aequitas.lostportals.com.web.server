@@ -11,11 +11,14 @@ import com.lostportals.aequitas.web.domain.MapIcon;
 @Service
 public class MapIconService {
 
+	private final IconService entityTypeService;
+
 	@Autowired
-	IconService entityTypeService;
+	public MapIconService(IconService entityTypeService) {
+		this.entityTypeService = entityTypeService;
+	}
 
 	public List<MapIcon> getAll() {
-		List<MapIcon> mapIconList = entityTypeService.getAll().stream().map(MapIcon::new).collect(Collectors.toList());
-		return mapIconList;
+		return entityTypeService.getAll().stream().map(MapIcon::new).collect(Collectors.toList());
 	}
 }

@@ -1,69 +1,59 @@
 package com.lostportals.aequitas.service;
 
+import com.lostportals.aequitas.exception.NotFoundException;
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
+import com.lostportals.aequitas.web.admin.domain.*;
+import com.lostportals.aequitas.web.domain.*;
+import org.apache.maven.shared.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import javax.validation.ValidationException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import javax.validation.ValidationException;
-
-import org.apache.maven.shared.utils.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
-import com.lostportals.aequitas.exception.NotFoundException;
-import com.lostportals.aequitas.exception.UnprocessableEntityException;
-import com.lostportals.aequitas.web.admin.domain.Circle;
-import com.lostportals.aequitas.web.admin.domain.Entity;
-import com.lostportals.aequitas.web.admin.domain.EntityEntityTypeXref;
-import com.lostportals.aequitas.web.admin.domain.Image;
-import com.lostportals.aequitas.web.admin.domain.Marker;
-import com.lostportals.aequitas.web.admin.domain.Note;
-import com.lostportals.aequitas.web.admin.domain.Polygon;
-import com.lostportals.aequitas.web.domain.MapCircle;
-import com.lostportals.aequitas.web.domain.MapEntity;
-import com.lostportals.aequitas.web.domain.MapEntityType;
-import com.lostportals.aequitas.web.domain.MapIcon;
-import com.lostportals.aequitas.web.domain.MapImage;
-import com.lostportals.aequitas.web.domain.MapMarker;
-import com.lostportals.aequitas.web.domain.MapNote;
-import com.lostportals.aequitas.web.domain.MapPolygon;
-
 @Service
 public class MapEntityService {
 
-	@Autowired
-	EntityService entityService;
+	private final EntityService entityService;
+
+	private final EntityTypeService entityTypeService;
+
+	private final EntityEntityTypeXrefService entityEntityTypeXrefService;
+
+	private final CircleService circleService;
+
+	private final MarkerService markerService;
+
+	private final PolygonService polygonService;
+
+	private final NoteService noteService;
+
+	private final IconService iconService;
+
+	private final ImageService imageService;
 
 	@Autowired
-	EntityTypeService entityTypeService;
-
-	@Autowired
-	EntityEntityTypeXrefService entityEntityTypeXrefService;
-
-	@Autowired
-	CircleService circleService;
-
-	@Autowired
-	MarkerService markerService;
-
-	@Autowired
-	PolygonService polygonService;
-
-	@Autowired
-	NoteService noteService;
-
-	@Autowired
-	IconService iconService;
-
-	@Autowired
-	ImageService imageService;
+	public MapEntityService(EntityService entityService, EntityTypeService entityTypeService, EntityEntityTypeXrefService entityEntityTypeXrefService, CircleService circleService, MarkerService markerService, PolygonService polygonService, NoteService noteService, IconService iconService, ImageService imageService) {
+		this.entityService = entityService;
+		this.entityTypeService = entityTypeService;
+		this.entityEntityTypeXrefService = entityEntityTypeXrefService;
+		this.circleService = circleService;
+		this.markerService = markerService;
+		this.polygonService = polygonService;
+		this.noteService = noteService;
+		this.iconService = iconService;
+		this.imageService = imageService;
+	}
 
 	public List<MapEntity> getAll() {
 		List<MapEntity> mapEntityList = entityService.getAll().stream().map(MapEntity::new).collect(Collectors.toList());
-		List<EntityEntityTypeXref> entityEntityTypeXrefList = entityEntityTypeXrefService.getAll().stream().collect(Collectors.toList());
+		List<EntityEntityTypeXref> entityEntityTypeXrefList = new ArrayList<>(entityEntityTypeXrefService.getAll());
 
 		Map<String, MapIcon> mapIconMap = iconService.getAll().stream().map(MapIcon::new).collect(Collectors.toMap(MapIcon::getId, Function.identity()));
 		Map<String, MapEntityType> mapEntityTypeMap = entityTypeService.getAll().stream().map(MapEntityType::new).collect(Collectors.toMap(MapEntityType::getId, Function.identity()));
@@ -73,10 +63,10 @@ public class MapEntityService {
 		List<MapMarker> mapMarkerList = markerService.getAll().stream().map(MapMarker::new).collect(Collectors.toList());
 		List<MapImage> mapImageList = imageService.getAll().stream().map(MapImage::new).collect(Collectors.toList());
 
-		mapMarkerList.forEach(m -> { m.setIcon(mapIconMap.get(m.getIconId())); });
+		mapMarkerList.forEach(m -> m.setIcon(mapIconMap.get(m.getIconId())));
 
 		mapEntityList.forEach(e -> {
-			entityEntityTypeXrefList.stream().filter(x -> e.getId().equals(x.getEntityId())).forEach(x -> { e.addType(mapEntityTypeMap.get(x.getEntityTypeId())); });
+			entityEntityTypeXrefList.stream().filter(x -> e.getId().equals(x.getEntityId())).forEach(x -> e.addType(mapEntityTypeMap.get(x.getEntityTypeId())));
 			mapNoteList.stream().filter(n -> e.getId().equals(n.getEntityId())).forEach(e::addNote);
 			mapMarkerList.stream().filter(m -> e.getId().equals(m.getEntityId())).forEach(e::addMarker);
 			mapCircleList.stream().filter(c -> e.getId().equals(c.getEntityId())).forEach(e::addCircle);
