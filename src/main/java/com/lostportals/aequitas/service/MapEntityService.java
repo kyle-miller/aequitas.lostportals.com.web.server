@@ -1,19 +1,16 @@
 package com.lostportals.aequitas.service;
 
-import com.lostportals.aequitas.exception.NotFoundException;
 import com.lostportals.aequitas.exception.UnprocessableEntityException;
 import com.lostportals.aequitas.web.admin.domain.*;
 import com.lostportals.aequitas.web.domain.*;
-import org.apache.maven.shared.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import javax.validation.ValidationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -66,12 +63,12 @@ public class MapEntityService {
 		mapMarkerList.forEach(m -> m.setIcon(mapIconMap.get(m.getIconId())));
 
 		mapEntityList.forEach(e -> {
-			entityEntityTypeXrefList.stream().filter(x -> e.getId().equals(x.getEntityId())).forEach(x -> e.addType(mapEntityTypeMap.get(x.getEntityTypeId())));
-			mapNoteList.stream().filter(n -> e.getId().equals(n.getEntityId())).forEach(e::addNote);
-			mapMarkerList.stream().filter(m -> e.getId().equals(m.getEntityId())).forEach(e::addMarker);
-			mapCircleList.stream().filter(c -> e.getId().equals(c.getEntityId())).forEach(e::addCircle);
-			mapPolygonList.stream().filter(p -> e.getId().equals(p.getEntityId())).forEach(e::addPolygon);
-			mapImageList.stream().filter(i -> e.getId().equals(i.getEntityId())).forEach(e::addImage);
+			entityEntityTypeXrefList.stream().filter(x -> StringUtils.equals(e.getId(), x.getEntityId())).map(EntityEntityTypeXref::getId).map(mapEntityTypeMap::get).forEach(e::addType);
+			mapNoteList.stream().filter(n -> StringUtils.equals(e.getId(), n.getEntityId())).forEach(e::addNote);
+			mapMarkerList.stream().filter(m -> StringUtils.equals(e.getId(), m.getEntityId())).forEach(e::addMarker);
+			mapCircleList.stream().filter(c -> StringUtils.equals(e.getId(), c.getEntityId())).forEach(e::addCircle);
+			mapPolygonList.stream().filter(p -> StringUtils.equals(e.getId(), p.getEntityId())).forEach(e::addPolygon);
+			mapImageList.stream().filter(i -> StringUtils.equals(e.getId(), i.getEntityId())).forEach(e::addImage);
 		});
 
 		return mapEntityList;
@@ -254,50 +251,30 @@ public class MapEntityService {
 		}
 	}
 
-	public void delete(String id) { // TODO Test
-		if (id == null) {
-			throw new ValidationException("id is required");
-		}
-
-		Optional<MapEntity> optionalMapEntity = getAll().stream().filter(e -> id.equals(e.getId())).findFirst();
-
-		if (optionalMapEntity.isPresent()) {
-			MapEntity mapEntity = optionalMapEntity.get();
-
+	public void delete(String id) { // TODO test...
+		getAll().stream().filter(e -> StringUtils.equals(id, e.getId())).forEach(mapEntity -> {
 			if (!CollectionUtils.isEmpty(mapEntity.getNotes())) {
-				for (MapNote mapNote : mapEntity.getNotes()) {
-					noteService.delete(mapNote.getId());
-				}
+				mapEntity.getNotes().stream().map(MapNote::getId).forEach(noteService::delete);
 			}
 
 			if (!CollectionUtils.isEmpty(mapEntity.getImages())) {
-				for (MapImage mapImage : mapEntity.getImages()) {
-					imageService.delete(mapImage.getId());
-				}
+				mapEntity.getImages().stream().map(MapImage::getId).forEach(imageService::delete);
 			}
 
 			if (!CollectionUtils.isEmpty(mapEntity.getMarkers())) {
-				for (MapMarker mapMarker : mapEntity.getMarkers()) {
-					markerService.delete(mapMarker.getId());
-				}
+				mapEntity.getMarkers().stream().map(MapMarker::getId).forEach(markerService::delete);
 			}
 
 			if (!CollectionUtils.isEmpty(mapEntity.getCircles())) {
-				for (MapCircle mapCircle : mapEntity.getCircles()) {
-					circleService.delete(mapCircle.getId());
-				}
+				mapEntity.getCircles().stream().map(MapCircle::getId).forEach(circleService::delete);
 			}
 
 			if (!CollectionUtils.isEmpty(mapEntity.getPolygons())) {
-				for (MapPolygon mapPolygon : mapEntity.getPolygons()) {
-					polygonService.delete(mapPolygon.getId());
-				}
+				mapEntity.getPolygons().stream().map(MapPolygon::getId).forEach(polygonService::delete);
 			}
 
 			entityService.delete(mapEntity.getId());
-		} else {
-			throw new NotFoundException("MapEntity with id=" + id + " not found");
-		}
+		});
 	}
 
 }

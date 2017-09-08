@@ -16,7 +16,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import com.lostportals.aequitas.exception.UnprocessableEntityException;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -38,6 +41,8 @@ import com.lostportals.aequitas.web.domain.MapImage;
 import com.lostportals.aequitas.web.domain.MapMarker;
 import com.lostportals.aequitas.web.domain.MapNote;
 import com.lostportals.aequitas.web.domain.MapPolygon;
+
+import javax.xml.bind.ValidationException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MapEntityService_UT {
@@ -73,6 +78,9 @@ public class MapEntityService_UT {
 
 	@Mock
 	ImageService imageService;
+
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
 
 	@Test
 	public void getAll_noEntities() {
